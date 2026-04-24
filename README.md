@@ -1,0 +1,1 @@
+# AnotacoesGerais_V.D.02_08_02_2025
