@@ -1,0 +1,49 @@
+﻿<Window x:Class="AppAnotacoesGerais.ExibirDados.Views.Menus.TelaPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        mc:Ignorable="d" xml:lang="pt-BR" Height="995" Width="1600" 
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="CanResizeWithGrip"
+        WindowStyle="SingleBorderWindow" Cursor="Hand" >
+
+    <Window.DataContext>
+        <local:TelaPrincipalViewModel/>
+    </Window.DataContext>
+
+    <Grid Margin="5,0,5,0">
+        <Border Background="#FF1EE3F1" BorderBrush="#FFFFFF" BorderThickness="0,5,0,5" CornerRadius="25" HorizontalAlignment="Stretch" 
+            Height="NaN" Width="NaN" VerticalAlignment="Stretch"/>
+
+        <Grid Margin="5,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--| Borda do Menu Lateral |-->
+            <Grid Grid.Column="0"  >
+
+                <!--//  Menu Lateral Layout //-->
+                <ContentControl Content="{Binding}" Cursor="Hand">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Setter Property="ContentTemplate" Value="{StaticResource MenuLateral}" />
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+            </Grid>
+
+            <!--| Página Principal |-->
+            <Grid Margin="5" Grid.Row="2" Grid.Column="2" Height="980">
+                <Border Background="#FF021507" BorderBrush="#FFFFFF" BorderThickness="0,5,0,5" Margin="0,5,10,5"
+                        CornerRadius="25 25 25 25">
+                    <ContentControl x:Name="Pages" Content="{Binding SelecionarControleDeUsuario}" Margin="10,10,10,10"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

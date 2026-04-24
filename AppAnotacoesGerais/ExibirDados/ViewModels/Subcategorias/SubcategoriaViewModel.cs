@@ -1,0 +1,49 @@
+﻿using AppAnotacoesGerais.AcessarDados.Entidades;
+using AppAnotacoesGerais.ExibirDados.Comandos;
+using AppAnotacoesGerais.ExibirDados.Models;
+using AppAnotacoesGerais.GerenciarDados.Repositorios;
+
+namespace AppAnotacoesGerais.ExibirDados.ViewModels.Subcategorias;
+
+public partial class SubcategoriaViewModel : ViewModelBase
+{
+    public SubcategoriaRepositorio _subcategoriaRepositorio = new();
+
+    public CategoriaModel CategoriaModel { get; set; } = new();
+    public SubcategoriaModel SubcategoriaModel { get; set; } = new();
+
+    private string _textoPesquisa;
+    public string TextoPesquisa
+    {
+        get => _textoPesquisa;
+        set
+        {
+            if (_textoPesquisa != value)
+            {
+                _textoPesquisa = value;
+                OnPropertyChanged(nameof(TextoPesquisa));
+                PesquisarSubcategorias();
+            }
+        }
+    }
+
+    private void PesquisarSubcategorias()
+    {
+        var listaDeSubcategorias = SubcategoriaRepositorio.ObterSubcategorias() ?? Enumerable.Empty<Subcategoria>();
+
+        // Aplica filtro por texto de pesquisa (se informado)
+        if (!string.IsNullOrWhiteSpace(TextoPesquisa))
+        {
+            var busca = TextoPesquisa.Trim();
+            listaDeSubcategorias = listaDeSubcategorias.Where(sc => !string.IsNullOrEmpty(sc.NomeSubcategoria) &&
+                                      sc.NomeSubcategoria.Contains(busca, StringComparison.OrdinalIgnoreCase));
+        }
+        SubcategoriaModel.ListaDeSubcategorias = [];
+        SubcategoriaModel.ListaDeSubcategorias = [.. listaDeSubcategorias];
+    }
+
+    public SubcategoriaViewModel()
+    {
+        TextoPesquisa = string.Empty;        
+    }
+}
