@@ -3,10 +3,131 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.Subcategorias"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="800" d:DesignWidth="1300">
+
+    <UserControl.DataContext>
+        <local:SubcategoriaViewModel/>
+    </UserControl.DataContext>
+
+    <!--| Grid Principal |-->
+    <Grid Background="#FF1C0BE4" Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="345"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--| Grid Superior |-->
+        <Grid Name="GridSuperior" Margin="5,10,5,10">
+
+            <!--| Borda Externa da Grid Superior |-->
+            <Border Background="#FF082CEF" BorderBrush="#FF06CDF3" BorderThickness="5" Margin="5,10,5,3" CornerRadius="15">
+
+                <!--| Grid Interna da Borda |-->
+                <Grid Background="#FF082CEF" Margin="10,5,10,5">
+
+                    <!--| Seta para voltar ao Menu de Consultas e Relatórios |-->
+                    <RadioButton Height="60" Width="66" Style="{StaticResource SetaVoltarMenuAnterior}" Margin="10,-2,0,0" 
+                                 Command="{Binding DataContext.ComandoVoltarSubmenuAnotacoesGerais, RelativeSource={RelativeSource 
+                                 FindAncestor, AncestorType={x:Type Window}}}" Tag="{DynamicResource SetaVoltarMenuAnterior}" Grid.RowSpan="2"/>
+
+                    <TextBlock Text="Voltar &gt;Para o Submenu de Anotacoes Gerais" FontSize="18" FontWeight="Bold" Foreground="#FF06F7F2" 
+                               Height="22" Width="398" Margin="80,18,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                    <!--| TeextBlock |-->
+                    <TextBlock Text="Subcategorias" FontSize="36" FontWeight="Bold" Foreground="#FFF7F7F7" Margin="500,0,0,0" 
+                               HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Height="45"/>
+
+                    <!--| Borda Interna de Cadastrar, Alterar e Excluir |-->
+                    <Border Background="#FF0BCEF3" BorderBrush="#FFF1F306" BorderThickness="5" Height="170" Margin="10,0,0,65" 
+                            VerticalAlignment="Bottom" CornerRadius="15">
+
+                        <!--| Grid Interna de Cadastrar, Alterar e Excluir |-->
+                        <Grid Background="#FF0BCEF3" Width="1205" Margin="20,0,0,10" HorizontalAlignment="Left" Height="145" VerticalAlignment="Bottom">
+
+                            <!--| Rótulos(Label) |-->
+                            <Label Content="Cadastrar, Alterar e Excluir Subcategorias" FontSize="20" FontWeight="Bold" Foreground="#FF110AEA" 
+                                   Height="40" Width="400" Margin="285,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <Label Content="Código da Categoria" FontSize="16" FontWeight="Bold" Foreground="#FF110AEA" Height="30" Width="165"
+                                   Margin="30,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                            <Label Content="Código da Subcategoria" FontSize="16" FontWeight="Bold" Foreground="#FF110AEA" Height="30" Width="200"
+                                   Margin="0,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                            <Label Content="Nome da Categoria" FontSize="16" FontWeight="Bold" Foreground="#FF110AEA" Height="30" Width="160"
+                                   Margin="320,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <Label Content="Nome da Subcategoria" FontSize="16" FontWeight="Bold" Foreground="#FF110AEA" Height="30" Width="190"
+                                   Margin="290,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                            <!--| TextBoxes) |-->
+                            <TextBox Text="{Binding SubcategoriaModel.CategoriaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="16" Height="30" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="195,40,0,0" 
+                                     IsReadOnly="True"/>
+
+                            <TextBox Text="{Binding SubcategoriaModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" 
+                                     Height="30" Width="85" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="195,100,0,0" IsReadOnly="True"/>
+
+                            <TextBox Text="{Binding SubcategoriaModel.NomeSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" 
+                                     Height="30" Width="310" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="475,100,0,0"/>
+
+                            <!--| ComboBox de Categorias |-->
+                            <ComboBox Height="40" Width="310" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="475,35,0,0"
+                                      Text="{Binding SubcategoriaModel.NomeCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
+                                      SelectedValue="{Binding SubcategoriaModel.CategoriaId}"
+                                      SelectedIndex="0"/>
+
+                            <!--| Pesquisar Subcategorias|-->
+                            <Grid Margin="800,70,0,0" Height="80" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                                <TextBox x:Name="TxtPesquisar" Style="{StaticResource PesquisarTextBox}" Margin="0,20,0,10" 
+                                         Text="{Binding TextoPesquisa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock x:Name="TxbPesquisar" Text="Pesquisar Subcategorias" Style="{StaticResource PesquisarTextBlock}" 
+                                           Margin="0,20,0,10"/>
+
+                                <Button Content="Limpar" FontSize="18" Height="45" Width="160" Margin="235,10,0,0" 
+                                        Style="{DynamicResource BtnRetangularVerdeEscuro}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                        Command="{Binding ComandoAtualizarSubcategoria}"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!--| Botões) |-->
+                    <Button Content="Cadastrar" FontSize="16" Width="140" Style="{StaticResource BtnAzulEscuroEAzulClaro}" 
+                            Command="{Binding ComandoAdicionarSubcategoria}" Margin="30,240,0,0"/>
+
+                    <Button Content="Alterar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
+                            Command="{Binding ComandoEditarSubcategoria}" Margin="200,240,0,0"/>
+
+                    <Button Content="Excluir" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
+                            Command="{Binding ComandoExcluirSubcategoria}" Margin="370,240,0,0"/>
+
+                    <Button Content="Atualizar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
+                            Command="{Binding ComandoAtualizarSubcategoria}" Margin="540,240,0,0"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!--| DataGrid de DtgDados |-->
+        <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,0,5,5"
+                  ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding CategoriaId, StringFormat=\{0:D4\}}" Width="100"/>
+                <DataGridTextColumn Header="Nome da Categoria" Binding="{Binding NomeCategoria}" Width="295"/>
+                <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="100"/>
+                <DataGridTextColumn Header="Subcategoria" Binding="{Binding NomeSubcategoria}" Width="400"/>
+            </DataGrid.Columns>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding ComandoDuploClickSubcategoria}" 
+                                           CommandParameter="{Binding SelectedItem, ElementName=DtgDados}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </DataGrid>
     </Grid>
 </UserControl>

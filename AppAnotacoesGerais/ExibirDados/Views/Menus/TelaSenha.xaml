@@ -5,26 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views.Menus"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-             mc:Ignorable="d" d:DesignHeight="900" d:DesignWidth="1000" Background="#FF031F05">
+             mc:Ignorable="d" d:DesignHeight="900" d:DesignWidth="1000" Background="#FF021507">
 
     <Border CornerRadius="0" Height="590" Width="650" Margin="60,155,180,155" >
         <Border.Background>
             <ImageBrush ImageSource="/ExibirDados/Recursos/Imagens/Notebook.jpg" Stretch="Fill"/>
         </Border.Background>
+        
         <Border CornerRadius="10" BorderThickness="5" Opacity="0.95" Margin="-5" BorderBrush="#FF158011">           
             <Border.Background>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="#FF031304" Offset="0.0"/>
-                    <GradientStop Color="#FF09500E" Offset="1"/>
-                    <GradientStop Color="#FF0B3810" Offset="0.461"/>
-                    <GradientStop Color="#FF094E0F" Offset="0.987"/>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                    <GradientStop Color="#FF099087" Offset="0.0"/>
+                    <GradientStop Color="#FF099087" Offset="1"/>
+                    <GradientStop Color="#FF011311" Offset="0.342"/>
+                    <GradientStop Color="#FF02231C" Offset="0.614"/>
                 </LinearGradientBrush>
             </Border.Background>
+            
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -32,14 +35,19 @@
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Digite a senha para abrir o formulário de Informações Pessoais" Foreground="DarkGray" FontSize="12" 
+                    
+                    <TextBlock Text="Digite a senha para abrir o formulário de Informações Pessoais" Foreground="White" FontSize="16" 
                                FontFamily="Montserrat" Grid.Column="0" VerticalAlignment="Center" Margin="10, 0, 0, 0"/>
                 </Grid>
-                <StackPanel Width="320" Grid.Row="1" Orientation="Vertical" Margin="0,35,0,0">
+                
+                <StackPanel Width="320" Grid.Row="1" Orientation="Vertical" Margin="0,25,0,0">
+                    
                     <Image Source="/ExibirDados/Recursos/Imagens/logo.png" Width="100" Height="100"/>
+                    
                     <TextBlock Text="ANOTAÇÕES GERAIS" Foreground="White" FontSize="25" FontWeight="Medium" FontFamily="Montserrat" 
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="Digite sua senha." Foreground="DarkGray" FontSize="14" FontWeight="Medium" FontFamily="Montserrat" Margin="0,15,0,0"/>
+                    
+                    <TextBlock Text="Digite sua senha." Foreground="White" FontSize="14" FontWeight="Bold" FontFamily="Montserrat" Margin="0,15,0,0"/>
 
                     <!---| Password Box|-->
                     <local:CaixaDeSenha  x:Name="PbSenha" Password="{Binding Senha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -50,13 +58,15 @@
                                 <b:InvokeCommandAction Command="{Binding ComandoExecutarSenha}" PassEventArgsToCommand="True" />
                             </b:EventTrigger>
                         </b:Interaction.Triggers>
+                        
                         <local:CaixaDeSenha.Background>
                             <ImageBrush ImageSource="/ExibirDados/Recursos/Imagens/key-icon.png" Stretch="None" AlignmentX="Left"/>
                         </local:CaixaDeSenha.Background>
+                        
                     </local:CaixaDeSenha>
 
-                    <Button x:Name="BtnEntrar" Content="Entrar" Style="{DynamicResource BtnVerdeRedondo}" Margin="85,20,0,0"
-                            Command="{Binding ComandoVerificarSenha}"/>
+                    <Button x:Name="BtnEntrar" Content="Entrar" Style="{DynamicResource BtnRetangularVerdeEscuro}" Margin="60,20,0,0"
+                            Command="{Binding ComandoVerificarSenha}" Width="200"/>
                 </StackPanel>
             </Grid>
         </Border>

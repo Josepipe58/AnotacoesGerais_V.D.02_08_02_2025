@@ -4,9 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views.Menus"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="1200">
+
+    <Grid Background="#FF021507" Height="800" VerticalAlignment="Top">
+
+        <!--| TextBlock |-->
+        <TextBlock Text="Gerenciar Categorias, Subcategorias e Nome da Descrição" FontSize="30" Foreground="#DDDDDD" 
+                   Width="781" Margin="270,146,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <TextBlock Text="Gerenciar Consumo de Gás" FontSize="30" Foreground="#DDDDDD" Width="395" 
+                   Margin="420,401,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!--| Gerenciar Categorias, Subcategorias e Nome da Descrição |-->
+        <RadioButton Content="Categorias" Style="{StaticResource RadionButtonComImagem}" Margin="200,209,0,0"
+                     Command="{Binding Path=DataContext.ComandoCategoria, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}" Width="290" Height="120"/>
+
+        <RadioButton Content="Subcategorias" Width="290" Style="{StaticResource RadionButtonComImagem}" Margin="510,209,0,0"
+                     Command="{Binding Path=DataContext.ComandoSubcategoria, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}" Height="120"/>
+
+        <RadioButton Content="Nome da Descrição" Width="290" Style="{StaticResource RadionButtonComImagem}" Margin="820,209,0,0"
+                     Command="{Binding Path=DataContext.ComandoNomeDescricao, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}" Height="120"/>
+
+        <!--| Gerenciar Consumo de Gás |-->
+        <RadioButton Content="Consumo de Gás" Width="290" Style="{StaticResource RadionButtonComImagem}" Margin="460,461,0,0"
+                     Command="{Binding DataContext.ComandoConsumoGas, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}" Height="120"/>
     </Grid>
 </UserControl>

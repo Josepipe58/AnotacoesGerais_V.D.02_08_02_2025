@@ -2,7 +2,6 @@
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -88,7 +87,7 @@ public partial class SubcategoriaViewModel// SubcategoriaGerenciar
             MessageBoxResult resultado = Mensagens.ConfirmarExcluir(subcategoriaModel.Id);
             if (resultado == MessageBoxResult.No)
             {
-                LimparDados();
+                Atualizar();
                 return;
             }
             try
@@ -137,7 +136,6 @@ public partial class SubcategoriaViewModel// SubcategoriaGerenciar
     {
         SubcategoriaModel.Id = 0;
         SubcategoriaModel.NomeSubcategoria = null;
-        SubcategoriaModel.CategoriaId = 0;
 
         var listaDeSubcategorias = SubcategoriaRepositorio.ObterSubcategorias().ToList() ?? [];
 
@@ -147,8 +145,7 @@ public partial class SubcategoriaViewModel// SubcategoriaGerenciar
 
     public void Atualizar()
     {
-        //Limpar ComboBox de Categorias.
-        SubcategoriaModel.NomeCategoria = null;
+        SubcategoriaModel.NomeCategoria = CategoriaModel.ListaDeCategorias[0].NomeCategoria;
         TextoPesquisa = null;
         LimparDados();
     }

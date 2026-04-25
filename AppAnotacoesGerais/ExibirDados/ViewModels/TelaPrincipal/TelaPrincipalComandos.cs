@@ -1,7 +1,8 @@
 ﻿using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Helpers;
-using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.ExibirDados.Views;
+using AppAnotacoesGerais.ExibirDados.Views.AnotacaoGeral;
+using AppAnotacoesGerais.ExibirDados.Views.InformacaoPessoal;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
 using System.Diagnostics;
 using System.Windows;
@@ -11,13 +12,21 @@ namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal;
 
 public partial class TelaPrincipalViewModel// TelaPrincipalComandos
 {
-    //public ICommand ComandoMenuLateral { get; }
+    #region | Comando do Menu Lateral e Página Inicial |
 
+    private ICommand _comandoMenuLateral;
+    public ICommand ComandoMenuLateral
+    {
+        get
+        {
+            _comandoMenuLateral ??= new RelayCommand<object>(param => MenuLateral(param));
+            return _comandoMenuLateral;
+        }
+    }
 
     public void PaginaInicialComando()
     {
         SelecionarControleDeUsuario = new PaginaInicial();
-        Caption = "Página Inicial";       
     }
 
     private ICommand _comandoPaginaInicial;
@@ -32,6 +41,47 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
             return _comandoPaginaInicial;
         }
     }
+    #endregion
+
+    #region | Comandos de Anotaçoes Gerais |
+
+    public void AbrirJanelaDeCadastrar()
+    {
+        //SelecionarControleDeUsuario = new CadastrarAnotacaoGeral_UI();
+    }
+
+    private ICommand _comandoAbrirJanelaDeCadastrar;
+    public ICommand ComandoAbrirJanelaDeCadastrar
+    {
+        get
+        {
+            if (_comandoAbrirJanelaDeCadastrar == null)
+            {
+                _comandoAbrirJanelaDeCadastrar = new RelayCommand<object>(param => AbrirJanelaDeCadastrar());
+            }
+            return _comandoAbrirJanelaDeCadastrar;
+        }
+    }
+
+    public void VoltarAnotacaoGeral()
+    {
+        SelecionarControleDeUsuario = new AnotacaoGeralView();
+    }
+
+    private ICommand _comandoVoltarAnotacaoGeral;
+    public ICommand ComandoVoltarAnotacaoGeral
+    {
+        get
+        {
+            if (_comandoVoltarAnotacaoGeral == null)
+            {
+                _comandoVoltarAnotacaoGeral = new RelayCommand<object>(param => VoltarAnotacaoGeral());
+            }
+            return _comandoVoltarAnotacaoGeral;
+        }
+    }
+
+    #endregion
 
     #region | Senha Para Acessar Informações Pessoais |
 
@@ -83,67 +133,14 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
             return _comandoExecutarSenha;
         }
     }
+   
+    #endregion   
 
-    // Uso de método utilitário compartilhado para verificação de tecla Enter.
-
-    public void FecharAplicativoComando()
-    {
-
-        var telaLogin = Application.Current.Windows.OfType<Window>()
-            .FirstOrDefault(w => w.GetType() == typeof(TelaSenha));
-        telaLogin.Close();
-
-        var telaPrincipal = Application.Current.Windows.OfType<Window>().First();
-        telaPrincipal.Close();
-
-        //TelaPrincipal.Show();
-
-        Window ReabrirTelaPrincipal = new Views.Menus.TelaPrincipal();
-        ReabrirTelaPrincipal.Show();
-    }
-
-    private ICommand _comandoFecharAplicativo;
-    public ICommand ComandoFecharAplicativo
-    {
-        get
-        {
-            if (_comandoFecharAplicativo == null)
-            {
-                _comandoFecharAplicativo = new RelayCommand<object>(param => FecharAplicativoComando());
-            }
-            return _comandoFecharAplicativo;
-        }
-    }
-
-    #endregion
-
-    #region | Comandos de AnotacoesGerais, InformacoesPessoais e ConsumoGas |
-
-    public void InformacaoPessoalComando()
-    {
-        SelecionarControleDeUsuario = new TelaSenha();
-    }
-
-    private ICommand _comandoInformacaoPessoal;
-    public ICommand ComandoInformacaoPessoal
-    {
-        get
-        {
-            if (_comandoInformacaoPessoal == null)
-            {
-                _comandoInformacaoPessoal = new RelayCommand<object>(param => InformacaoPessoalComando());
-            }
-            return _comandoInformacaoPessoal;
-        }
-    }
-    #endregion
-
-    #region | Comandos de Categorias, Subcategorias e Nome da Descrição |
+    #region | Comandos de Categorias, Subcategorias, Nome da Descrição, ConsumoGas e Seta de Voltar|
 
     public void CategoriaComando()
     {
         SelecionarControleDeUsuario = new CategoriaView();
-        Caption = "Gerenciar Categorias";        
     }
 
     private ICommand _comandoCategoria;
@@ -161,8 +158,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
 
     public void SubcategoriaComando()
     {
-        SelecionarControleDeUsuario = new SubcategoriaView();
-        Caption = "Gerenciar Subcategorias";        
+        SelecionarControleDeUsuario = new SubcategoriaView();        
     }
 
     private ICommand _comandoSubcategoria;
@@ -181,19 +177,55 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
     public void NomeDaDescricaoComando()
     {
         SelecionarControleDeUsuario = new NomeDescricaoView();
-        Caption = "Gerenciar Nome da Descrição";        
     }
 
-    private ICommand _comandoNomeDaDescricao;
-    public ICommand ComandoNomeDaDescricao
+    private ICommand _comandoNomeDescricao;
+    public ICommand ComandoNomeDescricao
     {
         get
         {
-            if (_comandoNomeDaDescricao == null)
+            if (_comandoNomeDescricao == null)
             {
-                _comandoNomeDaDescricao = new RelayCommand<object>(param => NomeDaDescricaoComando());
+                _comandoNomeDescricao = new RelayCommand<object>(param => NomeDaDescricaoComando());
             }
-            return _comandoNomeDaDescricao;
+            return _comandoNomeDescricao;
+        }
+    }
+
+    public void ConsumoGasComando()
+    {
+        SelecionarControleDeUsuario = new ConsumoGasView();
+    }
+
+    private ICommand _comandoConsumoGas;
+    public ICommand ComandoConsumoGas
+    {
+        get
+        {
+            if (_comandoConsumoGas == null)
+            {
+                _comandoConsumoGas = new RelayCommand<object>(param => ConsumoGasComando());
+            }
+            return _comandoConsumoGas;
+        }
+    }
+
+    private void VoltarSubmenuAnotacoesGerais()
+    {
+        SelecionarControleDeUsuario = new SubmenuAnotacoesGerais();
+    }
+
+    private ICommand _comandoVoltarSubmenuAnotacoesGerais;
+    public ICommand ComandoVoltarSubmenuAnotacoesGerais
+    {
+        get
+        {
+            if (_comandoVoltarSubmenuAnotacoesGerais == null)
+            {
+                _comandoVoltarSubmenuAnotacoesGerais =
+                    new RelayCommand<object>(param => VoltarSubmenuAnotacoesGerais());
+            }
+            return _comandoVoltarSubmenuAnotacoesGerais;
         }
     }
     #endregion
@@ -235,4 +267,36 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         }
     }
     #endregion
+
+    // Uso de método utilitário compartilhado para verificação de tecla Enter.
+    /*
+    public void FecharAplicativoComando()
+    {
+
+        var telaLogin = Application.Current.Windows.OfType<Window>()
+            .FirstOrDefault(w => w.GetType() == typeof(TelaSenha));
+        telaLogin.Close();
+
+        var telaPrincipal = Application.Current.Windows.OfType<Window>().First();
+        telaPrincipal.Close();
+
+        //TelaPrincipal.Show();
+
+        Window ReabrirTelaPrincipal = new Views.Menus.TelaPrincipal();
+        ReabrirTelaPrincipal.Show();
+    }
+
+    private ICommand _comandoFecharAplicativo;
+    public ICommand ComandoFecharAplicativo
+    {
+        get
+        {
+            if (_comandoFecharAplicativo == null)
+            {
+                _comandoFecharAplicativo = new RelayCommand<object>(param => FecharAplicativoComando());
+            }
+            return _comandoFecharAplicativo;
+        }
+    }
+    */
 }

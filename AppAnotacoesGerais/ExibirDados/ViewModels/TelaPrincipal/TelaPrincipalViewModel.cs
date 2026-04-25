@@ -1,14 +1,12 @@
-﻿using System;
+﻿using AppAnotacoesGerais.ExibirDados.Comandos;
+using AppAnotacoesGerais.ExibirDados.Views.AnotacaoGeral;
+using AppAnotacoesGerais.ExibirDados.Views.Menus;
+using AppAnotacoesGerais.GerenciarDados;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Input;
-using AppAnotacoesGerais.ExibirDados.Comandos;
-using AppAnotacoesGerais.ExibirDados.Views;
-using AppAnotacoesGerais.ExibirDados.Views.Menus;
-using AppAnotacoesGerais.GerenciarDados;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal;
 
@@ -18,20 +16,6 @@ public partial class TelaPrincipalViewModel : ViewModelBase
 {
     private CollectionViewSource CollectionViewSource { get; set; }
     public ICollectionView SourceCollection => CollectionViewSource.View;
-
-    private string _caption;
-    public string Caption
-    {
-        get
-        {
-            return _caption;
-        }
-        set
-        {
-            _caption = value;
-            OnPropertyChanged(nameof(Caption));
-        }
-    }      
 
     public int _dataAtual;
     public int DataAtual
@@ -46,7 +30,6 @@ public partial class TelaPrincipalViewModel : ViewModelBase
             OnPropertyChanged(nameof(DataAtual));
         }
     }
-    
 
     private string _senha;
     public string Senha
@@ -55,7 +38,7 @@ public partial class TelaPrincipalViewModel : ViewModelBase
         set
         {
             _senha = value;
-            OnPropertyChanged(nameof(Senha));            
+            OnPropertyChanged(nameof(Senha));
         }
     }
 
@@ -63,7 +46,11 @@ public partial class TelaPrincipalViewModel : ViewModelBase
     public object SelecionarControleDeUsuario
     {
         get => _selecionarControleDeUsuario;
-        set { _selecionarControleDeUsuario = value; OnPropertyChanged(nameof(SelecionarControleDeUsuario)); }
+        set
+        {
+            _selecionarControleDeUsuario = value;
+            OnPropertyChanged(nameof(SelecionarControleDeUsuario));
+        }
     }
 
     public TelaPrincipalViewModel()
@@ -73,19 +60,18 @@ public partial class TelaPrincipalViewModel : ViewModelBase
             new MenuModel { NomeDoMenu = "Página Inicial" },
             new MenuModel { NomeDoMenu = "Anotações Gerais" },
             new MenuModel { NomeDoMenu = "Informações Pessoais" },
-            new MenuModel { NomeDoMenu = "Submenu de Anotações Gerais" },           
+            new MenuModel { NomeDoMenu = "Submenu de Anotações Gerais" },
             new MenuModel { NomeDoMenu = "Banco de Dados" },
             new MenuModel { NomeDoMenu = "Sair do Aplicativo" },
         };
-        
+
         CollectionViewSource = new CollectionViewSource { Source = menuItems };
-        
+
         // Configura a página de inicialização.
         SelecionarControleDeUsuario = new PaginaInicial();
-        Caption = "Página Inicial";            
-        DataAtual = DateTime.Now.Year; 
+        DataAtual = DateTime.Now.Year;
     }
-    
+
     public void MenuLateral(object parameter)
     {
         try
@@ -105,8 +91,8 @@ public partial class TelaPrincipalViewModel : ViewModelBase
                     break;
                 case "Submenu de Anotações Gerais":
                     SelecionarControleDeUsuario = new SubmenuAnotacoesGerais();
-                    break;                
-                case "Banco de Dados":                    
+                    break;
+                case "Banco de Dados":
                     try
                     {
                         Process.Start("C:\\Program Files (x86)\\Microsoft SQL Server Management Studio 20\\Common7\\IDE\\Ssms.exe");
@@ -131,16 +117,6 @@ public partial class TelaPrincipalViewModel : ViewModelBase
             Mensagens.NomeDoMetodo = "MenuLateral";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
             return;
-        }
-    }
-          
-    private ICommand _comandoMenuLateral;
-    public ICommand ComandoMenuLateral
-    {
-        get
-        {
-            _comandoMenuLateral ??= new RelayCommand<object>(param => MenuLateral(param));
-            return _comandoMenuLateral;
         }
     }
 }

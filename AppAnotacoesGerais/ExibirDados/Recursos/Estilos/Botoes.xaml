@@ -425,4 +425,134 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+    <!--==========================================| RadioButtonVerdeEscuro |==================================================================-->
+
+    <Style x:Key="RadioButtonVerdeEscuro" TargetType="RadioButton">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#FF11E4E4"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Padding" Value="0 0 0 3"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Margin="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="border" BorderBrush="#FF0F7548" CornerRadius="15"  BorderThickness="8">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF13F0F0" Offset="0.109"/>
+                                    <GradientStop Color="#FF13F0F0" Offset="0.941"/>
+                                    <GradientStop Color="#FF091F0B" Offset="0.28"/>
+                                    <GradientStop Color="#FF091F0B" Offset="0.757"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock x:Name="SidebarRadioButtonMenuText" Grid.Row="1" Width="300" Text="{TemplateBinding Property=Content}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF09EADA" FontSize="18" Padding="10 0 0 0"
+                                   FontFamily="Segoe UI" Margin="15,0,10,0" Grid.ColumnSpan="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FF091F0B"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FF091F0B"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--==========================================| RadioButtonAzulMarinho |==================================================================-->
+
+    <Style x:Key="RadioButtonAzulMarinho" TargetType="RadioButton">
+        <Setter Property="Width" Value="350"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="0,3,0,0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Margin="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="border" Background="#FF090E58"
+                            CornerRadius="10 10 10 10"  BorderThickness="3"/>
+                        <TextBlock x:Name="SidebarRadioButtonMenuText" Grid.Row="1" Width="250" Text="{TemplateBinding Property=Content}"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" FontSize="18"
+                               FontFamily="Segoe UI" Margin="15,0,10,0" Grid.ColumnSpan="1"/>
+                        <Border x:Name="Highlighter" Height="30" Width="10" Background="#FFECF906" CornerRadius="5"
+                            HorizontalAlignment="Left" Margin="0,0,5,0" Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FF0509EC"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FF076962"/>
+                            <Setter Property="Visibility" TargetName="Highlighter" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--================================================| RadionButtonComImagem |=============================================================-->
+
+    <Style x:Key="RadionButtonComImagem" TargetType="RadioButton">
+        <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Margin="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="290"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="border" Background="#FF065648" CornerRadius="6"/>
+                        <Image x:Name="SidebarRadioButtonMenuIcon" Grid.Row="0" Margin="0,0,0,0" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           Stretch="None" Source="/ExibirDados/Recursos/Imagens/PastaTurquesa.png"/>
+                        <TextBlock x:Name="SidebarRadioButtonMenuText" Grid.Row="0" 
+                               Text="{TemplateBinding Property=Content}" Foreground="#E8EAEC"
+                               VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                               FontSize="14" FontFamily="Segoe Ui" Margin="0,0,0,10" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FF0A3711"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FFD3E813"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="3"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="#FF0A0E48"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FF10F1D8"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="3"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

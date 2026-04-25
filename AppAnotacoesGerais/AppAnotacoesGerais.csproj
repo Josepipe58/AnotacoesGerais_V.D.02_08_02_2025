@@ -9,6 +9,10 @@
     <ApplicationIcon>ExibirDados\Recursos\Imagens\Anotacoes.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="ExibirDados\Recursos\Estilos\PastaTurquesa.png" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <Content Include="ExibirDados\Recursos\Imagens\Anotacoes.ico" />

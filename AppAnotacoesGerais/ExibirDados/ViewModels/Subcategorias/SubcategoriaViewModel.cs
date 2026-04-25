@@ -8,6 +8,7 @@ namespace AppAnotacoesGerais.ExibirDados.ViewModels.Subcategorias;
 public partial class SubcategoriaViewModel : ViewModelBase
 {
     public SubcategoriaRepositorio _subcategoriaRepositorio = new();
+    public CategoriaRepositorio _categoriaRepositorio = new();
 
     public CategoriaModel CategoriaModel { get; set; } = new();
     public SubcategoriaModel SubcategoriaModel { get; set; } = new();

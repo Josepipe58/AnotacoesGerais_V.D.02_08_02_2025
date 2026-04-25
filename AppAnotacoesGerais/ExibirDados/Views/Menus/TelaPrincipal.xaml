@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        mc:Ignorable="d" xml:lang="pt-BR" Height="995" Width="1600" 
+        mc:Ignorable="d" xml:lang="pt-BR" Height="1000" Width="1600" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="CanResizeWithGrip"
         WindowStyle="SingleBorderWindow" Cursor="Hand" >
 
