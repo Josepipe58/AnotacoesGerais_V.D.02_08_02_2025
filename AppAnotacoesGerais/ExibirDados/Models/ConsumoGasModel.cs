@@ -48,8 +48,8 @@ public class ConsumoGasModel : ViewModelBase
         }
     }
 
-    private decimal _preco;
-    public decimal Preco
+    private string _preco;
+    public string Preco
     {
         get => _preco;
         set
@@ -67,6 +67,64 @@ public class ConsumoGasModel : ViewModelBase
         {
             _fornecedor = value;
             OnPropertyChanged(nameof(Fornecedor));
+        }
+    }
+
+    private int _idDataAnterior;
+    public int IdDataAnterior
+    {
+        get => _idDataAnterior;
+        set
+        {
+            _idDataAnterior = value;
+            OnPropertyChanged(nameof(IdDataAnterior));
+        }
+    }
+
+    private string _calcularDiasConsumo;
+    public string CalcularDiasConsumo
+    {
+        get => _calcularDiasConsumo;
+        set
+        {
+            _calcularDiasConsumo = value;
+            OnPropertyChanged(nameof(CalcularDiasConsumo));
+        }
+    }
+
+    private DateTime _dataAnterior;
+    public DateTime DataAnterior
+    {
+        get => _dataAnterior;
+        set
+        {
+            _dataAnterior = value;
+            OnPropertyChanged(nameof(DataAnterior));
+        }
+    }
+    //TxtBotijaoReserva
+    private string _botijaoReserva;
+    public string BotijaoReserva
+    {
+        get => _botijaoReserva;
+        set
+        {
+            _botijaoReserva = value;
+            OnPropertyChanged(nameof(BotijaoReserva));
+        }
+    }
+
+    private int _indiceSelecionadoConsumoGas;
+    public int IndiceSelecionadoConsumoGas
+    {
+        get => _indiceSelecionadoConsumoGas;
+        set
+        {
+            if (_indiceSelecionadoConsumoGas != value)
+            {
+                _indiceSelecionadoConsumoGas = value;
+                OnPropertyChanged(nameof(IndiceSelecionadoConsumoGas));
+            }
         }
     }
 }

@@ -1,16 +1,65 @@
-﻿using AppAnotacoesGerais.ExibirDados.Comandos;
+﻿using AppAnotacoesGerais.AcessarDados.Entidades;
+using AppAnotacoesGerais.ExibirDados.Comandos;
+using AppAnotacoesGerais.ExibirDados.Models;
+using AppAnotacoesGerais.GerenciarDados;
+using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Windows.Input;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.Categorias;
 
 public partial class CategoriaViewModel//CategoriaComandos
 {
+    /*
     private ICommand _comandoAdicionarCategoria;
     public ICommand ComandoAdicionarCategoria
     {
         get
         {
             _comandoAdicionarCategoria ??= new RelayCommand<object>(param => Adicionar(CategoriaModel));
+            return _comandoAdicionarCategoria;
+        }
+    }*/
+
+    private ICommand _comandoAdicionarCategoria;
+    public ICommand ComandoAdicionarCategoria
+    {
+        get
+        {
+            _comandoAdicionarCategoria ??= new RelayCommand<object>(param => 
+            {
+                // Criar uma nova instância de CategoriaModel para evitar modificar a instância vinculada à interface do usuário.
+                CategoriaModel categoriaModel = new();
+                categoriaModel = CategoriaModel;
+                if (categoriaModel.Id == 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
+                {
+                    try
+                    {
+                        CategoriaRepositorio categoriaRepositorio = new();
+                        Categoria categoria = new()
+                        {
+                            NomeCategoria = categoriaModel.NomeCategoria
+                        };
+                        categoriaRepositorio.Adicionar(categoria);
+                        Mensagens.SucessoAoAdicionar(categoria.Id);
+                        LimparDados();
+                    }
+                    catch (Exception ex)
+                    {
+                        Mensagens.NomeDoMetodo = "Adicionar";
+                        Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+                    }
+                }
+                else if (categoriaModel.Id > 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
+                {
+                    Mensagens.ErroAoAdicionar();
+                    return;
+                }
+                else
+                {
+                    Mensagens.PreencherCampoVazio();
+                    return;
+                }
+            });
             return _comandoAdicionarCategoria;
         }
     }

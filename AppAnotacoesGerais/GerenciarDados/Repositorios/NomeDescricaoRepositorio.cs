@@ -10,7 +10,7 @@ public class NomeDescricaoRepositorio : Repositorio<NomeDescricao>
         try
         {
             using Contexto contexto = new();
-            var listaDoNomeDaDescricao = contexto.TSubcategoria.Join(contexto.TCategoria,
+            var listaDoNomeDescricao = contexto.TSubcategoria.Join(contexto.TCategoria,
                 sc => sc.CategoriaId,
                 c => c.Id,
                 (sc, c) => new { sc, c })
@@ -27,7 +27,7 @@ public class NomeDescricaoRepositorio : Repositorio<NomeDescricao>
                     NomeSubcategoria = nd.Subcategoria.NomeSubcategoria
                 }).OrderByDescending(sc => sc.Id).ToList();
 
-            return [.. listaDoNomeDaDescricao];
+            return [.. listaDoNomeDescricao];
         }
         catch (Exception ex)
         {
@@ -43,7 +43,7 @@ public class NomeDescricaoRepositorio : Repositorio<NomeDescricao>
         try
         {
             using Contexto contexto = new();
-            var listaDoNomeDaDescricao = contexto.TSubcategoria.Join(contexto.TCategoria,
+            var listaDoNomeDescricao = contexto.TSubcategoria.Join(contexto.TCategoria,
                 sc => sc.CategoriaId,
                 c => c.Id,
                 (sc, c) => new { sc, c })
@@ -60,7 +60,7 @@ public class NomeDescricaoRepositorio : Repositorio<NomeDescricao>
                     NomeSubcategoria = nd.NomeSubcategoria
                 }).Where(sc => sc.SubcategoriaId == id).OrderByDescending(sc => sc.Id).ToList();
 
-            return [.. listaDoNomeDaDescricao];
+            return [.. listaDoNomeDescricao];
         }
         catch (Exception ex)
         {

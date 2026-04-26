@@ -6,7 +6,6 @@ public partial class TelaSenha : UserControl
 {
     public TelaSenha()
     {
-        InitializeComponent();
-         PbSenha.Focus();        
+        InitializeComponent();                
     }
 }

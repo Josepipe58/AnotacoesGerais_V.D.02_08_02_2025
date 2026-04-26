@@ -6,54 +6,54 @@ namespace AppAnotacoesGerais.ExibirDados.ViewModels.NomeDescricaoVM;
 
 public partial class NomeDescricaoViewModel//NomeDescricaoComandos
 {
-    private ICommand _comandoAdicionarNomeDaDescricao;
-    public ICommand ComandoAdicionarNomeDaDescricao
+    private ICommand _comandoAdicionarNomeDescricao;
+    public ICommand ComandoAdicionarNomeDescricao
     {
         get
         {
-            _comandoAdicionarNomeDaDescricao ??= new RelayCommand<object>(param => Adicionar(NomeDaDescricaoModel));
-            return _comandoAdicionarNomeDaDescricao;
+            _comandoAdicionarNomeDescricao ??= new RelayCommand<object>(param => Adicionar(NomeDescricaoModel));
+            return _comandoAdicionarNomeDescricao;
         }
     }
 
-    private ICommand _comandoEditarNomeDaDescricao;
-    public ICommand ComandoEditarNomeDaDescricao
+    private ICommand _comandoEditarNomeDescricao;
+    public ICommand ComandoEditarNomeDescricao
     {
         get
         {
-            _comandoEditarNomeDaDescricao ??= new RelayCommand<object>(param => Editar(NomeDaDescricaoModel));
-            return _comandoEditarNomeDaDescricao;
+            _comandoEditarNomeDescricao ??= new RelayCommand<object>(param => Editar(NomeDescricaoModel));
+            return _comandoEditarNomeDescricao;
         }
     }
 
-    private ICommand _comandoExcluirNomeDaDescricao;
-    public ICommand ComandoExcluirNomeDaDescricao
+    private ICommand _comandoExcluirNomeDescricao;
+    public ICommand ComandoExcluirNomeDescricao
     {
         get
         {
-            _comandoExcluirNomeDaDescricao ??= new RelayCommand<object>(param => Excluir(NomeDaDescricaoModel));
-            return _comandoExcluirNomeDaDescricao;
+            _comandoExcluirNomeDescricao ??= new RelayCommand<object>(param => Excluir(NomeDescricaoModel));
+            return _comandoExcluirNomeDescricao;
         }
     }
 
-    private ICommand _comandoAtualizarNomeDaDescricao;
-    public ICommand ComandoAtualizarNomeDaDescricao
+    private ICommand _comandoAtualizarNomeDescricao;
+    public ICommand ComandoAtualizarNomeDescricao
     {
         get
         {
-            _comandoAtualizarNomeDaDescricao ??= new RelayCommand<object>(param => Atualizar());
-            return _comandoAtualizarNomeDaDescricao;
+            _comandoAtualizarNomeDescricao ??= new RelayCommand<object>(param => Atualizar());
+            return _comandoAtualizarNomeDescricao;
         }
     }
 
     //Comando do evento MouseDoubleClick.
-    private ICommand _comandoDuploClickNomeDaDescricao;
-    public ICommand ComandoDuploClickNomeDaDescricao
+    private ICommand _comandoDuploClickNomeDescricao;
+    public ICommand ComandoDuploClickNomeDescricao
     {
         get
         {
-            _comandoDuploClickNomeDaDescricao ??= new RelayCommand<object>(param => DuploClickNomeDaDescricao(param));
-            return _comandoDuploClickNomeDaDescricao;
+            _comandoDuploClickNomeDescricao ??= new RelayCommand<object>(param => DuploClickNomeDescricao(param));
+            return _comandoDuploClickNomeDescricao;
         }
     }
 }

@@ -4,6 +4,7 @@ using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.Categorias;
 

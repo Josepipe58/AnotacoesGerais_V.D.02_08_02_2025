@@ -67,16 +67,16 @@
                     </Border>
 
                     <!--| Botões) |-->
-                    <Button x:Name="BtnCadastrar" Content="Cadastrar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"  
+                    <Button Content="Adicionar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"  
                             Margin="30,195,0,0" Command="{Binding ComandoAdicionarCategoria}"/>
 
-                    <Button x:Name="BtnAlterar" Content="Alterar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                    <Button Content="Editar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
                             Margin="200,195,0,0" Command="{Binding ComandoEditarCategoria}"/>
 
-                    <Button x:Name="BtnExcluir" Content="Excluir" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                    <Button Content="Excluir" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
                             Margin="370,195,0,0" Command="{Binding ComandoExcluirCategoria}"/>
 
-                    <Button x:Name="BtnAtualizar" Content="Atualizar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                    <Button Content="Atualizar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
                             Margin="540,195,0,0" Command="{Binding ComandoAtualizarCategoria}"/>
                 </Grid>
             </Border>

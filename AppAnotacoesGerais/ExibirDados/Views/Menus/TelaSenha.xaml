@@ -52,7 +52,7 @@
                     <!---| Password Box|-->
                     <local:CaixaDeSenha  x:Name="PbSenha" Password="{Binding Senha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                          FontFamily="Montserrat" FontSize="20" FontWeight="Bold" Foreground="#FFF8F7FD" Height="35" Width="301" 
-                                         Margin="0,5,0,0" Padding="20,0,0,0" HorizontalAlignment="Left">
+                                         Margin="0,5,0,0" Padding="20,0,0,0" HorizontalAlignment="Left" >
                         <b:Interaction.Triggers>
                             <b:EventTrigger EventName="KeyDown">
                                 <b:InvokeCommandAction Command="{Binding ComandoExecutarSenha}" PassEventArgsToCommand="True" />

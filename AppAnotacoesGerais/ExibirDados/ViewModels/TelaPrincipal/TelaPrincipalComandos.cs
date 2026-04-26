@@ -174,7 +174,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         }
     }
 
-    public void NomeDaDescricaoComando()
+    public void NomeDescricaoComando()
     {
         SelecionarControleDeUsuario = new NomeDescricaoView();
     }
@@ -186,7 +186,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         {
             if (_comandoNomeDescricao == null)
             {
-                _comandoNomeDescricao = new RelayCommand<object>(param => NomeDaDescricaoComando());
+                _comandoNomeDescricao = new RelayCommand<object>(param => NomeDescricaoComando());
             }
             return _comandoNomeDescricao;
         }

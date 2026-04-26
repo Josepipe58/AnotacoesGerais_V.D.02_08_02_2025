@@ -145,7 +145,7 @@ public partial class SubcategoriaViewModel// SubcategoriaGerenciar
 
     public void Atualizar()
     {
-        SubcategoriaModel.NomeCategoria = CategoriaModel.ListaDeCategorias[0].NomeCategoria;
+        SubcategoriaModel.CategoriaId = 1;
         TextoPesquisa = null;
         LimparDados();
     }

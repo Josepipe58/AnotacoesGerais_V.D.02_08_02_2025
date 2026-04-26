@@ -3,10 +3,128 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.ConsumoDeGas"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" d:DesignWidth="1400">
+
+    <UserControl.DataContext>
+        <local:ConsumoGasViewModel/>
+    </UserControl.DataContext>
+
+    <Grid Background="#FF062E0D">
+
+        <!--| Seta para voltar ao Submenu de Anotacões Gerais |-->
+        <RadioButton Height="60" Width="66" Style="{StaticResource SetaVoltarMenuAnterior}" Margin="10,-2,0,0"
+             Command="{Binding DataContext.ComandoVoltarSubmenuAnotacoesGerais, RelativeSource={RelativeSource 
+             FindAncestor, AncestorType={x:Type Window}}}" Tag="{DynamicResource SetaVoltarMenuAnterior}" Grid.RowSpan="2"/>
+
+        <TextBlock Text="Voltar &gt; Para o Submenu de Anotacões Gerais" FontSize="16" FontWeight="Bold" 
+                   Foreground="#FF06F7F2" Height="22" Width="398" Margin="80,18,0,0" HorizontalAlignment="Left" 
+                   VerticalAlignment="Top"/>
+
+        <!--| Rótulos(Label) |-->
+        <Label Content="CONSUMO DE GÁS" Style="{DynamicResource LabelTransparente}" Width="262" Height="30" Margin="511,10,0,0" FontSize="20"/>
+
+        <Label Content="Digite um código para carregar a data anterior:" Style="{DynamicResource LabelTransparente}" Width="364" 
+               Margin="60,64,0,0" FontSize="16"/>
+
+        <Label Content="Tem botijão de gás de reserva?" Style="{DynamicResource LabelTransparente}" Width="250" Margin="60,110,0,0" 
+               FontSize="16" Height="25"/>
+
+        <!--ConsumoGasModel.CalcularDiasConsumo Quantidade de dias de consumo.-->
+        <Label Name="LblDiasConsumo" Content="{Binding ConsumoGasModel.CalcularDiasConsumo}" Style="{DynamicResource LabelTransparente}" 
+               Margin="510,64,0,0" Width="650" FontSize="16"/>
+
+        <Label Content="Codigo" Style="{DynamicResource LabelTransparente}" FontSize="12" Width="56" Height="20" Margin="15,147,0,0"/>
+
+        <Label Content="Data Anterior" Style="{DynamicResource LabelTransparente}" FontSize="12" Width="100" Height="20" Margin="90,147,0,0" />
+
+        <Label Content="Data da Troca" Style="{DynamicResource LabelTransparente}" FontSize="12" Width="104" Height="20" Margin="240,147,0,0"/>
+
+        <Label Content="Dias de Consumo" Style="{DynamicResource LabelTransparente}" FontSize="12" Width="110" Height="20" Margin="445,147,0,0"/>
+
+        <Label Content="Data da Compra" Style="{DynamicResource LabelTransparente}" FontSize="12" Width="110" Height="20" Margin="565,147,0,0"/>
+
+        <Label Content="Preço"  Style="{DynamicResource LabelTransparente}" FontSize="12" Width="58" Height="20" Margin="775,147,0,0"/>
+
+        <Label Content="Nome da Empresa" Style="{DynamicResource LabelTransparente}" FontSize="12" Width="116" Height="20" Margin="885,147,0,0"/>
+
+        <!--| TeextBox |-->
+        <TextBox Text="{Binding ConsumoGasModel.IdDataAnterior, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{DynamicResource TxtBrancoEBordaAzul}" Width="70" Margin="430,59,0,0">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="KeyDown">
+                    <b:InvokeCommandAction Command="{Binding ComandoCalcularDiasConsumo}" PassEventArgsToCommand="True" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </TextBox>
+
+        <TextBox Text="{Binding ConsumoGasModel.BotijaoReserva, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{DynamicResource TxtBrancoEBordaAzul}" Width="50" Margin="305,108,0,0"
+                 Height="30" FontSize="16"/>
+
+        <TextBox x:Name ="TxtId" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="65" Margin="20,167,0,0"
+                 Text="{Binding ConsumoGasModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox x:Name ="TxtConsumoEmDias" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="106" Margin="453,167,0,0"
+                 Text="{Binding ConsumoGasModel.DiasConsumo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBox x:Name ="TxtPreco" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="105" Margin="777,167,0,0"
+                 Text="{Binding ConsumoGasModel.Preco, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="KeyDown">
+                    <b:InvokeCommandAction Command="{Binding ComandoPrecoGas}" PassEventArgsToCommand="True" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </TextBox>
+
+        <TextBox x:Name ="TxtFornecedor" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="120" Margin="887,167,0,0"
+                 Text="{Binding ConsumoGasModel.Fornecedor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!--| Calendários |-->
+        <DatePicker x:Name="DtpDataTroca" Style="{DynamicResource CalendarioDatePicker}" Height="45" Width="200" Margin="243,160,0,0"
+                    Text="{Binding ConsumoGasModel.DataTroca, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <DatePicker x:Name="DtpDataCompra" Style="{DynamicResource CalendarioDatePicker}" Height="45" Width="200" Margin="568,160,0,0"
+                    Text="{Binding ConsumoGasModel.DataCompra, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!--| Botões |-->
+        <Button Content="Adicionar" Style="{DynamicResource BtnRetangularVerdeEscuro}" Height="50" Width="150" 
+                Margin="25,220,0,0" Command="{Binding ComandoAdicionarConsumoGas}"/>
+
+        <Button Content="Editar" Style="{DynamicResource BtnRetangularVerdeEscuro}" Height="50" Width="150" 
+                Margin="185,220,0,0" Command="{Binding ComandoEditarConsumoGas}"/>
+
+        <Button Content="Excluir" Style="{DynamicResource BtnRetangularVerdeEscuro}" Height="50" Width="150"
+                Margin="360,220,0,0" Command="{Binding ComandoExcluirConsumoGas}"/>
+
+        <Button Content="Atualizar" Style="{DynamicResource BtnRetangularVerdeEscuro}" FontSize="16" Height="50" Width="150"
+                Margin="530,220,0,0" Command="{Binding ComandoAtualizarConsumoGas}"/>
+
+        <!--| Combobox |-->
+        <ComboBox Text="{Binding ConsumoGasModel.DataAnterior}" Style="{DynamicResource ComboBoxAzulMarinho}" Width="140" Margin="93,167,0,0" 
+                  ItemsSource="{Binding ListaDaDataAnterior}" DisplayMemberPath="DataTroca" SelectedValuePath="Id" ItemStringFormat="dd/MM/yyyy"
+                   SelectedIndex="0"/>
+
+        <!--| DataGrid de Dados |-->
+        <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="0,284,5,0" IsReadOnly="True"
+                  ItemsSource="{Binding ListaDeConsumoGas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="100"/>
+                <DataGridTextColumn Header="Data da Troca" Binding="{Binding DataTroca, StringFormat=dd/MM/yyyy}" Width="150"/>
+                <DataGridTextColumn Header="Dias de Consumo" Binding="{Binding DiasConsumo}" Width="150"/>
+                <DataGridTextColumn Header="Data da Compra" Binding="{Binding DataCompra, StringFormat=dd/MM/yyyy}" Width="150"/>
+                <DataGridTextColumn Header="Preço do Gás" Binding="{Binding Preco, StringFormat=R$ \{0:N2\}}" Width="150"/>
+                <DataGridTextColumn Header="Empresa de Gás" Binding="{Binding Fornecedor}" Width="250"/>
+                <DataGridTextColumn Header="" Width="547"/>
+            </DataGrid.Columns>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseDoubleClick">
+                    <b:InvokeCommandAction Command="{Binding ComandoDuploClickConsumoGas}" 
+                                           CommandParameter="{Binding SelectedItem, ElementName=DtgDados}" />
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </DataGrid>
     </Grid>
 </UserControl>

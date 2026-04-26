@@ -2,7 +2,6 @@
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
-using System;
 using System.Collections.ObjectModel;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.NomeDescricaoVM;
@@ -11,35 +10,35 @@ public partial class NomeDescricaoViewModel : ViewModelBase
 {
     private string _textoPesquisa;
     public NomeDescricaoRepositorio _nomeDaDescricaoRepositorio = new();
-    private ObservableCollection<NomeDescricao> _listaDoNomeDaDescricao;
-    
+    private ObservableCollection<NomeDescricao> _listaDoNomeDescricao;
+
     public CategoriaModel CategoriaModel { get; set; } = new();
     public SubcategoriaModel SubcategoriaModel { get; set; } = new();
-    public NomeDescricaoModel NomeDaDescricaoModel { get; set; } = new();
+    public NomeDescricaoModel NomeDescricaoModel { get; set; } = new();
 
-    public string TextoPesquisa 
-    { 
-        get => _textoPesquisa; 
+    public string TextoPesquisa
+    {
+        get => _textoPesquisa;
         set
         {
             if (_textoPesquisa != value)
             {
                 _textoPesquisa = value;
                 OnPropertyChanged(nameof(TextoPesquisa));
-                PesquisarNomeDaDescricao();
+                PesquisarNomeDescricao();
             }
         }
     }
 
-    public ObservableCollection<NomeDescricao> ListaDoNomeDaDescricao
-    { 
-        get => _listaDoNomeDaDescricao;
+    public ObservableCollection<NomeDescricao> ListaDoNomeDescricao
+    {
+        get => _listaDoNomeDescricao;
         set
         {
-            if (_listaDoNomeDaDescricao != value)
+            if (_listaDoNomeDescricao != value)
             {
-                _listaDoNomeDaDescricao = value;
-                OnPropertyChanged(nameof(ListaDoNomeDaDescricao));
+                _listaDoNomeDescricao = value;
+                OnPropertyChanged(nameof(ListaDoNomeDescricao));
             }
         }
     }
@@ -75,25 +74,25 @@ public partial class NomeDescricaoViewModel : ViewModelBase
         }
     }
 
-    private void PesquisarNomeDaDescricao()
+    private void PesquisarNomeDescricao()
     {
-        var listaDoNomeDaDescricao = NomeDescricaoRepositorio.ObterNomeDescricao() ?? Enumerable.Empty<NomeDescricao>();
+        var listaDoNomeDescricao = NomeDescricaoRepositorio.ObterNomeDescricao() ?? Enumerable.Empty<NomeDescricao>();
 
         // Aplica filtro por texto de pesquisa (se informado)
         if (!string.IsNullOrWhiteSpace(TextoPesquisa))
         {
             var busca = TextoPesquisa.Trim();
-            listaDoNomeDaDescricao = listaDoNomeDaDescricao.Where(nd => !string.IsNullOrEmpty(nd.NomeDaDescricao) &&
+            listaDoNomeDescricao = listaDoNomeDescricao.Where(nd => !string.IsNullOrEmpty(nd.NomeDaDescricao) &&
                                       nd.NomeDaDescricao.Contains(busca, StringComparison.OrdinalIgnoreCase));
         }
-        ListaDoNomeDaDescricao = [];
-        ListaDoNomeDaDescricao = [.. listaDoNomeDaDescricao];
+        ListaDoNomeDescricao = [];
+        ListaDoNomeDescricao = [.. listaDoNomeDescricao];
     }
 
     public NomeDescricaoViewModel()
     {
         TextoPesquisa = string.Empty;
-        ListaDoNomeDaDescricao = [];
-        ListaDoNomeDaDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricao()];
+        ListaDoNomeDescricao = [];
+        ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricao()];
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.Subcategorias"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="800" d:DesignWidth="1300">
-
+    
     <UserControl.DataContext>
         <local:SubcategoriaViewModel/>
     </UserControl.DataContext>
@@ -97,10 +97,10 @@
                     </Border>
 
                     <!--| Botões) |-->
-                    <Button Content="Cadastrar" FontSize="16" Width="140" Style="{StaticResource BtnAzulEscuroEAzulClaro}" 
+                    <Button Content="Adicionar" FontSize="16" Width="140" Style="{StaticResource BtnAzulEscuroEAzulClaro}" 
                             Command="{Binding ComandoAdicionarSubcategoria}" Margin="30,240,0,0"/>
 
-                    <Button Content="Alterar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
+                    <Button Content="Editar" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
                             Command="{Binding ComandoEditarSubcategoria}" Margin="200,240,0,0"/>
 
                     <Button Content="Excluir" FontSize="16" Width="140" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
