@@ -41,20 +41,6 @@ public partial class ConsumoGasViewModel : ViewModelBase
         }
     }
 
-    public ConsumoGasViewModel()
-    {
-        ConsumoGasModel.CalcularDiasConsumo = $"Quantidade de dias de consumo.";
-
-        _listaDaDataAnterior = [.. _consumoGasRepositorio.ObterListaDeTodos().OrderByDescending(x => x.DataTroca)];
-        ListaDaDataAnterior = [.. _listaDaDataAnterior ?? []];
-
-        _listaDeConsumoGas = [.. _consumoGasRepositorio.ObterListaDeTodos() ?? []];
-
-        ListaDeConsumoGas = new ObservableCollection<ConsumoGas>(_listaDeConsumoGas.OrderByDescending(x => x.Id));
-
-        VerificarGasDeReserva();
-    }
-
     private void VerificarGasDeReserva()
     {
         try
@@ -75,5 +61,35 @@ public partial class ConsumoGasViewModel : ViewModelBase
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
             return;
         }
+    }
+
+    public void LimparDados()
+    {
+        ConsumoGasModel.Id = 0;
+        ConsumoGasModel.DiasConsumo = 0;
+        ConsumoGasModel.Preco = "";
+        ConsumoGasModel.Fornecedor = null;
+        ConsumoGasModel.DataCompra = DateTime.Now;
+        ConsumoGasModel.DataTroca = DateTime.Now;
+
+        var listaDeConsumoGas = _consumoGasRepositorio.ObterListaDeTodos()
+            .OrderByDescending(x => x.DataTroca).ToList() ?? [];
+
+        //Carregar DataGrid de ConsumoGass.        
+        ListaDeConsumoGas = new ObservableCollection<ConsumoGas>(listaDeConsumoGas);
+    }
+
+    public ConsumoGasViewModel()
+    {
+        ConsumoGasModel.CalcularDiasConsumo = $"Quantidade de dias de consumo.";
+
+        _listaDaDataAnterior = [.. _consumoGasRepositorio.ObterListaDeTodos().OrderByDescending(x => x.DataTroca)];
+        ListaDaDataAnterior = [.. _listaDaDataAnterior ?? []];
+
+        _listaDeConsumoGas = [.. _consumoGasRepositorio.ObterListaDeTodos() ?? []];
+
+        ListaDeConsumoGas = new ObservableCollection<ConsumoGas>(_listaDeConsumoGas.OrderByDescending(x => x.Id));
+
+        VerificarGasDeReserva();
     }
 }

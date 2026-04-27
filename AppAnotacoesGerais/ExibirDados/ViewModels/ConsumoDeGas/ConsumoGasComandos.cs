@@ -42,7 +42,7 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
                     }
                     catch (Exception ex)
                     {
-                        Mensagens.NomeDoMetodo = "Adicionar";
+                        Mensagens.NomeDoMetodo = "ComandoAdicionarConsumoGas";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     }
                 }
@@ -88,20 +88,20 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
                             Preco = Convert.ToDecimal(consumoGasModel.Preco.ToString().Replace("R$", "")),
                             Fornecedor = consumoGasModel.Fornecedor
                         };
-                        consumoGasRepositorio.Adicionar(consumoGas);
-                        Mensagens.SucessoAoAdicionar(consumoGas.Id);
+                        consumoGasRepositorio.Editar(consumoGas);
+                        Mensagens.SucessoAoEditar(consumoGas.Id);
                         LimparDados();
                     }
                     catch (Exception ex)
                     {
-                        Mensagens.NomeDoMetodo = "Adicionar";
+                        Mensagens.NomeDoMetodo = "ComandoEditarConsumoGas";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     }
                 }
                 else if (consumoGasModel.Id == 0 && consumoGasModel.DiasConsumo > 0 && !string.IsNullOrWhiteSpace(consumoGasModel.Preco)
                          && !string.IsNullOrWhiteSpace(consumoGasModel.Fornecedor))
                 {
-                    Mensagens.ErroAoAdicionar();
+                    Mensagens.ErroAoEditarOuExcluir();
                     return;
                 }
                 else
@@ -125,7 +125,7 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
                 ConsumoGasModel consumoGasModel = new();
                 consumoGasModel = ConsumoGasModel;
 
-                if (consumoGasModel.Id > 0)
+                if (consumoGasModel.Id > 0 && !string.IsNullOrWhiteSpace(consumoGasModel.Fornecedor))
                 {
                     MessageBoxResult resultado = Mensagens.ConfirmarExcluir(consumoGasModel.Id);
                     if (resultado == MessageBoxResult.No)
@@ -146,12 +146,12 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
                     }
                     catch (Exception erro)
                     {
-                        Mensagens.NomeDoMetodo = "Excluir";
+                        Mensagens.NomeDoMetodo = "ComandoExcluirConsumoGas";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(erro, Mensagens.NomeDoMetodo);
                         return;
                     }
                 }
-                else if (consumoGasModel.Id == 0)
+                else if (consumoGasModel.Id == 0 && !string.IsNullOrWhiteSpace(consumoGasModel.Fornecedor))
                 {
                     Mensagens.ErroAoEditarOuExcluir();
                     return;
@@ -172,7 +172,7 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
         get
         {
             _comandoAtualizarConsumoGas ??= new RelayCommand<object>(param =>
-            { 
+            {
                 LimparDados();
                 ConsumoGasModel.DataAnterior = ListaDaDataAnterior[0].DataTroca;
             });
@@ -223,13 +223,13 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
 
                     //Exibir o resultado do cálculo de dias de consumo em um Label.
                     ConsumoGasModel.CalcularDiasConsumo = $"O consumo de gás, entre {ConsumoGasModel.DataAnterior.ToShortDateString()} e " +
-                    $"{ConsumoGasModel.DataTroca.ToShortDateString()} foi de {diasConsumo.Days} dias.";                    
+                    $"{ConsumoGasModel.DataTroca.ToShortDateString()} foi de {diasConsumo.Days} dias.";
                 }
             });
             return _comandoCalcularDiasConsumo;
         }
     }
-    
+
     //Comando do evento KeyDown ao presssionar a tecla Enter.
     private ICommand _comandoPrecoGas;
     public ICommand ComandoPrecoGas
@@ -264,5 +264,4 @@ public partial class ConsumoGasViewModel// ConsumoGasComandos
             return _comandoPrecoGas;
         }
     }
-
 }

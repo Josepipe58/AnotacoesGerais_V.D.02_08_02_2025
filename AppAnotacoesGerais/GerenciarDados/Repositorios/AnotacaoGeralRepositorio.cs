@@ -1,11 +1,12 @@
 ﻿using AppAnotacoesGerais.AcessarDados;
 using AppAnotacoesGerais.AcessarDados.Entidades;
+using System.Collections.ObjectModel;
 
 namespace AppAnotacoesGerais.GerenciarDados.Repositorios;
 
 public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
 {
-    public static List<AnotacaoGeral> ObterAnotacoesGerais()
+    public static ObservableCollection<AnotacaoGeral> ObterAnotacoesGerais()
     {
         try
         {
@@ -30,7 +31,7 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
         }
     }
 
-    public static List<AnotacaoGeral> ObterAnotacoesGeraisPorId(int id)
+    public static ObservableCollection<AnotacaoGeral> ObterAnotacoesGeraisPorId(int id)
     {
         try
         {
@@ -61,7 +62,7 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
         try
         {
             using Contexto contexto = new();
-            var verificarConsulta = contexto.TAnotacaoGeral.Select(x=>x.Id == id); //SelecionarPK(id);
+            var verificarConsulta = contexto.TAnotacaoGeral.Select(x=>x.Id == id);
             if (verificarConsulta is not null)
             {
                 int retorno = Convert.ToInt32(verificarConsulta);
@@ -81,22 +82,6 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
                 return false;
             }
             return true;
-        }
-    }
-
-    public int ContadorRegistros()
-    {
-        try
-        {
-            int retorno = ObterListaDeTodos().Count;
-            return retorno;
-
-        }
-        catch (Exception ex)
-        {
-            Mensagens.NomeDoMetodo = "ContadorRegistros";
-            Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-            return 0;
         }
     }
 }

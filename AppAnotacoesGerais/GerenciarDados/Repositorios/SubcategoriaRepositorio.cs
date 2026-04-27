@@ -1,5 +1,6 @@
 ﻿using AppAnotacoesGerais.AcessarDados;
 using AppAnotacoesGerais.AcessarDados.Entidades;
+using System.Collections.ObjectModel;
 
 namespace AppAnotacoesGerais.GerenciarDados.Repositorios;
 
@@ -34,24 +35,24 @@ public class SubcategoriaRepositorio : Repositorio<Subcategoria>
         }
     }
 
-    public static List<Subcategoria> ObterSubcategoriasPorId(int id)
+    public static ObservableCollection<Subcategoria> ObterSubcategoriasPorId(int id)
     {
         try
         {
             using Contexto contexto = new();
-            var listaDeSubcategorias = contexto.TSubcategoria.Join(contexto.TCategoria,
-                sc => sc.CategoriaId,
+            var listaSubcategorias = contexto.TCategoria
+                .Join(contexto.TSubcategoria,
                 c => c.Id,
-                (sc, c) => new Subcategoria
+                sc => sc.CategoriaId,
+                (c, sc) => new Subcategoria
                 {
                     Id = sc.Id,
                     NomeSubcategoria = sc.NomeSubcategoria,
                     CategoriaId = sc.CategoriaId,
-                    NomeCategoria = sc.Categoria.NomeCategoria,
+                    NomeCategoria = c.NomeCategoria,
+                }).Where(sc => sc.CategoriaId == id).OrderBy(sc => sc.NomeSubcategoria);
 
-                }).Where(sc => sc.CategoriaId == id).ToList();
-
-            return [.. listaDeSubcategorias];
+            return [.. listaSubcategorias];
         }
         catch (Exception ex)
         {

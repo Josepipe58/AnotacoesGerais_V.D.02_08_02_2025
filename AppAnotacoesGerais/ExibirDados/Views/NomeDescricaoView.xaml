@@ -90,8 +90,8 @@
                                       SelectedValue="{Binding NomeDescricaoModel.CategoriaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding CategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
 
-                            <ComboBox Height="40" Width="310" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="820,35,0,0" DisplayMemberPath="NomeSubcategoria" 
-                                      SelectedValuePath="Id" ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias}"                              
+                            <ComboBox Height="40" Width="310" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="820,35,0,0" 
+                                      DisplayMemberPath="NomeSubcategoria" SelectedValuePath="Id" ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias}"                              
                                       SelectedValue="{Binding NomeDescricaoModel.SubcategoriaId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedIndex="{Binding SubcategoriaModel.IndiceSelecionadoSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 

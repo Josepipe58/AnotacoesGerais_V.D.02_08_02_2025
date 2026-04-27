@@ -19,6 +19,6 @@ public class ConsumoGas
     [Column(TypeName = "decimal(10, 2)")]
     public decimal Preco { get; set; }
 
-    [Required, StringLength(30)]
+    [Required, StringLength(100)]
     public string Fornecedor { get; set; }
 }

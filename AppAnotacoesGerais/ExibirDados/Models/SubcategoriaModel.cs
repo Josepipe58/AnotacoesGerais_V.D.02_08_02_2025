@@ -94,14 +94,14 @@ public class SubcategoriaModel : ViewModelBase
     public SubcategoriaModel()
     {
         //Usando encapsulamento para obter a lista de Subcategorias do repositório e armazená-la em uma coleção observável.       
-        _listaDeSubcategoriasPorId = [..SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaId) ?? []];
+        //_listaDeSubcategoriasPorId = [..SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaId) ?? []];
 
-        ListaDeSubcategoriasPorId = new ObservableCollection<Subcategoria>(_listaDeSubcategoriasPorId);
+        //ListaDeSubcategoriasPorId = new ObservableCollection<Subcategoria>(_listaDeSubcategoriasPorId);
 
 
-        _listaDeSubcategorias = [.. SubcategoriaRepositorio.ObterSubcategorias() ?? []];
+        //_listaDeSubcategorias = [.. SubcategoriaRepositorio.ObterSubcategorias() ?? []];
 
-        ListaDeSubcategorias = new ObservableCollection<Subcategoria>(_listaDeSubcategorias);
+        //ListaDeSubcategorias = new ObservableCollection<Subcategoria>(_listaDeSubcategorias);
 
     }
 }

@@ -3,23 +3,14 @@ using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
+using System.Reflection.Metadata;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.Categorias;
 
 public partial class CategoriaViewModel//CategoriaComandos
 {
-    /*
-    private ICommand _comandoAdicionarCategoria;
-    public ICommand ComandoAdicionarCategoria
-    {
-        get
-        {
-            _comandoAdicionarCategoria ??= new RelayCommand<object>(param => Adicionar(CategoriaModel));
-            return _comandoAdicionarCategoria;
-        }
-    }*/
-
     private ICommand _comandoAdicionarCategoria;
     public ICommand ComandoAdicionarCategoria
     {
@@ -27,9 +18,11 @@ public partial class CategoriaViewModel//CategoriaComandos
         {
             _comandoAdicionarCategoria ??= new RelayCommand<object>(param => 
             {
-                // Criar uma nova instância de CategoriaModel para evitar modificar a instância vinculada à interface do usuário.
+                // Criar uma nova instância de CategoriaModel para evitar
+                // modificar a instância vinculada à interface do usuário.
                 CategoriaModel categoriaModel = new();
                 categoriaModel = CategoriaModel;
+
                 if (categoriaModel.Id == 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
                 {
                     try
@@ -45,7 +38,7 @@ public partial class CategoriaViewModel//CategoriaComandos
                     }
                     catch (Exception ex)
                     {
-                        Mensagens.NomeDoMetodo = "Adicionar";
+                        Mensagens.NomeDoMetodo = "ComandoAdicionarCategoria";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     }
                 }
@@ -69,7 +62,44 @@ public partial class CategoriaViewModel//CategoriaComandos
     {
         get
         {
-            _comandoEditarCategoria ??= new RelayCommand<object>(param => Editar(CategoriaModel));
+            _comandoEditarCategoria ??= new RelayCommand<object>(param => 
+            {
+                // Criar uma nova instância de CategoriaModel para evitar
+                // modificar a instância vinculada à interface do usuário.
+                CategoriaModel categoriaModel = new();
+                categoriaModel = CategoriaModel;
+
+                if (categoriaModel.Id > 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
+                {
+                    try
+                    {
+                        CategoriaRepositorio categoriaRepositorio = new();
+                        Categoria categoria = new()
+                        {
+                            Id = categoriaModel.Id,
+                            NomeCategoria = categoriaModel.NomeCategoria
+                        };
+                        categoriaRepositorio.Editar(categoria);
+                        Mensagens.SucessoAoEditar(categoria.Id);
+                        LimparDados();
+                    }
+                    catch (Exception ex)
+                    {
+                        Mensagens.NomeDoMetodo = "ComandoEditarCategoria";
+                        Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+                    }
+                }
+                else if (categoriaModel.Id == 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
+                {
+                    Mensagens.ErroAoEditarOuExcluir();
+                    return;
+                }
+                else
+                {
+                    Mensagens.PreencherCampoVazio();
+                    return;
+                }
+            });
             return _comandoEditarCategoria;
         }
     }
@@ -79,7 +109,49 @@ public partial class CategoriaViewModel//CategoriaComandos
     {
         get
         {
-            _comandoExcluirCategoria ??= new RelayCommand<object>(param => Excluir(CategoriaModel));
+            _comandoExcluirCategoria ??= new RelayCommand<object>(param =>
+            {
+                // Criar uma nova instância de CategoriaModel para evitar
+                // modificar a instância vinculada à interface do usuário.
+                CategoriaModel categoriaModel = new();
+                categoriaModel = CategoriaModel;
+
+                if (categoriaModel.Id > 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
+                {
+                    MessageBoxResult resultado = Mensagens.ConfirmarExcluir(categoriaModel.Id);
+                    if (resultado == MessageBoxResult.No)
+                    {
+                        LimparDados();
+                        return;
+                    }
+                    try
+                    {
+                        CategoriaRepositorio categoriaRepositorio = new();
+                        Categoria categoria = new()
+                        {
+                            Id = categoriaModel.Id
+                        };
+                        categoriaRepositorio.Excluir(categoria);
+                        Mensagens.SucessoAoExcluir(categoria.Id);
+                        LimparDados();
+                    }
+                    catch (Exception ex)
+                    {
+                        Mensagens.NomeDoMetodo = "ComandoExcluirCategoria";
+                        Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+                    }
+                }
+                else if (categoriaModel.Id == 0 && !string.IsNullOrWhiteSpace(categoriaModel.NomeCategoria))
+                {
+                    Mensagens.ErroAoEditarOuExcluir();
+                    return;
+                }
+                else
+                {
+                    Mensagens.PreencherCampoVazio();
+                    return;
+                }
+            });
             return _comandoExcluirCategoria;
         }
     }
@@ -89,7 +161,10 @@ public partial class CategoriaViewModel//CategoriaComandos
     {
         get
         {
-            _comandoAtualizarCategoria ??= new RelayCommand<object>(param => Atualizar());
+            _comandoAtualizarCategoria ??= new RelayCommand<object>(param =>
+            {
+                LimparDados();
+            });
             return _comandoAtualizarCategoria;
         }
     }
@@ -100,7 +175,14 @@ public partial class CategoriaViewModel//CategoriaComandos
     {
         get
         {
-            _comandoDuploClickCategoria ??= new RelayCommand<object>(param => DuploClickCategoria(param));
+            _comandoDuploClickCategoria ??= new RelayCommand<object>(param =>
+            {
+                if (param is Categoria categoria)
+                {
+                    CategoriaModel.Id = categoria.Id;
+                    CategoriaModel.NomeCategoria = categoria.NomeCategoria;
+                }
+            });
             return _comandoDuploClickCategoria;
         }
     }

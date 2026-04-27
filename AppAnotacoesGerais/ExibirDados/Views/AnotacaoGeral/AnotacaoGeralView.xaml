@@ -3,10 +3,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views.AnotacaoGeral"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" Width="1490">
+
+    <UserControl.DataContext>
+        <local:AnotacaoGeralViewModel/>
+    </UserControl.DataContext>
+
+    <!--| Grid Principal |-->
+    <Grid Background="#FF0A18E4" Margin="-10,0,-10,0">
+
+        <!--| Grid Superior |-->
+        <Grid x:Name="GridSuperior" Background="#FFF4F5FB" Height="240" VerticalAlignment="Top">
+
+            <!--| Imagem de Fundo |-->
+            <Image Margin="5,5,5,0" Source="/ExibirDados/Recursos/Imagens/Universo.jpg" Stretch="Fill" Height="235" VerticalAlignment="Top"/>
+
+            <!--| Título da Grid Superior |-->
+            <TextBlock Text="Gerenciar Anotações Gerais" FontSize="40" Foreground="#FF02FDFD" Width="520"
+               Margin="530,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Grid.RowSpan="2"/>
+
+            <!--| Rótulos(Label) |-->
+            <Label Content="Categorias" Style="{DynamicResource LabelTransparente}" Margin="55,70,0,0" Height="34" Width="206"/>
+
+            <Label Content="Subcategorias" Style="{DynamicResource LabelTransparente}" Margin="400,70,0,0" Height="34" Width="206"/>
+
+            <Label Content="Nome da Descrição" Style="{DynamicResource LabelTransparente}" Margin="805,70,0,0" Height="34" Width="206"/>
+
+            <Label Content="Consultar Registros" Style="{DynamicResource LabelTransparente}" Margin="739,175,0,0" Height="34" Width="165"/>
+
+            <!--| TextBoxes |-->
+            <TextBox Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Height="35" Margin="910,170,0,0" Padding="20 0 0 0"
+                     Text="{Binding AnotacaoGeralModel.Id, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!--| ComboBoxes |-->
+            <ComboBox Name="CbxCategoria" Height="40" Width="300" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="55,95,0,0"
+                      Text="{Binding AnotacaoGeralModel.NomeCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
+                      SelectedItem="{Binding CategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
+            <ComboBox Name="CbxSubcategoria" Height="40" Width="350" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="405,95,0,0" 
+                      Text="{Binding AnotacaoGeralModel.NomeSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias}" DisplayMemberPath="NomeSubcategoria" SelectedValuePath="Id"                                              
+                      SelectedItem="{Binding SubcategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding SubcategoriaModel.IndiceSelecionadoSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ComboBox Height="40" Width="400" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="805,95,0,0" 
+                      ItemsSource="{Binding ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"
+                      Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding IndiceSelecionadoNomeDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <!--| Botões |-->
+            <Button x:Name="BtnCadastrar" Content="Cadastrar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="48,165,0,0"  
+                    Width="150" Height="50"
+                    Command="{Binding Path=DataContext.ComandoAbrirJanelaDeCadastrar, RelativeSource={RelativeSource FindAncestor, 
+                    AncestorType={x:Type Window}}}"/>
+
+            <Button x:Name="BtnAlterar" Content="Alterar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" 
+                    Width="150" Height="50"/>
+
+            <Button Content="Excluir" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="388,165,0,0" Width="150" Height="50" 
+                    Command="{Binding ComandoExcluirAnotacaoGeral, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Content="Atualizar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="558,165,0,0" 
+                    Width="150" Height="50" Command="{Binding ComandoAtualizarAnotacaoGeral}"/>
+        </Grid>
+        <Grid x:Name="GridInferior" Background="#FFFCFFFF" Margin="0,245,0,0">
+
+            <!--| Borda da Data Grid de Dados |-->
+            <Border x:Name="Borda03" BorderBrush="Navy" CornerRadius="25,25,25,25" BorderThickness="2,4,3,9" Margin="5,0,5,5" Width="1480">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="LightCyan" Offset="0.0" />
+                        <GradientStop Color="LightBlue" Offset="0.5" />
+                        <GradientStop Color="#FF08F0DA" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <!--| Data Grid de Dados |-->
+                <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgEditorDeTextoInternoDaGridInferior}" Margin="5,5,5,5" IsReadOnly="True"
+                          ItemsSource="{Binding ListaDeAnotacoesGerais}" BorderBrush="#FF0C1889" BorderThickness="5"
+                          ColumnHeaderStyle="{DynamicResource CabecalhoEstilo}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="100"/>
+                        <DataGridTextColumn Header="Categoria" Binding="{Binding NomeCategoria}" Width="320"/>
+                        <DataGridTextColumn Header="Subcategoria" Binding="{Binding NomeSubcategoria}" Width="400"/>
+                        <DataGridTextColumn Header="Nome Da Descrição" Binding="{Binding NomeDaDescricao}" Width="480"/>
+                        <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="130"/>
+                    </DataGrid.Columns>
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseDoubleClick">
+                            <b:InvokeCommandAction Command="{Binding ComandoDuploClickAnotacaoGeral}" 
+                                                   CommandParameter="{Binding SelectedItem, ElementName=DtgDados}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                </DataGrid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

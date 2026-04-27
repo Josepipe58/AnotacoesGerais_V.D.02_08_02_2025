@@ -43,7 +43,7 @@ public partial class NomeDescricaoViewModel : ViewModelBase
         }
     }
 
-    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Filtrar Categorias e o ComboBox de Categorias.
+    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
     private Categoria _categoriaSelecionada;
     public Categoria CategoriaSelecionada
     {
@@ -60,7 +60,7 @@ public partial class NomeDescricaoViewModel : ViewModelBase
         }
     }
 
-    // Método do evento: atualiza categorias e aplica filtro
+    //Método do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
     private void ObterListaDeSubcategorias()
     {
         if (CategoriaSelecionada != null)
@@ -87,6 +87,17 @@ public partial class NomeDescricaoViewModel : ViewModelBase
         }
         ListaDoNomeDescricao = [];
         ListaDoNomeDescricao = [.. listaDoNomeDescricao];
+    }
+
+    public void LimparDados()
+    {
+        NomeDescricaoModel.Id = 0;
+        NomeDescricaoModel.NomeDaDescricao = null;
+
+        var listaDeSubcategorias = NomeDescricaoRepositorio.ObterNomeDescricao().ToList() ?? [];
+
+        //Carregar DataGrid do Nome da Descrição.        
+        ListaDoNomeDescricao = new ObservableCollection<NomeDescricao>(listaDeSubcategorias);
     }
 
     public NomeDescricaoViewModel()

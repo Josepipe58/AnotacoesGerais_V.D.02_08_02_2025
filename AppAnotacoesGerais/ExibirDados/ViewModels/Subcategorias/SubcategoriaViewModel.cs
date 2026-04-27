@@ -2,6 +2,7 @@
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
+using System.Collections.ObjectModel;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.Subcategorias;
 
@@ -43,8 +44,19 @@ public partial class SubcategoriaViewModel : ViewModelBase
         SubcategoriaModel.ListaDeSubcategorias = [.. listaDeSubcategorias];
     }
 
+    public void LimparDados()
+    {
+        SubcategoriaModel.Id = 0;
+        SubcategoriaModel.NomeSubcategoria = null;
+
+        var listaDeSubcategorias = SubcategoriaRepositorio.ObterSubcategorias().ToList() ?? [];
+
+        //Carregar DataGrid de Subcategorias.        
+        SubcategoriaModel.ListaDeSubcategorias = new ObservableCollection<Subcategoria>(listaDeSubcategorias);
+    }
+
     public SubcategoriaViewModel()
     {
-        TextoPesquisa = string.Empty;        
+        TextoPesquisa = string.Empty;
     }
 }
