@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace AppAnotacoesGerais.ExibirDados.Views
+namespace AppAnotacoesGerais.ExibirDados.Views;
+
+public partial class NomeDescricaoView : UserControl
 {
-    public partial class NomeDescricaoView : UserControl
+    public NomeDescricaoView()
     {
-        public NomeDescricaoView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

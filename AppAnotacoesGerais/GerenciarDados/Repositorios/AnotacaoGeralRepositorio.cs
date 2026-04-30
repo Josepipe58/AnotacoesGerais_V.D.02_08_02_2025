@@ -57,31 +57,19 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
     }
 
     //Verificar se esse método não vai dar erro.
-    public bool VerificarRegistros(int id)
+    public static bool VerificarRegistros(int id)
     {
         try
         {
+            if (id <= 0) return false;
             using Contexto contexto = new();
-            var verificarConsulta = contexto.TAnotacaoGeral.Select(x=>x.Id == id);
-            if (verificarConsulta is not null)
-            {
-                int retorno = Convert.ToInt32(verificarConsulta);
-                return retorno != 0 && retorno > 0;
-            }
-            else
-            {
-                return false;
-            }
+            return contexto.TAnotacaoGeral.Any(x => x.Id == id);
         }
         catch (Exception ex)
         {
-            if (id <= 0)
-            {
-                Mensagens.NomeDoMetodo = "VerificarRegistros";
-                Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-                return false;
-            }
-            return true;
+            Mensagens.NomeDoMetodo = "VerificarRegistros";
+            Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+            return false;
         }
     }
 }

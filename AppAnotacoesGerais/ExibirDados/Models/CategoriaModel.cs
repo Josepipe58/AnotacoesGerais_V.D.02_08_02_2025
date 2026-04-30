@@ -29,6 +29,20 @@ public class CategoriaModel : ViewModelBase
         }
     }
 
+    private int _indiceSelecionadoCategoria;
+    public int IndiceSelecionadoCategoria
+    {
+        get => _indiceSelecionadoCategoria;
+        set
+        {
+            if (_indiceSelecionadoCategoria != value)
+            {
+                _indiceSelecionadoCategoria = value;
+                OnPropertyChanged(nameof(IndiceSelecionadoCategoria));
+            }
+        }
+    }
+
     //A Lista de Categorias é acessada por várias instancias da CategoriaModel,
     //então é mais eficiente usar um repositório compartilhado para obter os dados.
     //Dessa forma, todas as instâncias da CategoriaModel podem acessar a mesma

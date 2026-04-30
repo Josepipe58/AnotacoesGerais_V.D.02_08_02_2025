@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace AppAnotacoesGerais.ExibirDados.Views
+namespace AppAnotacoesGerais.ExibirDados.Views;
+
+public partial class ConsumoGasView : UserControl
 {
-    public partial class ConsumoGasView : UserControl
+    public ConsumoGasView()
     {
-        public ConsumoGasView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

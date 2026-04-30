@@ -66,4 +66,23 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralGerenciar
             return;
         }
     }
+
+    public void LimparDados()
+    {
+        AnotacaoGeralModel.Id = 0;
+        AnotacaoGeralModel.NomeCategoria = null;
+        AnotacaoGeralModel.NomeSubcategoria = null;
+        AnotacaoGeralModel.NomeDaDescricao = null;
+        
+        //Carregar DataGrid de Anotações Gerais.
+        var listaDeAnotacoesGerais = new ObservableCollection<AnotacaoGeral>();
+        listaDeAnotacoesGerais = [.. AnotacaoGeralRepositorio.ObterAnotacoesGerais() ?? []];
+
+        _listaDeAnotacoesGerais.Clear();
+        foreach (var item in listaDeAnotacoesGerais)
+            _listaDeAnotacoesGerais.Add(item);
+
+        //var listaDeCategorias = _categoriaRepositorio.ObterListaDeTodos().ToList() ?? [];
+        //AnotacaoGeralModel.ListaDeAnotacoesGerais = new ObservableCollection<Categoria>(listaDeCategorias);
+    }
 }

@@ -1,0 +1,27 @@
+<Window x:Class="AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView.EditarAnotacaoGeralWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView"
+        mc:Ignorable="d" Title="Editar Anotação" Height="900" Width="1600" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Host para a view de edição -->
+        <ContentControl x:Name="ContentHost" Grid.Row="0" />
+
+        <!-- Botões Salvar / Cancelar -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="10,10,20,25">
+            <Button x:Name="BtnSalvar" Content="Salvar" Width="150" Height="60" Margin="0,0,25,0" 
+                    Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Click="BtnSalvar_Click" />
+            
+            <Button x:Name="BtnCancelar" Content="Cancelar" Width="150" Height="60" 
+                    Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Click="BtnCancelar_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

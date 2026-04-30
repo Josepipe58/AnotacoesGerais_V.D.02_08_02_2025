@@ -51,10 +51,10 @@ public static class Mensagens
             "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
-    public static void ErroDObterId(int id)
+    public static void ErroObterId(int id, string _nomeDoMetodo)
     {
-        MessageBox.Show($"Não foi possível encontrar o {id},tente outro id diferente.\nCorrija esses erros, para continuar.",
-            "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: {_nomeDoMetodo}." +
+            $"\nEsse código de número {id},não existe.", "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
     }
     //Erros do Try Catch(Exception)
     public static string ErroDeExcecaoENomeDoMetodo(Exception ex, string _nomeDoMetodo)

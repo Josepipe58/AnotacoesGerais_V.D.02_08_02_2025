@@ -1,19 +1,28 @@
 ﻿using AppAnotacoesGerais.ExibirDados.Comandos;
-using AppAnotacoesGerais.ExibirDados.Views.AnotacaoGeral;
+using AppAnotacoesGerais.ExibirDados.Models;
+using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
 using AppAnotacoesGerais.GerenciarDados;
+using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 
-namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal;
+namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
 
 public class MenuModel { public string NomeDoMenu { get; set; } }
 
 public partial class TelaPrincipalViewModel : ViewModelBase
 {
+    public AnotacaoGeralRepositorio _anotacaoGeralRepositorio = new();
+
+    public AnotacaoGeralModel AnotacaoGeralModel { get; set; } = new();
+    public CategoriaModel CategoriaModel { get; set; } = new();
+    public SubcategoriaModel SubcategoriaModel { get; set; } = new();
+    public NomeDescricaoModel NomeDescricaoModel { get; set; } = new();
+
     private CollectionViewSource CollectionViewSource { get; set; }
     public ICollectionView SourceCollection => CollectionViewSource.View;
 
