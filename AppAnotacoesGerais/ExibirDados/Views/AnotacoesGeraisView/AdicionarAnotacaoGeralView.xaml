@@ -92,8 +92,8 @@
                   SelectedIndex="{Binding SubcategoriaModel.IndiceSelecionadoSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <ComboBox x:Name="CbxNomeDaDescricao" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="450" Margin="46,292,0,0"
-                  ItemsSource="{Binding ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"
                   Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                  
                   SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedIndex="{Binding IndiceSelecionadoNomeDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>

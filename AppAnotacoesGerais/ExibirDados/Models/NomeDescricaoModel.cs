@@ -1,4 +1,6 @@
-﻿using AppAnotacoesGerais.ExibirDados.Comandos;
+﻿using AppAnotacoesGerais.AcessarDados.Entidades;
+using AppAnotacoesGerais.ExibirDados.Comandos;
+using System.Collections.ObjectModel;
 
 namespace AppAnotacoesGerais.ExibirDados.Models;
 
@@ -69,5 +71,24 @@ public class NomeDescricaoModel : ViewModelBase
             _nomeSubcategoria = value;
             OnPropertyChanged(nameof(NomeSubcategoria));
         }
+    }
+
+    private ObservableCollection<NomeDescricao> _listaDoNomeDescricao;
+    public ObservableCollection<NomeDescricao> ListaDoNomeDescricao
+    {
+        get => _listaDoNomeDescricao;
+        set
+        {
+            if (_listaDoNomeDescricao != value)
+            {
+                _listaDoNomeDescricao = value;
+                OnPropertyChanged(nameof(ListaDoNomeDescricao));
+            }
+        }
+    }
+
+    public NomeDescricaoModel()
+    {
+            
     }
 }

@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais"
         mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" d:DesignWidth="1400" >
 
-    <!--<UserControl.DataContext>
+    <UserControl.DataContext>
         <local:AnotacaoGeralViewModel/>
-    </UserControl.DataContext>-->
+    </UserControl.DataContext>
 
     <Grid>
         <!--| Título |-->
@@ -75,7 +75,7 @@
         
         <ComboBox x:Name="CbxNomeDaDescricao" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="315" Margin="32,307,0,0"
                   Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  ItemsSource="{Binding ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"  
+                  ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"  
                   SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
     </Grid>
 </UserControl>

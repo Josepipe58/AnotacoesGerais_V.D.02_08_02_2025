@@ -26,8 +26,8 @@ public partial class EditarAnotacaoGeralView : UserControl
             if (origemViewModel.SubcategoriaModel?.ListaDeSubcategorias != null)
                 vm.SubcategoriaModel.ListaDeSubcategorias = origemViewModel.SubcategoriaModel.ListaDeSubcategorias;
 
-            if (origemViewModel.ListaDoNomeDescricao != null)
-                vm.ListaDoNomeDescricao = origemViewModel.ListaDoNomeDescricao;
+            if (origemViewModel.NomeDescricaoModel.ListaDoNomeDescricao != null)
+                vm.NomeDescricaoModel.ListaDoNomeDescricao = origemViewModel.NomeDescricaoModel.ListaDoNomeDescricao;
         }
 
         // Atribuir o modelo a ser editado (usar novo se for nulo)
@@ -46,9 +46,9 @@ public partial class EditarAnotacaoGeralView : UserControl
                 .FirstOrDefault(sc => sc.NomeSubcategoria == model.NomeSubcategoria);
         }
 
-        if (vm.ListaDoNomeDescricao != null && model != null)
+        if (vm.NomeDescricaoModel?.ListaDoNomeDescricao != null && model != null)
         {
-            vm.NomeDescricaoSelecionada = vm.ListaDoNomeDescricao
+            vm.NomeDescricaoSelecionada = vm.NomeDescricaoModel.ListaDoNomeDescricao
                 .FirstOrDefault(nd => nd.NomeDaDescricao == model.NomeDaDescricao);
         }
 

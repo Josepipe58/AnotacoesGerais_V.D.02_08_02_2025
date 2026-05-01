@@ -1,14 +1,9 @@
-﻿using AppAnotacoesGerais.AcessarDados.Entidades;
-using AppAnotacoesGerais.ExibirDados.Comandos;
+﻿using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Helpers;
-using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.ExibirDados.Views;
 using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
-using AppAnotacoesGerais.GerenciarDados;
-using AppAnotacoesGerais.GerenciarDados.Repositorios;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -67,199 +62,6 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
             return _comandoAdicionarAnotacaoGeral;
         }
     }
-
-    private int _indiceSelecionadoCategoria;
-    public int IndiceSelecionadoCategoria
-    {
-        get => _indiceSelecionadoCategoria;
-        set
-        {
-            if (_indiceSelecionadoCategoria != value)
-            {
-                _indiceSelecionadoCategoria = value;
-                OnPropertyChanged(nameof(IndiceSelecionadoCategoria));
-            }
-        }
-    }
-
-    private ObservableCollection<NomeDescricao> _listaDoNomeDescricao;
-    public ObservableCollection<NomeDescricao> ListaDoNomeDescricao
-    {
-        get => _listaDoNomeDescricao;
-        set
-        {
-            if (_listaDoNomeDescricao != value)
-            {
-                _listaDoNomeDescricao = value;
-                OnPropertyChanged(nameof(ListaDoNomeDescricao));
-            }
-        }
-    }
-
-    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
-    private Categoria _categoriaSelecionada;
-    public Categoria CategoriaSelecionada
-    {
-        get => _categoriaSelecionada;
-        set
-        {
-            if (_categoriaSelecionada != value)
-            {
-                _categoriaSelecionada = value;
-                OnPropertyChanged(nameof(CategoriaSelecionada));
-                ObterListaDeSubcategorias();
-                IndiceSelecionadoCategoria = 0; // Forçar atualização da lista de Subcategoria ao selecionar Categoria
-            }
-        }
-    }
-
-    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
-    private Subcategoria _subcategoriaSelecionada = new();
-    public Subcategoria SubcategoriaSelecionada
-    {
-        get => _subcategoriaSelecionada;
-        set
-        {
-            if (_subcategoriaSelecionada != value)
-            {
-                _subcategoriaSelecionada = value;
-                OnPropertyChanged(nameof(SubcategoriaSelecionada));
-                ObterListaDeNomeDescricao();
-            }
-        }
-    }
-
-    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Subcategorias e o ComboBox de NomeDescricao.
-    private NomeDescricao _nomeDescricaoSelecionada = new();
-    public NomeDescricao NomeDescricaoSelecionada
-    {
-        get => _nomeDescricaoSelecionada;
-        set
-        {
-            if (_nomeDescricaoSelecionada != value)
-            {
-                _nomeDescricaoSelecionada = value;
-                OnPropertyChanged(nameof(NomeDescricaoSelecionada));
-            }
-        }
-    }
-
-    //Método do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
-    private void ObterListaDeSubcategorias()
-    {
-        if (CategoriaSelecionada != null)
-        {
-            SubcategoriaModel.ListaDeSubcategorias = [.. SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaSelecionada.Id) ?? []];
-        }
-        else
-        {
-            SubcategoriaModel.ListaDeSubcategorias = [];
-        }
-    }
-
-    //Método do evento: "SelectionChanged" entre o ComboBox de Sucategorias e o ComboBox de NomeDescricao.
-    private void ObterListaDeNomeDescricao()
-    {
-        if (SubcategoriaSelecionada != null)
-        {
-            ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricaoPorId(SubcategoriaSelecionada.Id) ?? []];
-        }
-        else
-        {
-            ListaDoNomeDescricao = [];
-        }
-    }
-
-    public void EditarAnotacaoGeralComando()
-    {
-        try
-        {
-            AnotacaoGeral anotacaoGeral = new();
-            bool retorno = AnotacaoGeralRepositorio.VerificarRegistros(AnotacaoGeralModel.Id);
-            if (retorno)
-            {
-                anotacaoGeral.Id = AnotacaoGeralModel.Id;
-                var listaAnotacaoGeral = AnotacaoGeralRepositorio.ObterAnotacoesGeraisPorId(anotacaoGeral.Id);
-                if (anotacaoGeral.Id > 0)
-                {
-                    if (listaAnotacaoGeral.Count >= 0)
-                    {
-                        if (listaAnotacaoGeral[0].GetType() == typeof(AnotacaoGeral))
-                        {
-                            anotacaoGeral = listaAnotacaoGeral[0];
-                            AnotacaoGeralModel.Id = anotacaoGeral.Id;
-                            AnotacaoGeralModel.NomeCategoria = anotacaoGeral.NomeCategoria;
-                            AnotacaoGeralModel.NomeSubcategoria = anotacaoGeral.NomeSubcategoria;
-                            AnotacaoGeralModel.NomeDaDescricao = anotacaoGeral.NomeDaDescricao;
-                            AnotacaoGeralModel.Descricao = anotacaoGeral.Descricao;
-                            AnotacaoGeralModel.Data = anotacaoGeral.Data;
-                        }
-                    }
-                    //SelecionarControleDeUsuario = new EditarAnotacaoGeralView(AnotacaoGeralModel);
-                }
-            }
-            else
-            {
-                Mensagens.NomeDoMetodo = "VerificarRegistros";
-                Mensagens.ErroObterId(AnotacaoGeralModel.Id, Mensagens.NomeDoMetodo);
-            }
-        }
-        catch (Exception ex)
-        {
-            Mensagens.NomeDoMetodo = "EditarAnotacaoGeralComando";
-            Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-            return;
-        }
-    }
-
-    private ICommand _comandoEditarAnotacaoGeral;
-    public ICommand ComandoEditarAnotacaoGeral
-    {
-        get
-        {
-            if (_comandoEditarAnotacaoGeral == null)
-            {
-                _comandoEditarAnotacaoGeral = new RelayCommand<object>(param => EditarAnotacaoGeralComando());
-                /*
-                {
-                    if (param is AnotacaoGeral anotacaoGeral)
-                    {
-                        // Preencher um modelo que será usado como DataContext na view de edição.
-                        var modeloParaEditar = new AnotacaoGeralModel
-                        {
-                            Id = anotacaoGeral.Id,
-                            NomeCategoria = anotacaoGeral.NomeCategoria,
-                            NomeSubcategoria = anotacaoGeral.NomeSubcategoria,
-                            NomeDaDescricao = anotacaoGeral.NomeDaDescricao,
-                            Descricao = anotacaoGeral.Descricao,
-                            Data = Convert.ToDateTime(anotacaoGeral.Data.ToString("dd/MM/yyyy"))
-                        };
-
-                        // Verificar se o registro existe antes de abrir a view de edição.
-                        bool existe = AnotacaoGeralRepositorio.VerificarRegistros(17);//(modeloParaEditar.Id);
-                        if (!existe)
-                        {
-                            Mensagens.NomeDoMetodo = "VerificarRegistros";
-                            Mensagens.ErroObterId(modeloParaEditar.Id, Mensagens.NomeDoMetodo);
-                            return;
-                        }
-
-                        // Abrir a view de edição em um UserControl, passando o modelo clonado e o ViewModel
-                        SelecionarControleDeUsuario = new EditarAnotacaoGeralView(modeloParaEditar, null);
-                        
-                        bool? resultado = userControl?.ShowDialog();
-                        if (resultado == true)
-                        {
-                            // A janela já realizou a persistência; atualize a lista exibida chamando consulta.
-                            //AnotacaoGeralViewModel.ConsultasDeAnotacoesGerais();
-                        } 
-                    }
-                });*/
-            }
-            return _comandoEditarAnotacaoGeral;
-        }
-    }
-
     public void VoltarAnotacaoGeral()
     {
         SelecionarControleDeUsuario = new AnotacaoGeralView();
@@ -281,7 +83,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
     #endregion
 
     #region | Senha Para Acessar Informações Pessoais |
-
+    
     private void VerificarSenha()
     {
         if (Senha == "bj250281")

@@ -20,7 +20,7 @@ public partial class EditarAnotacaoGeralWindow : Window
         {
             vm.CategoriaModel.ListaDeCategorias = origemViewModel.CategoriaModel.ListaDeCategorias;
             vm.SubcategoriaModel.ListaDeSubcategorias = origemViewModel.SubcategoriaModel.ListaDeSubcategorias;
-            vm.ListaDoNomeDescricao = origemViewModel.ListaDoNomeDescricao;
+            vm.NomeDescricaoModel.ListaDoNomeDescricao = origemViewModel.NomeDescricaoModel.ListaDoNomeDescricao;
         }
 
         // Atribuir o modelo a ser editado (já é uma cópia criada pelo comando)
@@ -41,9 +41,9 @@ public partial class EditarAnotacaoGeralWindow : Window
                                                                     // ao selecionar Subcategoria
         }
 
-        if (vm.ListaDoNomeDescricao != null)
+        if (vm.NomeDescricaoModel?.ListaDoNomeDescricao != null)
         {
-            vm.NomeDescricaoSelecionada = vm.ListaDoNomeDescricao
+            vm.NomeDescricaoSelecionada = vm.NomeDescricaoModel.ListaDoNomeDescricao
                 .FirstOrDefault(nd => nd.NomeDaDescricao == model.NomeDaDescricao);
             vm.IndiceSelecionadoNomeDescricao = 0; // Forçar atualização da lista de NomeDescricao ao selecionar Subcategoria
         }

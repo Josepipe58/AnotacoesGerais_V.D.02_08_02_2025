@@ -35,8 +35,7 @@
 
             <!--| TextBoxes |-->
             <TextBox x:Name="TxtId" Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Height="35" Margin="910,170,0,0" Padding="20 0 0 0"
-                     Text="{Binding Path=DataContext.AnotacaoGeralModel.Id, RelativeSource={RelativeSource FindAncestor, 
-                     AncestorType={x:Type Window}}}"/>
+                     Text="{Binding AnotacaoGeralModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!--| ComboBoxes |-->
             <ComboBox Name="CbxCategoria" Height="40" Width="300" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="55,95,0,0"
@@ -53,9 +52,8 @@
 
             <ComboBox Height="40" Width="400" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="805,95,0,0" 
                       Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                      
-                      SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedIndex="{Binding IndiceSelecionadoNomeDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                      
+                      SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <!--| Botões |-->
             <Button Content="Adicionar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="48,165,0,0" Width="150" Height="50" 

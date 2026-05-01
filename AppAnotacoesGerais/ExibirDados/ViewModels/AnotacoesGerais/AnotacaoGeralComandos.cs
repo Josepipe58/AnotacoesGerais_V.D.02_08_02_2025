@@ -1,12 +1,13 @@
 ﻿using AppAnotacoesGerais.AcessarDados.Entidades;
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
+using AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
 using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
@@ -59,6 +60,57 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                 }
             });
             return _comandoAdicionarAnotacaoGeral;
+        }
+    }
+
+    private ICommand _comandoEditarAnotacaoGeral;
+    public ICommand ComandoEditarAnotacaoGeral
+    {
+        get
+        {
+            _comandoEditarAnotacaoGeral ??= new RelayCommand<object>(param =>
+            {
+                // Criar uma nova instância de AnotacaoGeralModel para evitar
+                // modificar a instância vinculada à interface do usuário.
+                AnotacaoGeralModel anotacaoGeralModel = new();
+                anotacaoGeralModel = AnotacaoGeralModel;
+
+                if (anotacaoGeralModel.Id > 0 && !string.IsNullOrWhiteSpace(anotacaoGeralModel.Descricao))
+                {
+                    try
+                    {
+                        CategoriaRepositorio categoriaRepositorio = new();
+                        AnotacaoGeral anotacaoGeral = new()
+                        {
+                            Id = anotacaoGeralModel.Id,
+                            NomeCategoria = anotacaoGeralModel.NomeCategoria,
+                            NomeSubcategoria = anotacaoGeralModel.NomeSubcategoria,
+                            NomeDaDescricao = anotacaoGeralModel.NomeDaDescricao,
+                            Descricao = anotacaoGeralModel.Descricao,
+                            Data = anotacaoGeralModel.Data,
+                        };
+                        _anotacaoGeralRepositorio.Editar(anotacaoGeral);
+                        Mensagens.SucessoAoEditar(anotacaoGeral.Id);
+                        LimparDados();
+                    }
+                    catch (Exception ex)
+                    {
+                        Mensagens.NomeDoMetodo = "ComandoEditarAnotacaoGeral";
+                        Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+                    }
+                }
+                else if (anotacaoGeralModel.Id == 0 && !string.IsNullOrWhiteSpace(anotacaoGeralModel.Descricao))
+                {
+                    Mensagens.ErroAoEditarOuExcluir();
+                    return;
+                }
+                else
+                {
+                    Mensagens.PreencherCampoVazio();
+                    return;
+                }
+            });
+            return _comandoEditarAnotacaoGeral;
         }
     }
 
@@ -118,12 +170,19 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                 AnotacaoGeralModel.NomeCategoria = "";
                 AnotacaoGeralModel.NomeSubcategoria = "";
                 AnotacaoGeralModel.NomeDaDescricao = "";
+
+                //Aguarde o binding ser atualizado antes de chamar os métodos.
+                //Application.Current.Dispatcher.InvokeAsync(() =>
+                //{
+                //    ObterListaDeNomeDescricao();
+                //    ConsultasDeAnotacoesGerais();
+                //});
                 ConsultasDeAnotacoesGerais();
             });
             return _comandoAtualizarAnotacaoGeral;
         }
     }
-    /*
+    
     //Comando do evento MouseDoubleClick.
     private ICommand _comandoDuploClickAnotacaoGeral;
     public ICommand ComandoDuploClickAnotacaoGeral
@@ -134,6 +193,8 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
             {                
                 if (param is AnotacaoGeral anotacaoGeral)
                 {
+                    AnotacaoGeralModel.Id = anotacaoGeral.Id;
+                    /*
                     // Preencher um modelo que será usado como DataContext na view de edição.
                     var modeloParaEditar = new AnotacaoGeralModel
                     {
@@ -144,8 +205,8 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                         Descricao = anotacaoGeral.Descricao,
                         Data = Convert.ToDateTime(anotacaoGeral.Data.ToString("dd/MM/yyyy"))
                     };
-
-                    // Verificar se o registro existe antes de abrir a view de edição.
+                    
+                     // Verificar se o registro existe antes de abrir a view de edição.
                     bool existe = AnotacaoGeralRepositorio.VerificarRegistros(modeloParaEditar.Id);
                     if (!existe)
                     {
@@ -161,11 +222,11 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                     {
                         // A janela já realizou a persistência; atualize a lista exibida chamando consulta.
                         ConsultasDeAnotacoesGerais();
-                    }
+                    }*/
                 }
                 
             });
             return _comandoDuploClickAnotacaoGeral;
         }
-    }*/
+    }
 }

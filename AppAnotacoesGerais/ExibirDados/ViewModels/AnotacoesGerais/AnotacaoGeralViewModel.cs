@@ -1,7 +1,6 @@
 ﻿using AppAnotacoesGerais.AcessarDados.Entidades;
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
-using AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -13,37 +12,13 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
     public CategoriaRepositorio _categoriaRepositorio = new();
     public AnotacaoGeralRepositorio _anotacaoGeralRepositorio = new();
 
+    public AnotacaoGeralModel AnotacaoGeralModel { get; set; } = new();
     public CategoriaModel CategoriaModel { get; set; } = new();
     public SubcategoriaModel SubcategoriaModel { get; set; } = new();
-    public AnotacaoGeralModel AnotacaoGeralModel { get; set; } = new();
+    public NomeDescricaoModel NomeDescricaoModel { get; set; } = new();
 
     private readonly ObservableCollection<AnotacaoGeral> _listaDeAnotacoesGerais = [];
-    public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }
-
-    private ObservableCollection<NomeDescricao> _listaDoNomeDescricao;
-    public ObservableCollection<NomeDescricao> ListaDoNomeDescricao
-    {
-        get => _listaDoNomeDescricao;
-        set
-        {
-            if (_listaDoNomeDescricao != value)
-            {
-                _listaDoNomeDescricao = value;
-                OnPropertyChanged(nameof(ListaDoNomeDescricao));
-            }
-        }
-    }
-
-    //private object _selecionarControleDeUsuario;
-    //public object SelecionarControleDeUsuario
-    //{
-    //    get => _selecionarControleDeUsuario;
-    //    set
-    //    {
-    //        _selecionarControleDeUsuario = value;
-    //        OnPropertyChanged(nameof(SelecionarControleDeUsuario));
-    //    }
-    //}
+    public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }    
 
     private int _indiceSelecionadoNomeDescricao;
     public int IndiceSelecionadoNomeDescricao
@@ -54,7 +29,7 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
             if (_indiceSelecionadoNomeDescricao != value)
             {
                 _indiceSelecionadoNomeDescricao = value;
-                OnPropertyChanged(nameof(IndiceSelecionadoNomeDescricao));               
+                OnPropertyChanged(nameof(IndiceSelecionadoNomeDescricao));
             }
         }
     }
@@ -70,7 +45,13 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
             {
                 _categoriaSelecionada = value;
                 OnPropertyChanged(nameof(CategoriaSelecionada));
-                ObterListaDeSubcategorias();
+
+                //Aguarde o binding ser atualizado antes de chamar os métodos.
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    ObterListaDeSubcategorias();
+                });
+
             }
         }
     }
@@ -86,7 +67,13 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
             {
                 _subcategoriaSelecionada = value;
                 OnPropertyChanged(nameof(SubcategoriaSelecionada));
-                ObterListaDeNomeDescricao();
+
+                //Aguarde o binding ser atualizado antes de chamar os métodos.
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    ObterListaDeNomeDescricao();
+                });
+
             }
         }
     }
@@ -102,7 +89,7 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
             {
                 _nomeDescricaoSelecionada = value;
                 OnPropertyChanged(nameof(NomeDescricaoSelecionada));
-
+                
                 //Aguarde o binding ser atualizado antes de chamar os métodos.
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
@@ -118,7 +105,8 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
         if (CategoriaSelecionada != null)
         {
             SubcategoriaModel.ListaDeSubcategorias = [.. SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaSelecionada.Id) ?? []];
-            //SubcategoriaModel.IndiceSelecionadoSubcategoria = -1;           
+            SubcategoriaModel.IndiceSelecionadoSubcategoria = -1;
+            ConsultasDeAnotacoesGerais();
         }
         else
         {
@@ -131,20 +119,20 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
     {
         if (SubcategoriaSelecionada != null)
         {
-            ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricaoPorId(SubcategoriaSelecionada.Id) ?? []];
+            NomeDescricaoModel.ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricaoPorId(SubcategoriaSelecionada.Id) ?? []];
             //IndiceSelecionadoNomeDescricao = 0;
-            //ConsultasDeAnotacoesGerais();
+            ConsultasDeAnotacoesGerais();
         }
         else
         {
-            ListaDoNomeDescricao = [];
+            NomeDescricaoModel.ListaDoNomeDescricao = [];
         }
     }
 
     public AnotacaoGeralViewModel()
     {
         //Carregar ComboBox de Categorias de Despesa.
-        //CategoriaModel.ListaDeCategorias = [.. _categoriaRepositorio.ObterListaDeTodos() ?? []];
+        CategoriaModel.ListaDeCategorias = [.. _categoriaRepositorio.ObterListaDeTodos() ?? []];
         ConsultasDeAnotacoesGerais();
 
         //Carregar DataGrid de Anotações Gerais.

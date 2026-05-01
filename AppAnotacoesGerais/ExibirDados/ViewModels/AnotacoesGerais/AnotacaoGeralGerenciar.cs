@@ -53,15 +53,15 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralGerenciar
                     _listaDeAnotacoesGerais.Add(item);
             }
             else
-            {
-                MessageBox.Show("Não foi possível fazer nenhum tipo de consulta nas anotações gerais.", "Mensagem de Erro!",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+            {               
+                //MessageBox.Show("Não foi possível fazer nenhum tipo de consulta nas anotações gerais.", "Mensagem de Erro!",
+                //    MessageBoxButton.OK, MessageBoxImage.Error);
+                return ;
             }
         }
         catch (Exception ex)
         {
-            Mensagens.NomeDoMetodo = "ConsultasDeDespesas";
+            Mensagens.NomeDoMetodo = "ConsultasDeAnotacoesGerais";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
             return;
         }

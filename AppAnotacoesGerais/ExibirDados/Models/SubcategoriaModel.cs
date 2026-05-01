@@ -51,7 +51,7 @@ public class SubcategoriaModel : ViewModelBase
             OnPropertyChanged(nameof(NomeCategoria));
         }
     }
-
+    
     //Essas propriedades são usadas em consultas, Despesa, Poupança, Receita e Investimento.
     private int _indiceSelecionadoSubcategoria;
     public int IndiceSelecionadoSubcategoria
@@ -94,7 +94,7 @@ public class SubcategoriaModel : ViewModelBase
     public SubcategoriaModel()
     {
         //Usando encapsulamento para obter a lista de Subcategorias do repositório e armazená-la em uma coleção observável.       
-        //_listaDeSubcategoriasPorId = [..SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaId) ?? []];
+        //_listaDeSubcategoriasPorId = [.. SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaId) ?? []];
 
         //ListaDeSubcategoriasPorId = new ObservableCollection<Subcategoria>(_listaDeSubcategoriasPorId);
 
