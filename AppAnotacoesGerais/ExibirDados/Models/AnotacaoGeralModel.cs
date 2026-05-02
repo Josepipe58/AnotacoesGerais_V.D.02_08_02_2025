@@ -69,4 +69,19 @@ public class AnotacaoGeralModel : ViewModelBase
             OnPropertyChanged(nameof(Data));
         }
     }
+
+    //Esse campo é usadado por causa do Dispacher que gera um erro nos ComboBoxes.
+    public string _diferenciarMetodos;
+    public string DiferenciarMetodos
+    {
+        get => _diferenciarMetodos;
+        set
+        {
+            if (_diferenciarMetodos != value)
+            {
+                _diferenciarMetodos = value;
+                OnPropertyChanged(nameof(DiferenciarMetodos));
+            }
+        }
+    }
 }

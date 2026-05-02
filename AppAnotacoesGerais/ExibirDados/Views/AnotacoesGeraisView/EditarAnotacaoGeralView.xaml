@@ -4,22 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais"
-        mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" d:DesignWidth="1400" >
+        mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" d:DesignWidth="1600">
 
     <UserControl.DataContext>
-        <local:AnotacaoGeralViewModel/>
+        <local:EditarAnotacaoGeralViewModel/>
     </UserControl.DataContext>
 
-    <Grid>
+    <Grid Background="#FFFDFEFF">
+
         <!--| Título |-->
-        <Label Content="ALTERAR ANOTAÇÕES GERAIS" Style="{DynamicResource LabelAzulMarino}" FontSize="24" Height="50"
-               Padding="200,8,10,10" Margin="675,5,10,0" HorizontalAlignment="Stretch"/>
+        <Label Content="GERENCIAR ANOTAÇÕES GERAIS" Style="{DynamicResource LabelAzulMarino}" FontSize="24" Height="50"  Padding="150,8,10,10" 
+               Margin="830,5,10,0" HorizontalAlignment="Stretch"/>
 
         <!--| Imagem |-->
-        <Image HorizontalAlignment="Left" Width="660" Source="/ExibirDados/Recursos/Imagens/Cachoeira.jpg" Stretch="Fill"  Margin="10,5,0,5"/>
+        <Image HorizontalAlignment="Left" Width="815" Source="/ExibirDados/Recursos/Imagens/Cachoeira.jpg" Stretch="Fill"  Margin="10,5,0,5"/>
 
         <!--|Borda Lateral Direita -->
-        <Border x:Name="Borda03" BorderBrush="Navy" CornerRadius="25,25,25,25" BorderThickness="2,4,3,9" Margin="675,55,10,10">
+        <Border x:Name="Borda03" BorderBrush="Navy" CornerRadius="25,25,25,25" BorderThickness="2,4,3,9" Margin="830,55,10,10">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Color="#FF3A0CE2" Offset="0.0" />
@@ -29,53 +30,64 @@
             </Border.Background>
 
             <!--|TextBox Lateral Direita -->
-            <TextBox x:Name="TxtDescricao" FontSize="20" FontWeight="Bold" Foreground="#FF0F0FB0" Margin="10,10,10,10" 
-                     Text="{Binding AnotacaoGeralModel.Descricao, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"
-                     AcceptsTab="True" AcceptsReturn="True"/>
+            <TextBox x:Name="TxtDescricao" FontSize="20" FontWeight="Bold" Foreground="#FF0F0FB0" Margin="10,10,10,10" TextWrapping="Wrap" 
+                     AcceptsTab="True" AcceptsReturn="True" Text="{Binding AnotacaoGeralModel.Descricao, UpdateSourceTrigger=PropertyChanged}"/>
         </Border>
 
         <!--| Calendário |-->
-        <DatePicker x:Name="DtpData" Style="{DynamicResource CalendarioDatePicker}" Height="44" Width="200" Margin="408,166,0,0"
+        <DatePicker x:Name="DtpData" Style="{DynamicResource CalendarioDatePicker}" Height="44" Width="200" Margin="46,406,0,0"
                     Text="{Binding AnotacaoGeralModel.Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!--| Rótulos[Label] -->
-        <Label Content="Código" Style="{DynamicResource LabelAzulMarino}" Height="40" Width="84" Margin="408,32,0,0"/>
+        <Label Content="Código" Style="{DynamicResource LabelAzulMarino}" Height="40" Width="84" Margin="418,28,0,0"/>
 
-        <Label Content="Data" Style="{DynamicResource LabelAzulMarino}" Height="40" Width="86" Margin="408,132,0,0"/>
+        <Label Content="Data" Style="{DynamicResource LabelAzulMarino}" Height="40" Width="86" Margin="46,372,0,0"/>
 
-        <Label Content="Categoria" Style="{DynamicResource LabelAzulMarino}" FontSize="18" Height="45" Margin="30,27,0,0" Width="286"/>
+        <Label Content="Consultar" Style="{DynamicResource LabelVerdeClaro}" Height="40" Width="104"  Margin="585,44,0,0"/>
 
-        <Label Content="Subcategoria" Style="{DynamicResource LabelAzulMarino}" FontSize="18" Height="45" Width="284" Margin="32,142,0,0"/>
+        <Label Content="Categoria" Style="{DynamicResource LabelAzulMarino}" FontSize="18" Height="45" Margin="44,23,0,0" Width="286"/>
 
-        <Label Content="Nome da Descrição" Style="{DynamicResource LabelAzulMarino}" FontSize="18" Height="45" Width="283" Margin="33,262,0,0"/>
+        <Label Content="Subcategoria" Style="{DynamicResource LabelAzulMarino}" FontSize="18" Height="45" Width="284" Margin="46,135,0,0"/>
+
+        <Label Content="Nome da Descrição" Style="{DynamicResource LabelAzulMarino}" FontSize="18" Height="45" Width="283" Margin="46,252,0,0"/>
 
         <!--| TextBoxes |-->
-        <TextBox x:Name="TxtId" Style="{DynamicResource TextBoxAzulMarinho}" Margin="408,72,0,0" Height="40" Width="90" 
-                 Text="{Binding AnotacaoGeralModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 FontSize="16" FontWeight="Bold" IsReadOnly="True"/>
+        <TextBox x:Name="TxtId" Text="{Binding AnotacaoGeralModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="90" FontSize="16" 
+                 FontWeight="Bold" Style="{DynamicResource TextBoxAzulMarinho}" Margin="418,68,0,0" IsReadOnly="True"/>
 
+        <TextBox x:Name="TxtConsultar" Style="{DynamicResource TxtAzulClaroEBordaAzul}" Margin="684,44,0,0" Height="40" Width="90"  FontSize="16"/>
+        
         <!--| Botões -->
-        <Button x:Name="BtnAlterar" Content="Alterar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
-                Height="60" Width="190" Margin="408,222,0,0"/>
+        <Button x:Name="BtnConsultar" Content="Consultar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                Height="60" Width="190" Margin="585,98,0,0"/>
 
-        <Button x:Name="BtnSair" Content="Sair" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
-                Height="60" Width="190" Margin="408,316,0,0"/>
+        <Button x:Name="BtnCadastrar" Content="Adicionar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                Width="190" Height="60"  Margin="585,174,0,0" Command="{Binding ComandoAdicionarAnotacaoGeral}"/>
+
+        <Button x:Name="BtnAlterar" Content="Editar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                Height="60" Width="190" Margin="585,248,0,0" Command="{Binding ComandoEditarAnotacaoGeral}"/>
+
+        <Button x:Name="BtnLimpar" Content="Limpar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                Height="60" Width="190" Margin="584,325,0,0" Command="{Binding ComandoLimparAnotacaoGeral}"/>
+
+        <Button x:Name="BtnVoltarAnotacaoGeral" Content="Voltar Anotação Geral " Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Height="60" Width="250" 
+                Margin="550,405,0,0" Command="{Binding Path=DataContext.ComandoVoltarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
+                AncestorType={x:Type Window}}}"/>
 
         <!--| Comboboxes -->
-        <ComboBox x:Name="CbxCategoria" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="315" Margin="28,72,0,0"
+        <ComboBox x:Name="CbxCategoria" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="330" Margin="42,68,0,0"
                   Text="{Binding AnotacaoGeralModel.NomeCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"                   
-                  SelectedItem="{Binding CategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedIndex="0"/>
+                  ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
+                  SelectedItem="{Binding CategoriaSelecionadaEditar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
 
-        <ComboBox x:Name="CbxSubcategoria" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="315" Margin="30,187,0,0"
+        <ComboBox x:Name="CbxSubcategoria" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="380" Margin="44,180,0,0"
                   Text="{Binding AnotacaoGeralModel.NomeSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias}" DisplayMemberPath="NomeSubcategoria" SelectedValuePath="Id"                                              
-                  SelectedItem="{Binding SubcategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
-        
-        <ComboBox x:Name="CbxNomeDaDescricao" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="315" Margin="32,307,0,0"
-                  Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"  
-                  SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
+                  SelectedItem="{Binding SubcategoriaSelecionadaEditar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
+
+        <ComboBox x:Name="CbxNomeDaDescricao" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="450" Margin="46,292,0,0"
+                  Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                  
+                  SelectedItem="{Binding NomeDescricaoSelecionadaEditar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
     </Grid>
 </UserControl>

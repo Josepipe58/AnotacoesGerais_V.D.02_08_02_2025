@@ -11,7 +11,7 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralGerenciar
     public void ConsultasDeAnotacoesGerais()
     {
         try
-        {
+        {            
             var listaDeAnotacoesGerais = new ObservableCollection<AnotacaoGeral>();
             if (string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeCategoria) && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeSubcategoria)
                 && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeDaDescricao))

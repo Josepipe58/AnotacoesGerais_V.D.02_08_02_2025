@@ -60,12 +60,11 @@
                     Command="{Binding Path=DataContext.ComandoAdicionarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
                     AncestorType={x:Type Window}}}"/>
 
-            <Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
-                    Click="Button_Click"/>
-
             <!--<Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
-                    Command="{Binding Path=DataContext.ComandoEditarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
-                             AncestorType={x:Type Window}}}"/>-->
+                    Click="Button_Click"/>-->
+
+            <Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
+                    Command="{Binding ComandoGerenciarAnotacaoGeral}"/>
 
             <Button Content="Excluir" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="388,165,0,0" Width="150" Height="50" 
                     Command="{Binding ComandoExcluirAnotacaoGeral, UpdateSourceTrigger=PropertyChanged}"/>

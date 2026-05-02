@@ -1,24 +1,30 @@
 ﻿using AppAnotacoesGerais.AcessarDados.Entidades;
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
+using AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
+using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
 public partial class AnotacaoGeralViewModel : ViewModelBase
-{
+{    
     public CategoriaRepositorio _categoriaRepositorio = new();
     public AnotacaoGeralRepositorio _anotacaoGeralRepositorio = new();
 
+    //public TelaPrincipalViewModel TelaPrincipalViewModel { get; set; } = new();
     public AnotacaoGeralModel AnotacaoGeralModel { get; set; } = new();
     public CategoriaModel CategoriaModel { get; set; } = new();
     public SubcategoriaModel SubcategoriaModel { get; set; } = new();
     public NomeDescricaoModel NomeDescricaoModel { get; set; } = new();
 
     private readonly ObservableCollection<AnotacaoGeral> _listaDeAnotacoesGerais = [];
-    public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }    
+    public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }
+
+    
 
     private int _indiceSelecionadoNomeDescricao;
     public int IndiceSelecionadoNomeDescricao
@@ -51,6 +57,7 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
                 {
                     ObterListaDeSubcategorias();
                 });
+
 
             }
         }

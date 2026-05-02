@@ -57,6 +57,7 @@ public partial class AnotacaoGeralView : UserControl
                             editarAnotacaoGeralView.CbxNomeDaDescricao.Text = AnotacaoGeralModel.NomeDaDescricao;
                             editarAnotacaoGeralView.TxtDescricao.Text = AnotacaoGeralModel.Descricao;
                             editarAnotacaoGeralView.DtpData.Text = AnotacaoGeralModel.Data.ToString();
+
                             // Atribui a view de edição ao ViewModel principal para que o ContentControl principal exiba a UserControl
                             var mainVm = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
                             if (mainVm != null)

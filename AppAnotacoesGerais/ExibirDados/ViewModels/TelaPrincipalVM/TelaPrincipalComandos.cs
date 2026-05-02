@@ -1,9 +1,13 @@
-﻿using AppAnotacoesGerais.ExibirDados.Comandos;
+﻿using AppAnotacoesGerais.AcessarDados.Entidades;
+using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Helpers;
+using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.ExibirDados.Views;
 using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
+using AppAnotacoesGerais.GerenciarDados;
+using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -47,7 +51,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
 
     public void AdicionarAnotacaoGeralComando()
     {
-        SelecionarControleDeUsuario = new AdicionarAnotacaoGeralView();
+        SelecionarControleDeUsuario = new EditarAnotacaoGeralView();
     }
 
     private ICommand _comandoAdicionarAnotacaoGeral;
