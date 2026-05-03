@@ -48,7 +48,7 @@ public class CategoriaModel : ViewModelBase
     //Dessa forma, todas as instâncias da CategoriaModel podem acessar a mesma
     //lista de categorias sem precisar criar uma nova instância do repositório para cada uma.
     public CategoriaRepositorio _categoriaRepositorio = new();
-    private ObservableCollection<Categoria> _listaDeCategorias ;
+    public ObservableCollection<Categoria> _listaDeCategorias ;
     public ObservableCollection<Categoria> ListaDeCategorias
     {
         get => _listaDeCategorias;

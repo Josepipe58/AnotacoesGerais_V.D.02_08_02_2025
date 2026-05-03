@@ -13,7 +13,6 @@ namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
 public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
 {
-    /*
     private ICommand _comandoAdicionarAnotacaoGeral;
     public ICommand ComandoAdicionarAnotacaoGeral
     {
@@ -41,7 +40,8 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                         };
                         _anotacaoGeralRepositorio.Adicionar(anotacaoGeral);
                         Mensagens.SucessoAoAdicionar(anotacaoGeral.Id);
-                        LimparDados();
+
+                        LimparAnotacaoGeralGerenciarView();
                     }
                     catch (Exception ex)
                     {
@@ -92,7 +92,8 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                         };
                         _anotacaoGeralRepositorio.Editar(anotacaoGeral);
                         Mensagens.SucessoAoEditar(anotacaoGeral.Id);
-                        LimparDados();
+
+                        LimparAnotacaoGeralGerenciarView();
                     }
                     catch (Exception ex)
                     {
@@ -113,7 +114,7 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
             });
             return _comandoEditarAnotacaoGeral;
         }
-    }*/
+    }
 
     private ICommand _comandoExcluirAnotacaoGeral;
     public ICommand ComandoExcluirAnotacaoGeral
@@ -142,7 +143,7 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                         };
                         anotacaoGeralRepositorio.Excluir(anotacaoGeral);
                         Mensagens.SucessoAoExcluir(anotacaoGeral.Id);
-                        LimparDados(); 
+                        LimparDados();
                         return;
                     }
                     catch (Exception erro)
@@ -151,7 +152,7 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                         Mensagens.ErroDeExcecaoENomeDoMetodo(erro, Mensagens.NomeDoMetodo);
                         return;
                     }
-                }               
+                }
                 else
                 {
                     Mensagens.PreencherCampoVazio();
@@ -178,7 +179,7 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
             return _comandoAtualizarAnotacaoGeral;
         }
     }
-    
+
     private ICommand _comandoGerenciarAnotacaoGeral;
     public ICommand ComandoGerenciarAnotacaoGeral
     {
@@ -188,10 +189,10 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
             {
                 try
                 {
-                    EditarAnotacaoGeralView editarAnotacaoGeralView = new(AnotacaoGeralModel, null);
+                    AnotacaoGeralGerenciarView anotacaoGeralGerenciarView = new(AnotacaoGeralModel, null);
                     AnotacaoGeral anotacaoGeral = new();
                     ObservableCollection<AnotacaoGeralModel> listaDeAnotacaoGeralModel = new ObservableCollection<AnotacaoGeralModel>();
-                    AnotacaoGeralModel.Id = Convert.ToInt32(editarAnotacaoGeralView.TxtId.Text);
+                    AnotacaoGeralModel.Id = Convert.ToInt32(anotacaoGeralGerenciarView.TxtId.Text);
                     bool retorno = AnotacaoGeralRepositorio.VerificarRegistros(AnotacaoGeralModel.Id);
                     if (retorno)
                     {
@@ -216,19 +217,18 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                                 if (listaDeAnotacaoGeralModel[0].GetType() == typeof(AnotacaoGeralModel))
                                 {
                                     AnotacaoGeralModel = listaDeAnotacaoGeralModel[0];
-                                    editarAnotacaoGeralView.TxtId.Text = Convert.ToString(AnotacaoGeralModel.Id.ToString());
-                                    editarAnotacaoGeralView.CbxCategoria.Text = AnotacaoGeralModel.NomeCategoria;
-                                    editarAnotacaoGeralView.CbxSubcategoria.Text = AnotacaoGeralModel.NomeSubcategoria;
-                                    editarAnotacaoGeralView.CbxNomeDaDescricao.Text = AnotacaoGeralModel.NomeDaDescricao;
-                                    editarAnotacaoGeralView.TxtDescricao.Text = AnotacaoGeralModel.Descricao;
-                                    editarAnotacaoGeralView.DtpData.Text = AnotacaoGeralModel.Data.ToString();
+                                    anotacaoGeralGerenciarView.TxtId.Text = Convert.ToString(AnotacaoGeralModel.Id.ToString());
+                                    anotacaoGeralGerenciarView.CbxCategoria.Text = AnotacaoGeralModel.NomeCategoria;
+                                    anotacaoGeralGerenciarView.CbxSubcategoria.Text = AnotacaoGeralModel.NomeSubcategoria;
+                                    anotacaoGeralGerenciarView.CbxNomeDaDescricao.Text = AnotacaoGeralModel.NomeDaDescricao;
+                                    anotacaoGeralGerenciarView.TxtDescricao.Text = AnotacaoGeralModel.Descricao;
+                                    anotacaoGeralGerenciarView.DtpData.Text = AnotacaoGeralModel.Data.ToString();
 
                                     // Atribui a view de edição ao ViewModel principal para que o ContentControl principal exiba a UserControl
                                     var mainVm = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
                                     if (mainVm != null)
                                     {
-                                        AnotacaoGeralModel.DiferenciarMetodos = "GerenciarAnotacaoGeral";
-                                        mainVm.SelecionarControleDeUsuario = new EditarAnotacaoGeralView(AnotacaoGeralModel, null);
+                                        mainVm.SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView(AnotacaoGeralModel, null);
                                     }
                                 }
                             }
@@ -250,58 +250,31 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
             return _comandoGerenciarAnotacaoGeral;
         }
     }
-    
+
     //Comando do evento MouseDoubleClick.
     private ICommand _comandoDuploClickAnotacaoGeral;
     public ICommand ComandoDuploClickAnotacaoGeral
     {
         get
         {
-            _comandoDuploClickAnotacaoGeral ??= new RelayCommand<object>(param => 
-            /*{ 
-                // Atribui a view de edição ao ViewModel principal para que o ContentControl principal exiba a UserControl
-                var mainVm = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
-                if (mainVm != null)
-                {
-                    mainVm.EditarAnotacaoGeralExcluirComando();//.SelecionarControleDeUsuario = new EditarAnotacaoGeralView(AnotacaoGeralModel, null);// editarAnotacaoGeralView;
-                }
-            });*/
-            {               
+            _comandoDuploClickAnotacaoGeral ??= new RelayCommand<object>(param =>
+            {
                 if (param is AnotacaoGeral anotacaoGeral)
                 {
                     AnotacaoGeralModel.Id = anotacaoGeral.Id;
-                    /*
-                    // Preencher um modelo que será usado como DataContext na view de edição.
-                    var modeloParaEditar = new AnotacaoGeralModel
-                    {
-                        Id = anotacaoGeral.Id,
-                        NomeCategoria = anotacaoGeral.NomeCategoria,
-                        NomeSubcategoria = anotacaoGeral.NomeSubcategoria,
-                        NomeDaDescricao = anotacaoGeral.NomeDaDescricao,
-                        Descricao = anotacaoGeral.Descricao,
-                        Data = Convert.ToDateTime(anotacaoGeral.Data.ToString("dd/MM/yyyy"))
-                    };
-                    
-                     // Verificar se o registro existe antes de abrir a view de edição.
-                    bool existe = AnotacaoGeralRepositorio.VerificarRegistros(modeloParaEditar.Id);
-                    if (!existe)
-                    {
-                        Mensagens.NomeDoMetodo = "VerificarRegistros";
-                        Mensagens.ErroObterId(modeloParaEditar.Id, Mensagens.NomeDoMetodo);
-                        return;
-                    }
-
-                    // Abrir a view de edição em uma janela modal, passando o modelo clonado e o ViewModel atual
-                    var window = new EditarAnotacaoGeralWindow(modeloParaEditar, this);
-                    bool? resultado = window.ShowDialog();
-                    if (resultado == true)
-                    {
-                        // A janela já realizou a persistência; atualize a lista exibida chamando consulta.
-                        ConsultasDeAnotacoesGerais();
-                    }*/
-                }               
+                }
             });
             return _comandoDuploClickAnotacaoGeral;
+        }
+    }
+
+    private ICommand _comandoLimparAnotacaoGeral;
+    public ICommand ComandoLimparAnotacaoGeral
+    {
+        get
+        {
+            _comandoLimparAnotacaoGeral ??= new RelayCommand<object>(param => AtualizarAnotacaoGeralGerenciarView());
+            return _comandoLimparAnotacaoGeral;
         }
     }
 }

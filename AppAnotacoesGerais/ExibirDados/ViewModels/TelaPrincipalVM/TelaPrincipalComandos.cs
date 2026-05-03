@@ -1,13 +1,9 @@
-﻿using AppAnotacoesGerais.AcessarDados.Entidades;
-using AppAnotacoesGerais.ExibirDados.Comandos;
+﻿using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Helpers;
-using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.ExibirDados.Views;
 using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
-using AppAnotacoesGerais.GerenciarDados;
-using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -51,7 +47,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
 
     public void AdicionarAnotacaoGeralComando()
     {
-        SelecionarControleDeUsuario = new EditarAnotacaoGeralView();
+        SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView();
     }
 
     private ICommand _comandoAdicionarAnotacaoGeral;
@@ -87,7 +83,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
     #endregion
 
     #region | Senha Para Acessar Informações Pessoais |
-    
+
     private void VerificarSenha()
     {
         if (Senha == "bj250281")
@@ -270,36 +266,4 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         }
     }
     #endregion
-
-    // Uso de método utilitário compartilhado para verificação de tecla Enter.
-    /*
-    public void FecharAplicativoComando()
-    {
-
-        var telaLogin = Application.Current.Windows.OfType<Window>()
-            .FirstOrDefault(w => w.GetType() == typeof(TelaSenha));
-        telaLogin.Close();
-
-        var telaPrincipal = Application.Current.Windows.OfType<Window>().First();
-        telaPrincipal.Close();
-
-        //TelaPrincipal.Show();
-
-        Window ReabrirTelaPrincipal = new Views.Menus.TelaPrincipal();
-        ReabrirTelaPrincipal.Show();
-    }
-
-    private ICommand _comandoFecharAplicativo;
-    public ICommand ComandoFecharAplicativo
-    {
-        get
-        {
-            if (_comandoFecharAplicativo == null)
-            {
-                _comandoFecharAplicativo = new RelayCommand<object>(param => FecharAplicativoComando());
-            }
-            return _comandoFecharAplicativo;
-        }
-    }
-    */
 }

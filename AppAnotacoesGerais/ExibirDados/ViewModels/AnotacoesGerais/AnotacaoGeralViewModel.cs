@@ -1,21 +1,19 @@
 ﻿using AppAnotacoesGerais.AcessarDados.Entidades;
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
-using AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
-using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
 public partial class AnotacaoGeralViewModel : ViewModelBase
-{    
+{
     public CategoriaRepositorio _categoriaRepositorio = new();
+    public SubcategoriaRepositorio _subcategoriaRepositorio = new();
+    public NomeDescricaoRepositorio _nomeDescricaoRepositorio = new();
     public AnotacaoGeralRepositorio _anotacaoGeralRepositorio = new();
 
-    //public TelaPrincipalViewModel TelaPrincipalViewModel { get; set; } = new();
     public AnotacaoGeralModel AnotacaoGeralModel { get; set; } = new();
     public CategoriaModel CategoriaModel { get; set; } = new();
     public SubcategoriaModel SubcategoriaModel { get; set; } = new();
@@ -23,22 +21,6 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
 
     private readonly ObservableCollection<AnotacaoGeral> _listaDeAnotacoesGerais = [];
     public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }
-
-    
-
-    private int _indiceSelecionadoNomeDescricao;
-    public int IndiceSelecionadoNomeDescricao
-    {
-        get => _indiceSelecionadoNomeDescricao;
-        set
-        {
-            if (_indiceSelecionadoNomeDescricao != value)
-            {
-                _indiceSelecionadoNomeDescricao = value;
-                OnPropertyChanged(nameof(IndiceSelecionadoNomeDescricao));
-            }
-        }
-    }
 
     //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
     private Categoria _categoriaSelecionada;
@@ -55,10 +37,8 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
                 //Aguarde o binding ser atualizado antes de chamar os métodos.
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    ObterListaDeSubcategorias();
+                    AtualizarListaDeSubcategorias(CategoriaSelecionada, true);
                 });
-
-
             }
         }
     }
@@ -78,7 +58,7 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
                 //Aguarde o binding ser atualizado antes de chamar os métodos.
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    ObterListaDeNomeDescricao();
+                    AtualizarListaDeNomeDescricao(SubcategoriaSelecionada, true);
                 });
 
             }
@@ -96,7 +76,7 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
             {
                 _nomeDescricaoSelecionada = value;
                 OnPropertyChanged(nameof(NomeDescricaoSelecionada));
-                
+
                 //Aguarde o binding ser atualizado antes de chamar os métodos.
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
@@ -106,14 +86,50 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
         }
     }
 
-    //Método do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
-    private void ObterListaDeSubcategorias()
+    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
+    private Categoria _categoriaSelecionadaEditar;
+    public Categoria CategoriaSelecionadaEditar
     {
-        if (CategoriaSelecionada != null)
+        get => _categoriaSelecionadaEditar;
+        set
         {
-            SubcategoriaModel.ListaDeSubcategorias = [.. SubcategoriaRepositorio.ObterSubcategoriasPorId(CategoriaSelecionada.Id) ?? []];
+            if (_categoriaSelecionadaEditar != value)
+            {
+                _categoriaSelecionadaEditar = value;
+                OnPropertyChanged(nameof(CategoriaSelecionadaEditar));
+                AtualizarListaDeSubcategorias(CategoriaSelecionadaEditar, false);
+            }
+        }
+    }
+
+    //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
+    private Subcategoria _subcategoriaSelecionadaEditar = new();
+    public Subcategoria SubcategoriaSelecionadaEditar
+    {
+        get => _subcategoriaSelecionadaEditar;
+        set
+        {
+            if (_subcategoriaSelecionadaEditar != value)
+            {
+                _subcategoriaSelecionadaEditar = value;
+                OnPropertyChanged(nameof(SubcategoriaSelecionadaEditar));
+
+                AtualizarListaDeNomeDescricao(SubcategoriaSelecionadaEditar, false);
+            }
+        }
+    }
+
+    // Método interno comum para atualizar a lista de Subcategorias.
+    // chamarConsultas = true -> também chama ConsultasDeAnotacoesGerais() (usado no fluxo não editar)
+    private void AtualizarListaDeSubcategorias(Categoria categoria, bool chamarConsultas)
+    {
+        if (categoria != null)
+        {
+            SubcategoriaModel.ListaDeSubcategorias = [.. SubcategoriaRepositorio.ObterSubcategoriasPorId(categoria.Id) ?? []];
             SubcategoriaModel.IndiceSelecionadoSubcategoria = -1;
-            ConsultasDeAnotacoesGerais();
+
+            if (chamarConsultas)
+                ConsultasDeAnotacoesGerais();
         }
         else
         {
@@ -121,14 +137,16 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
         }
     }
 
-    //Método do evento: "SelectionChanged" entre o ComboBox de Sucategorias e o ComboBox de NomeDescricao.
-    private void ObterListaDeNomeDescricao()
+    // Método interno comum para atualizar a lista de NomeDescricao.
+    // chamarConsultas = true -> também chama ConsultasDeAnotacoesGerais() (usado no fluxo não editar)
+    private void AtualizarListaDeNomeDescricao(Subcategoria subcategoria, bool chamarConsultas)
     {
-        if (SubcategoriaSelecionada != null)
+        if (subcategoria != null)
         {
-            NomeDescricaoModel.ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricaoPorId(SubcategoriaSelecionada.Id) ?? []];
-            //IndiceSelecionadoNomeDescricao = 0;
-            ConsultasDeAnotacoesGerais();
+            NomeDescricaoModel.ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricaoPorId(subcategoria.Id) ?? []];
+
+            if (chamarConsultas)
+                ConsultasDeAnotacoesGerais();
         }
         else
         {

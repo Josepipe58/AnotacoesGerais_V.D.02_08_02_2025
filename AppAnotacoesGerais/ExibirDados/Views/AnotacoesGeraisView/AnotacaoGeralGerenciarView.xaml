@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView.EditarAnotacaoGeralView"
+﻿<UserControl x:Class="AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView.AnotacaoGeralGerenciarView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
         mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" d:DesignWidth="1600">
 
     <UserControl.DataContext>
-        <local:EditarAnotacaoGeralViewModel/>
+        <local:AnotacaoGeralViewModel/>
     </UserControl.DataContext>
 
     <Grid Background="#FFFDFEFF">
@@ -88,6 +88,6 @@
         <ComboBox x:Name="CbxNomeDaDescricao" Style="{DynamicResource ComboBoxAzulMarinho}" Height="45" Width="450" Margin="46,292,0,0"
                   Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                  
-                  SelectedItem="{Binding NomeDescricaoSelecionadaEditar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
+                  SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0"/>
     </Grid>
 </UserControl>

@@ -22,7 +22,7 @@
 
             <!--| Título da Grid Superior |-->
             <TextBlock Text="Gerenciar Anotações Gerais" FontSize="40" Foreground="#FF02FDFD" Width="520"
-               Margin="530,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Grid.RowSpan="2"/>
+                       Margin="530,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Grid.RowSpan="2"/>
 
             <!--| Rótulos(Label) |-->
             <Label Content="Categorias" Style="{DynamicResource LabelTransparente}" Margin="55,70,0,0" Height="34" Width="206"/>
@@ -40,8 +40,7 @@
             <!--| ComboBoxes |-->
             <ComboBox Name="CbxCategoria" Height="40" Width="300" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="55,95,0,0"
                       Text="{Binding AnotacaoGeralModel.NomeCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding Path=DataContext.CategoriaModel.ListaDeCategorias, RelativeSource={RelativeSource FindAncestor, 
-                      AncestorType={x:Type Window}}}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
+                      ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
                       SelectedItem="{Binding CategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <ComboBox Name="CbxSubcategoria" Height="40" Width="350" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="405,95,0,0" 
@@ -59,10 +58,7 @@
             <Button Content="Adicionar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="48,165,0,0" Width="150" Height="50" 
                     Command="{Binding Path=DataContext.ComandoAdicionarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
                     AncestorType={x:Type Window}}}"/>
-
-            <!--<Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
-                    Click="Button_Click"/>-->
-
+            
             <Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
                     Command="{Binding ComandoGerenciarAnotacaoGeral}"/>
 

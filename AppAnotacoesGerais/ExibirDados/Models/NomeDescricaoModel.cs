@@ -86,9 +86,4 @@ public class NomeDescricaoModel : ViewModelBase
             }
         }
     }
-
-    public NomeDescricaoModel()
-    {
-            
-    }
 }
