@@ -72,4 +72,20 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
             return false;
         }
     }
+
+    public int ContadorRegistros()
+    {
+        try
+        {
+            int retorno = ObterListaDeTodos().Count;
+            return retorno;
+
+        }
+        catch (Exception ex)
+        {
+            Mensagens.NomeDoMetodo = "ContadorRegistros";
+            Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+            return 0;
+        }
+    }
 }

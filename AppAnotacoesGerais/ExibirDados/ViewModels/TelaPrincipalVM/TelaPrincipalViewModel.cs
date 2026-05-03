@@ -87,6 +87,12 @@ public partial class TelaPrincipalViewModel : ViewModelBase
         {
             var opcao = parameter as string ?? string.Empty;
 
+            if(string.IsNullOrEmpty(opcao))
+            {
+                Mensagens.MensagemDeErroDeSwitchCase();
+                return;
+            }
+
             switch (opcao)
             {
                 case "Página Inicial":

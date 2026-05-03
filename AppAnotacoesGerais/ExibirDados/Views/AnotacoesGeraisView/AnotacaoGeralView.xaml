@@ -33,16 +33,34 @@
 
             <Label Content="Consultar Registros" Style="{DynamicResource LabelTransparente}" Margin="739,175,0,0" Height="34" Width="165"/>
 
+            <Label Content="Quantidade de Registros" Style="{DynamicResource LabelTransparente}" Margin="1225,101,0,0" Height="34" Width="206"/>
+
             <!--| TextBoxes |-->
             <TextBox x:Name="TxtId" Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Height="35" Margin="910,170,0,0" Padding="20 0 0 0"
                      Text="{Binding AnotacaoGeralModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="TxtQtdeRegistros" Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="1435,98,0,0"
+                     Text="{Binding AnotacaoGeralModel.ContadorRegistros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     IsReadOnly="True" Height="34" Foreground="#FF0617C7" Padding="10 0 0 0"/>
+
+            <!--| Pesquisar Anotações Gerais|-->
+            <Grid Margin="990,140,0,0" Height="80" Width="441" HorizontalAlignment="Left" VerticalAlignment="Top">
+                
+                <TextBox x:Name="TxtPesquisar" Style="{StaticResource PesquisarTextBox_AG}" 
+                         Text="{Binding TextoPesquisa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="220"/>
+
+                <TextBlock x:Name="TxbPesquisar" Text="Pesquisar Anotação Geral" Style="{StaticResource PesquisarTextBlock_AG}" Width="220"/>
+
+                <Button Content="Limpar" FontSize="18" Height="50" Width="160" Margin="235,12,0,0" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
+                        Command="{Binding ComandoAtualizarAnotacaoGeral}"/>
+            </Grid>
 
             <!--| ComboBoxes |-->
             <ComboBox Name="CbxCategoria" Height="40" Width="300" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="55,95,0,0"
                       Text="{Binding AnotacaoGeralModel.NomeCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
                       SelectedItem="{Binding CategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            
+
             <ComboBox Name="CbxSubcategoria" Height="40" Width="350" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="405,95,0,0" 
                       Text="{Binding AnotacaoGeralModel.NomeSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias}" DisplayMemberPath="NomeSubcategoria" SelectedValuePath="Id"                                              
@@ -53,12 +71,12 @@
                       Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                      
                       SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            
+
             <!--| Botões |-->
             <Button Content="Adicionar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="48,165,0,0" Width="150" Height="50" 
                     Command="{Binding Path=DataContext.ComandoAdicionarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
                     AncestorType={x:Type Window}}}"/>
-            
+
             <Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
                     Command="{Binding ComandoGerenciarAnotacaoGeral}"/>
 

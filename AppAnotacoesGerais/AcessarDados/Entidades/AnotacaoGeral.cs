@@ -17,7 +17,7 @@ public class AnotacaoGeral
     [Required, StringLength(100)]
     public string NomeDaDescricao { get; set; }
 
-    [Required, StringLength(maximumLength: 100000)]
+    [Required, StringLength(maximumLength: int.MaxValue)]
     public string Descricao { get; set; }
 
     [Column(TypeName = "date")]

@@ -69,4 +69,15 @@ public class AnotacaoGeralModel : ViewModelBase
             OnPropertyChanged(nameof(Data));
         }
     }
+
+    private int _contadorRegistros;
+    public int ContadorRegistros
+    {
+        get => _contadorRegistros;
+        set
+        {
+            _contadorRegistros = value;
+            OnPropertyChanged(nameof(ContadorRegistros));
+        }
+    }
 }

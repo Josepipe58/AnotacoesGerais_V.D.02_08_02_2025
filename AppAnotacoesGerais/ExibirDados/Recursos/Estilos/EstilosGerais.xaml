@@ -465,4 +465,57 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--======================| PesquisarPorAnotaçoesGerais(PesquisarTextBlock_AG e PesquisarTextBox_AG) |============================================-->
+
+    <!--| TextBlock usado para pesquisar Anotaçoes Gerais(AG). |-->
+    <Style x:Key="PesquisarTextBlock_AG" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="Blue"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="15,5,0,0"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="210"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=TxtPesquisar}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--| TextBox usado para pesquisar Anotaçoes Gerais(AG). |-->
+    <Style x:Key="PesquisarTextBox_AG" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="Blue"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="#FF06F0D0"/>
+        <Setter Property="Padding" Value="10,5,0,0" />
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="210"/>
+        <Setter Property="Margin" Value="0,10,0,10" />
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+
+        <!--|________________________| Essa propriedade é do Ponto de Inserção |__________________________________|-->
+
+        <Setter Property="CaretBrush" Value="Navy" />
+
+        <!--|______________________________________| Corner Radius |_______________________________________________|-->
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" CornerRadius="6" BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -98,7 +98,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         }
         else if (Senha != "bj250281")
         {
-            MessageBox.Show($"Senha inválida, tente novamente.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show($"Senha incorreta, tente novamente.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
             SelecionarControleDeUsuario = new TelaSenha();
             return;
         }

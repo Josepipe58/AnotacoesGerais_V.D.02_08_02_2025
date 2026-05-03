@@ -2,6 +2,7 @@
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
@@ -64,6 +65,17 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralGerenciar
         }
     }
 
+    public void ContadorDeRegistros()
+    {
+        int contador = _anotacaoGeralRepositorio.ContadorRegistros();
+        if (contador <= 0)
+        {
+            MessageBox.Show($"Atenção! Não existe nenhum registro no Banco de Dados.",
+                        "Aviso!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        AnotacaoGeralModel.ContadorRegistros = contador;
+    }
+
     public void LimparDados()
     {
         AnotacaoGeralModel.Id = 0;
@@ -88,6 +100,7 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralGerenciar
         AnotacaoGeralModel.NomeDaDescricao = NomeDescricaoModel.ListaDoNomeDescricao[0].NomeDaDescricao;
         AnotacaoGeralModel.Descricao = null;
         AnotacaoGeralModel.Data = DateTime.Now;
+        TextoPesquisa = string.Empty;
     }
 
     public void LimparAnotacaoGeralGerenciarView()

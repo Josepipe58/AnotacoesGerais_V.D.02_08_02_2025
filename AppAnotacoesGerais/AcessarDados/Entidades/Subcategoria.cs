@@ -16,6 +16,4 @@ public class Subcategoria
 
     [NotMapped]
     public string NomeCategoria { get; set; }
-
-    public virtual Categoria Categoria { get; set; }
 }

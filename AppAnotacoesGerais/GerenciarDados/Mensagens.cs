@@ -56,6 +56,7 @@ public static class Mensagens
         MessageBox.Show($"Atenção! Ocorreu um erro no seguinte método: {_nomeDoMetodo}." +
             $"\nEsse código de número {id},não existe.", "Atenção!", MessageBoxButton.OK, MessageBoxImage.Information);
     }
+
     //Erros do Try Catch(Exception)
     public static string ErroDeExcecaoENomeDoMetodo(Exception ex, string _nomeDoMetodo)
     {
@@ -66,14 +67,7 @@ public static class Mensagens
     //Mensagem de Erro de Switch Case
     public static void MensagemDeErroDeSwitchCase()
     {
-        MessageBox.Show($"Atenção! Ocorreu um erro no Switch Case.\nNão foi possível selecionar um servidor.",
+        MessageBox.Show($"Atenção! Ocorreu um erro no Switch Case.\nParameter incorreto.",
                         "Mensagem de Erro!", MessageBoxButton.OK, MessageBoxImage.Error);
-    }
-
-    //Mensagem de Erro de Senha
-    public static void ErroDeSenha()
-    {
-        MessageBox.Show($"Senha Incorreta!\nTente novamente.",
-                        "Mensagem de Erro de Senha!", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 }
