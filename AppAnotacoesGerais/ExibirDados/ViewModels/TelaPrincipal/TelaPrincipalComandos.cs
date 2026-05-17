@@ -4,11 +4,12 @@ using AppAnotacoesGerais.ExibirDados.Views;
 using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
+using AppAnotacoesGerais.ExibirDados.Views.TelaSenha;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
-namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
+namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal;
 
 public partial class TelaPrincipalViewModel// TelaPrincipalComandos
 {
@@ -45,41 +46,40 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
 
     #region | Comandos de Anotaçoes Gerais |
 
-    public void AdicionarAnotacaoGeralComando()
-    {
-        SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView();
-    }
-
-    private ICommand _comandoAdicionarAnotacaoGeral;
-    public ICommand ComandoAdicionarAnotacaoGeral
+    private ICommand _comandoAbrirJanelaAdicionarAnotacaoGeral;
+    public ICommand ComandoAbrirJanelaAdicionarAnotacaoGeral
     {
         get
         {
-            if (_comandoAdicionarAnotacaoGeral == null)
+            if (_comandoAbrirJanelaAdicionarAnotacaoGeral == null)
             {
-                _comandoAdicionarAnotacaoGeral = new RelayCommand<object>(param => AdicionarAnotacaoGeralComando());
+                _comandoAbrirJanelaAdicionarAnotacaoGeral = new RelayCommand<object>(param => 
+                { 
+                    SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView(); 
+                });
             }
-            return _comandoAdicionarAnotacaoGeral;
+            return _comandoAbrirJanelaAdicionarAnotacaoGeral;
         }
     }
-    public void VoltarAnotacaoGeral()
-    {
-        SelecionarControleDeUsuario = new AnotacaoGeralView();
-    }
+    #endregion
 
-    private ICommand _comandoVoltarAnotacaoGeral;
-    public ICommand ComandoVoltarAnotacaoGeral
+    #region | Comandos de Informações Pessoais |
+
+    private ICommand _comandoAbrirJanelaAdicionarInformacaoPessoal;
+    public ICommand ComandoAbrirJanelaAdicionarInformacaoPessoal
     {
         get
         {
-            if (_comandoVoltarAnotacaoGeral == null)
+            if (_comandoAbrirJanelaAdicionarInformacaoPessoal == null)
             {
-                _comandoVoltarAnotacaoGeral = new RelayCommand<object>(param => VoltarAnotacaoGeral());
+                _comandoAbrirJanelaAdicionarInformacaoPessoal = new RelayCommand<object>(param =>
+                {
+                    SelecionarControleDeUsuario = new InformacaoPessoalGerenciarView();
+                });
             }
-            return _comandoVoltarAnotacaoGeral;
+            return _comandoAbrirJanelaAdicionarInformacaoPessoal;
         }
     }
-
     #endregion
 
     #region | Senha Para Acessar Informações Pessoais |
@@ -99,7 +99,7 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         else if (Senha != "bj250281")
         {
             MessageBox.Show($"Senha incorreta, tente novamente.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
-            SelecionarControleDeUsuario = new TelaSenha();
+            SelecionarControleDeUsuario = new TelaSenhaView();
             return;
         }
     }

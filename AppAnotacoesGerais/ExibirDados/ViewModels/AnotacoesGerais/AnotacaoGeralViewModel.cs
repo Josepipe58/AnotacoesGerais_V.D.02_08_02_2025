@@ -20,37 +20,7 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
     public NomeDescricaoModel NomeDescricaoModel { get; set; } = new();
 
     private readonly ObservableCollection<AnotacaoGeral> _listaDeAnotacoesGerais = [];
-    public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }
-
-    private string _textoPesquisa;
-    public string TextoPesquisa
-    {
-        get => _textoPesquisa;
-        set
-        {
-            if (_textoPesquisa != value)
-            {
-                _textoPesquisa = value;
-                OnPropertyChanged(nameof(TextoPesquisa));
-                PesquisarSubcategorias();
-            }
-        }
-    }
-
-    private void PesquisarSubcategorias()
-    {
-        var listaDeSubcategorias = SubcategoriaRepositorio.ObterSubcategorias() ?? Enumerable.Empty<Subcategoria>();
-
-        // Aplica filtro por texto de pesquisa (se informado)
-        if (!string.IsNullOrWhiteSpace(TextoPesquisa))
-        {
-            var busca = TextoPesquisa.Trim();
-            listaDeSubcategorias = listaDeSubcategorias.Where(sc => !string.IsNullOrEmpty(sc.NomeSubcategoria) &&
-                                      sc.NomeSubcategoria.Contains(busca, StringComparison.OrdinalIgnoreCase));
-        }
-        SubcategoriaModel.ListaDeSubcategorias = [];
-        SubcategoriaModel.ListaDeSubcategorias = [.. listaDeSubcategorias];
-    }
+    public ReadOnlyObservableCollection<AnotacaoGeral> ListaDeAnotacoesGerais { get; }  
 
     //Propriedade do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
     private Categoria _categoriaSelecionada;

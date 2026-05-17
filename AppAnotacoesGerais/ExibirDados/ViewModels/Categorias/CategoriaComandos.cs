@@ -3,7 +3,6 @@ using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
-using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,7 +15,7 @@ public partial class CategoriaViewModel//CategoriaComandos
     {
         get
         {
-            _comandoAdicionarCategoria ??= new RelayCommand<object>(param => 
+            _comandoAdicionarCategoria ??= new RelayCommand<object>(param =>
             {
                 // Criar uma nova instância de CategoriaModel para evitar
                 // modificar a instância vinculada à interface do usuário.
@@ -62,7 +61,7 @@ public partial class CategoriaViewModel//CategoriaComandos
     {
         get
         {
-            _comandoEditarCategoria ??= new RelayCommand<object>(param => 
+            _comandoEditarCategoria ??= new RelayCommand<object>(param =>
             {
                 // Criar uma nova instância de CategoriaModel para evitar
                 // modificar a instância vinculada à interface do usuário.

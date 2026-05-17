@@ -10,9 +10,8 @@ public abstract class Repositorio<T> : IDisposable where T : class
 
     public bool Salvar { get; set; } = true;
 
-    public Repositorio(bool save = true)
+    public Repositorio()
     {
-        Salvar = save;
         _contexto = new Contexto();
     }
 
@@ -26,6 +25,7 @@ public abstract class Repositorio<T> : IDisposable where T : class
         {
             Mensagens.NomeDoMetodo = "ObterListaDeTodos";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+
             return [];
         }
     }
@@ -64,7 +64,7 @@ public abstract class Repositorio<T> : IDisposable where T : class
 
     public void Dispose()
     {
-        // limpar conexões do Banco de Dados.
+        //Limpar conexões do Banco de Dados.
         _contexto.Dispose();
         GC.SuppressFinalize(this);
     }

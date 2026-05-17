@@ -102,7 +102,7 @@ public class ConsumoGasModel : ViewModelBase
             OnPropertyChanged(nameof(DataAnterior));
         }
     }
-    //TxtBotijaoReserva
+
     private string _botijaoReserva;
     public string BotijaoReserva
     {

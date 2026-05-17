@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView.InformacaoPessoalGerenciarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.InformacoesPessoais"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" d:DesignWidth="1600" Margin="0,5,0,0">
+
+    <UserControl.DataContext>
+        <local:InformacaoPessoalViewModel/>
+    </UserControl.DataContext>
+
+    <Grid Background="#FFFDFEFF">
+
+        <Border CornerRadius="25,25,25,25" Background="#FF021507" BorderThickness="2,4,3,9">
+
+            <Grid >
+
+                <!--| Título |-->
+                <!--| Imagem |-->
+                <Image Source="/ExibirDados/Recursos/Imagens/Fernando_Noronha.png" Stretch="Fill"  Margin="10,5,0,5"/>
+
+                <!--| Título |-->
+                <Label Content="GERENCIAR INFORMAÇÃO PESSOAL" Style="{DynamicResource LabelTransparente}" FontSize="28" Height="50" Margin="520,10,0,0" Width="510"/>
+
+                <!--|Borda do Título |-->
+                <Border  CornerRadius="25,25,25,25" Background="#FF22C5B2" BorderThickness="2,4,3,9" Width="1090" Margin="25,70,0,0" HorizontalAlignment="Left" 
+                         Height="120" VerticalAlignment="Top">
+
+                    <TextBox x:Name="TxtTitulo" Text="{Binding InformacaoPessoalModel.Titulo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" 
+                             FontWeight="Bold" Foreground="#FF0F0FB0" TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True" Margin="10,10,10,10"/>
+                </Border>
+
+                <!--|Borda da Descrição |-->
+                <Border x:Name="Borda03" Background="#FF22C5B2" CornerRadius="25,25,25,25" BorderThickness="2,4,3,9" Margin="25,225,0,0" HorizontalAlignment="Left" 
+                        Width="1090" Height="650" VerticalAlignment="Top">
+
+                    <TextBox x:Name="TxtDescricao" Text="{Binding InformacaoPessoalModel.Descricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" 
+                             FontWeight="Bold" Foreground="#FF0F0FB0" Margin="10,10,10,10" TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True"/>
+                </Border>
+
+                <!--| Rótulos[Label] -->
+                <Label Content="Código" Style="{DynamicResource LabelTransparente}" Height="40" Width="84" Margin="1140,40,0,0"/>
+
+                <Label Content="Título" Style="{DynamicResource LabelTransparente}" Height="40" Margin="45,40,0,0" Padding="10,10,0,0" Width="100"/>
+
+                <Label Content="Descrição" Style="{DynamicResource LabelTransparente}" FontSize="20" Height="40" Margin="45,185,0,0" Padding="10,10,0,0" Width="120"/>
+
+                <!--| TextBoxes |-->
+                <TextBox x:Name="TxtId" Text="{Binding InformacaoPessoalModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="90" 
+                         FontSize="16" FontWeight="Bold" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="1140,70,0,0" IsReadOnly="True"/>
+
+                <Button x:Name="BtnAdicionar" Content="Adicionar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                        Width="190" Margin="1140,245,0,0" Command="{Binding ComandoAdicionarInformacaoPessoal}" Height="60"/>
+
+                <Button x:Name="BtnEditar" Content="Editar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                        Width="190" Margin="1140,335,0,0" Command="{Binding ComandoEditarInformacaoPessoal}" Height="60"/>
+
+                <Button x:Name="BtnAtualizar" Content="Atualizar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" 
+                        Width="190" Margin="1140,425,0,0" Command="{Binding ComandoAtualizarInformacaoPessoalGerenciarView}" Height="60"/>
+
+                <Button x:Name="BtnVoltar" Content="Voltar" Style="{DynamicResource BtnAzulEscuroEAzulClaro}" Width="190" Margin="1140,514,0,0" 
+                        Command="{Binding ComandoVoltarInformacaoPessoal}" Height="60"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

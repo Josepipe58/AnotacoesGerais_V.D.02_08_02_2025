@@ -15,8 +15,8 @@ public partial class CategoriaViewModel
         CategoriaModel.Id = 0;
         CategoriaModel.NomeCategoria = null;
 
-        var listaDeCategorias = _categoriaRepositorio.ObterListaDeTodos().ToList() ?? [];
-        //Carregar DataGrid de Categorias.        
+        //Carregar DataGrid de Categorias.
+        var listaDeCategorias = _categoriaRepositorio.ObterListaDeTodos().ToList() ?? [];                
         CategoriaModel.ListaDeCategorias = new ObservableCollection<Categoria>(listaDeCategorias);
     }
 }

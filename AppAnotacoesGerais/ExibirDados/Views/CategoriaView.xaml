@@ -85,7 +85,7 @@
         <!--| DataGrid de DtgDados |-->
         <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,0,5,5"
                   ItemsSource="{Binding CategoriaModel.ListaDeCategorias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Column="0" Grid.Row="1">
+                  IsReadOnly="True" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código da Categoria" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="200"/>
                 <DataGridTextColumn Header="Nome da Categoria" Binding="{Binding NomeCategoria}" Width="250"/>

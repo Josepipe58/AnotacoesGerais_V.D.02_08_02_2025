@@ -76,34 +76,16 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralGerenciar
         AnotacaoGeralModel.ContadorRegistros = contador;
     }
 
-    public void LimparDados()
+    public void AtualizarAnotacaoGeral()
     {
         AnotacaoGeralModel.Id = 0;
         AnotacaoGeralModel.NomeCategoria = null;
         AnotacaoGeralModel.NomeSubcategoria = null;
         AnotacaoGeralModel.NomeDaDescricao = null;
-
-        //Carregar DataGrid de Anotações Gerais.
-        var listaDeAnotacoesGerais = new ObservableCollection<AnotacaoGeral>();
-        listaDeAnotacoesGerais = [.. AnotacaoGeralRepositorio.ObterAnotacoesGerais() ?? []];
-
-        _listaDeAnotacoesGerais.Clear();
-        foreach (var item in listaDeAnotacoesGerais)
-            _listaDeAnotacoesGerais.Add(item);
+        ConsultasDeAnotacoesGerais();        
     }
 
-    public void AtualizarAnotacaoGeralGerenciarView()
-    {
-        AnotacaoGeralModel.Id = 0;        
-        AnotacaoGeralModel.NomeCategoria = CategoriaModel.ListaDeCategorias[0].NomeCategoria;
-        AnotacaoGeralModel.NomeSubcategoria = SubcategoriaModel.ListaDeSubcategorias[0].NomeSubcategoria;
-        AnotacaoGeralModel.NomeDaDescricao = NomeDescricaoModel.ListaDoNomeDescricao[0].NomeDaDescricao;
-        AnotacaoGeralModel.Descricao = null;
-        AnotacaoGeralModel.Data = DateTime.Now;
-        TextoPesquisa = string.Empty;
-    }
-
-    public void LimparAnotacaoGeralGerenciarView()
+    public void LimparAdicionarEditar()
     {
         AnotacaoGeralModel.Id = 0;
         AnotacaoGeralModel.Descricao = null;

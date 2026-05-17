@@ -10,9 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ExibirDados\Recursos\Estilos\PastaTurquesa.png" />
+    <None Remove="ExibirDados\Views\InformacoesPessoaisView\Fernando_Noronha.png" />
   </ItemGroup>
-
 
   <ItemGroup>
     <Content Include="ExibirDados\Recursos\Imagens\Anotacoes.ico" />
@@ -28,8 +27,7 @@
     <Resource Include="ExibirDados\Recursos\Imagens\PastaTurquesa.png" />
     <Resource Include="ExibirDados\Recursos\Imagens\Universo.jpg" />
     <Resource Include="ExibirDados\Recursos\Imagens\Voltar.png" />
-	<Resource Include="ExibirDados\Recursos\Imagens\Lupa.png" />
-	<Resource Include="ExibirDados\Recursos\Imagens\PaisagemMar.png" />
+	  <Resource Include="ExibirDados\Recursos\Imagens\Fernando_Noronha.png" />
   </ItemGroup>
 
   <ItemGroup>

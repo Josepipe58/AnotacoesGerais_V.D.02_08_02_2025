@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--==============================================| BtnAzulEscuroEAzulClaro |=============================================================-->
-
+    
     <Style TargetType="{x:Type Button}" x:Key="BtnAzulEscuroEAzulClaro">
         <Setter Property="BorderBrush" Value="#FF10FBF0"/>
         <Setter Property="Foreground" Value="#FF0B135F"/>
@@ -29,7 +29,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                        Background="{TemplateBinding Background}" SnapsToDevicePixels="true" RenderTransformOrigin="0.5,0.5" CornerRadius="30">
+                            Background="{TemplateBinding Background}" SnapsToDevicePixels="true" RenderTransformOrigin="0.5,0.5" CornerRadius="30">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -47,17 +47,17 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
-                                                                   Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
-                                                                   Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask)" 
-                                                                   Storyboard.TargetName="contentPresenter">
+                                                                       Storyboard.TargetName="contentPresenter">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <SolidColorBrush Color="#FF0DDC9A"/>
@@ -73,17 +73,17 @@
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.985"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" 
-                                                                   Storyboard.TargetName="contentPresenter">
+                                                                       Storyboard.TargetName="contentPresenter">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
-                                                                   Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.992"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[3].(TranslateTransform.X)" 
-                                                                   Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[3].(TranslateTransform.X)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="-1.111"/>
                                         </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
@@ -92,215 +92,16 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--=================================================| BtnVerdeRedondo |=================================================-->
-
-    <Style TargetType="{x:Type Button}" x:Key="BtnVerdeRedondo">
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Background" Value="#FF086B18"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Width="150" Height="40" CornerRadius="20" Padding="0,0,0,3" Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF298A53"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--==========================================| BtnOvalVermelhoAzulAmarelo |==============================================================-->
-
-    <Style x:Key="BtnOvalVermelhoAzulAmarelo" TargetType="{x:Type Button}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="#FFFEFEFF"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="0 0 0 5"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="#FFF10E38" BorderThickness="5" 
-                        SnapsToDevicePixels="true" Height="50" Width="Auto" Margin="0.487,0,1.555,0" 
-                        CornerRadius="30" RenderTransformOrigin="0.5,0.5">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF07ECEC" Offset="0.149"/>
-                                <GradientStop Color="#FFD6F707" Offset="0.861"/>
-                                <GradientStop Color="#FFE87765" Offset="0.364"/>
-                                <GradientStop Color="#FF9C0E28" Offset="0.639"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition From="MouseOver" GeneratedDuration="0:0:0.5" To="Normal"/>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="MouseOver">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed"/>
-                                <VisualState x:Name="Disabled"/>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--================================================| BtnVerdeBrilhanteComBordaAmarela |==================================================-->
-
-    <Style TargetType="{x:Type Button}" x:Key="BtnVerdeBrilhanteComBordaAmarela">
-        <Setter Property="Foreground" Value="#FF043107"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="BorderThickness" Value="5"/>
-        <Setter Property="BorderBrush" Value="#FFE9F30B"/>
-        <Setter Property="Padding" Value="0 0 0 5"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF073A19" Offset="0.135"/>
-                    <GradientStop Color="#FF073A19" Offset="0.808"/>
-                    <GradientStop Color="#FF0EF05E" Offset="0.282"/>
-                    <GradientStop Color="#FF0EEA5C" Offset="0.673"/>
-                    <GradientStop Color="#FF11F03E" Offset="0.492"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                        Background="{TemplateBinding Background}" SnapsToDevicePixels="true" RenderTransformOrigin="0.5,0.5" CornerRadius="30">
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition From="MouseOver" GeneratedDuration="0:0:0.5" To="Normal"/>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="MouseOver">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.2"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask)" 
-                                                                   Storyboard.TargetName="contentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <SolidColorBrush Color="#FF0DDC9A"/>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.985"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" 
-                                                                   Storyboard.TargetName="contentPresenter">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.992"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                                   .(TransformGroup.Children)[3].(TranslateTransform.X)" 
-                                                                   Storyboard.TargetName="border">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="-1.111"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask)" 
-                                                                   Storyboard.TargetName="contentPresenter">
-                                            <DiscreteObjectKeyFrame KeyTime="0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <SolidColorBrush Color="#FF0ADC3A"/>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled"/>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+    
     <!--=================================================| BtnRetangularVerdeEscuro |=================================================-->
-
+    
     <Style TargetType="{x:Type Button}" x:Key="BtnRetangularVerdeEscuro">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="#FF11E4E4"/>
@@ -314,7 +115,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="border" BorderBrush="#FF0F7548" BorderThickness="6" SnapsToDevicePixels="true" 
-                        CornerRadius="10" Margin="0,0,1.068,2.138" RenderTransformOrigin="0.1,0.1">
+                            CornerRadius="10" Margin="0,0,1.068,2.138" RenderTransformOrigin="0.1,0.1">
                         <Border.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FF13F0F0" Offset="0.109"/>
@@ -340,29 +141,29 @@
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                               .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
-                                                               Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.9"/>
                                             <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.9"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                               .(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
-                                                               Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.800"/>
                                             <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.9"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                               .(TransformGroup.Children)[3].(TranslateTransform.X)" 
-                                                               Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[3].(TranslateTransform.X)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.200"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform)
-                                                               .(TransformGroup.Children)[3].(TranslateTransform.Y)" 
-                                                               Storyboard.TargetName="border">
+                                                                       .(TransformGroup.Children)[3].(TranslateTransform.Y)" 
+                                                                       Storyboard.TargetName="border">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="1.5"/>
                                         </DoubleAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" 
-                                                               Storyboard.TargetName="border">
+                                                                       Storyboard.TargetName="border">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <SolidColorBrush Color="Black"/>
@@ -375,7 +176,7 @@
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush)" 
-                                                               Storyboard.TargetName="border">
+                                                                       Storyboard.TargetName="border">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <SolidColorBrush Color="#FF0BEEC4"/>
@@ -392,7 +193,7 @@
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" 
-                                                               Storyboard.TargetName="border">
+                                                                       Storyboard.TargetName="border">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -405,7 +206,7 @@
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush)" 
-                                                               Storyboard.TargetName="border">
+                                                                       Storyboard.TargetName="border">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <SolidColorBrush Color="#FF0BEEC4"/>
@@ -418,99 +219,16 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                  Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-
-    <!--==========================================| RadioButtonVerdeEscuro |==================================================================-->
-
-    <Style x:Key="RadioButtonVerdeEscuro" TargetType="RadioButton">
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="#FF11E4E4"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Height" Value="60"/>
-        <Setter Property="Width" Value="300"/>
-        <Setter Property="Padding" Value="0 0 0 3"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Grid Margin="0,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="320"/>
-                        </Grid.ColumnDefinitions>
-                        <Border x:Name="border" BorderBrush="#FF0F7548" CornerRadius="15"  BorderThickness="8">
-                            <Border.Background>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF13F0F0" Offset="0.109"/>
-                                    <GradientStop Color="#FF13F0F0" Offset="0.941"/>
-                                    <GradientStop Color="#FF091F0B" Offset="0.28"/>
-                                    <GradientStop Color="#FF091F0B" Offset="0.757"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                        </Border>
-                        <TextBlock x:Name="SidebarRadioButtonMenuText" Grid.Row="1" Width="300" Text="{TemplateBinding Property=Content}"
-                                   VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF09EADA" FontSize="18" Padding="10 0 0 0"
-                                   FontFamily="Segoe UI" Margin="15,0,10,0" Grid.ColumnSpan="1"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#FF091F0B"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#FF091F0B"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--==========================================| RadioButtonAzulMarinho |==================================================================-->
-
-    <Style x:Key="RadioButtonAzulMarinho" TargetType="RadioButton">
-        <Setter Property="Width" Value="350"/>
-        <Setter Property="Height" Value="50"/>
-        <Setter Property="Margin" Value="0,3,0,0"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Grid Margin="0,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="250"/>
-                        </Grid.ColumnDefinitions>
-                        <Border x:Name="border" Background="#FF090E58"
-                            CornerRadius="10 10 10 10"  BorderThickness="3"/>
-                        <TextBlock x:Name="SidebarRadioButtonMenuText" Grid.Row="1" Width="250" Text="{TemplateBinding Property=Content}"
-                               VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" FontSize="18"
-                               FontFamily="Segoe UI" Margin="15,0,10,0" Grid.ColumnSpan="1"/>
-                        <Border x:Name="Highlighter" Height="30" Width="10" Background="#FFECF906" CornerRadius="5"
-                            HorizontalAlignment="Left" Margin="0,0,5,0" Visibility="Collapsed"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#FF0509EC"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#FF076962"/>
-                            <Setter Property="Visibility" TargetName="Highlighter" Value="Visible"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+    
     <!--================================================| RadionButtonComImagem |=============================================================-->
-
+    
     <Style x:Key="RadionButtonComImagem" TargetType="RadioButton">
         <Setter Property="FontFamily" Value="Sans Serif Collection"/>
         <Setter Property="FontSize" Value="16"/>
@@ -532,12 +250,12 @@
                         </Grid.RowDefinitions>
                         <Border x:Name="border" Background="#FF065648" CornerRadius="6"/>
                         <Image x:Name="SidebarRadioButtonMenuIcon" Grid.Row="0" Margin="0,0,0,0" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Stretch="None" Source="/ExibirDados/Recursos/Imagens/PastaTurquesa.png"/>
+                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               Stretch="None" Source="/ExibirDados/Recursos/Imagens/PastaTurquesa.png"/>
                         <TextBlock x:Name="SidebarRadioButtonMenuText" Grid.Row="0" 
-                               Text="{TemplateBinding Property=Content}" Foreground="#E8EAEC"
-                               VerticalAlignment="Bottom" HorizontalAlignment="Center" 
-                               FontSize="14" FontFamily="Segoe Ui" Margin="0,0,0,10" />
+                                   Text="{TemplateBinding Property=Content}" Foreground="#E8EAEC"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                                   FontSize="14" FontFamily="Segoe Ui" Margin="0,0,0,10" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

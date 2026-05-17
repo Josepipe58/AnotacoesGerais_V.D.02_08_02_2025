@@ -1,5 +1,4 @@
 ﻿using AppAnotacoesGerais.GerenciarDados;
-using System;
 using System.Windows.Input;
 
 namespace AppAnotacoesGerais.ExibirDados.Comandos;
@@ -36,6 +35,7 @@ public sealed class RelayCommand<T> : ICommand
             // null é aceitável para tipos de referência
             if (default(T) == null)
                 return _canExecute(default!);
+
             // Para tipos de valor, use default(T)
             return _canExecute(default!);
         }
@@ -43,6 +43,7 @@ public sealed class RelayCommand<T> : ICommand
         try
         {
             var converted = (T)Convert.ChangeType(parameter, typeof(T));
+
             return _canExecute(converted);
         }
         catch
@@ -70,7 +71,7 @@ public sealed class RelayCommand<T> : ICommand
             var converted = (T)Convert.ChangeType(parameter, typeof(T));
             _execute(converted);
         }
-        catch(Exception ex) 
+        catch (Exception ex)
         {
             Mensagens.NomeDoMetodo = nameof(Execute);
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);

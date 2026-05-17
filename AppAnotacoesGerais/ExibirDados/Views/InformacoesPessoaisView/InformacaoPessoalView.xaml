@@ -3,10 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:local="clr-namespace:AppAnotacoesGerais.ExibirDados.ViewModels.InformacoesPessoais"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" xml:lang="pt-BR" d:DesignHeight="900" Width="1500">
+    <UserControl.DataContext>
+        <local:InformacaoPessoalViewModel/>
+    </UserControl.DataContext>
+
+    <Grid Background="#FF1AF3D6">
+
+        <Canvas Background="#FF041907" Height="169" VerticalAlignment="Top" Margin="5,5,5,0">
+
+            <!--| TextBlock - Título da Grid Superior |-->
+            <TextBlock Text="Consultar Informações Pessoais" Style="{DynamicResource TextBlockTranparente}" Canvas.Left="480" Canvas.Top="0" />
+
+            <!--| Rótulos(Label)|-->
+            <Label Content="Código" Style="{DynamicResource LabelTransparente}" Padding="10,5,10,10" Canvas.Left="12" Canvas.Top="50"/>
+
+            <!--| TextBoxes |-->
+            <TextBox x:Name="TxtId" Style="{DynamicResource TxtBrancoEBordaAzul}" FontSize="20" Width="85" Canvas.Left="17" Canvas.Top="80"
+                     Text="{Binding InformacaoPessoalModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!--| Botões |-->
+            <Button x:Name="BtnCadastrar" Content="CADASTRAR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="132" Canvas.Top="68"
+                     Command="{Binding Path=DataContext.ComandoAbrirJanelaAdicionarInformacaoPessoal, RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type Window}}}" Width="220"/>
+
+            <Button x:Name="BtnEditar" Content="EDITAR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="382" Canvas.Top="68"
+                    Width="220" Command="{Binding ComandoAbrirJanelaGerenciarInformacaoPessoal}"/>
+
+            <Button x:Name="BtnExcluir" Content="EXCLUIR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="632" Canvas.Top="68" 
+                    Width="220" Command="{Binding ComandoExcluirInformacaoPessoal}"/>
+
+            <Button x:Name="BtnAtualizar" Content="ATUALIZAR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="882" Canvas.Top="68" 
+                    Width="220" Command="{Binding ComandoAtualizarInformacaoPessoal}"/>
+        </Canvas>
+
+        <!--| Borda do Data Grid de Dados |-->
+        <Border x:Name="Borda03" BorderBrush="Navy" CornerRadius="25,25,25,25" BorderThickness="2,4,3,9" Margin="10,180,5,5">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="LightCyan" Offset="0.0" />
+                    <GradientStop Color="LightBlue" Offset="0.5" />
+                    <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <!--| Data Grid de Dados |-->
+            <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgEditorDeTextoInterno}" Margin="8,6,2,4" IsReadOnly="True"
+                      ItemsSource="{Binding ListaDeInformacoesPessoais}" ColumnHeaderStyle="{DynamicResource DtgCabecalhoVerdeEscuro}"
+                      BorderBrush="#FF0C1889" BorderThickness="3">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Id}" Width="100" />
+                    <DataGridTextColumn Header="TÍTULO" Binding="{Binding Titulo}" Width="1340"/>
+                </DataGrid.Columns>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="MouseDoubleClick">
+                        <b:InvokeCommandAction Command="{Binding ComandoDuploClickInformacaoPessoal}" 
+                               CommandParameter="{Binding SelectedItem, ElementName=DtgDados}" />
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
+            </DataGrid>
+        </Border>
     </Grid>
 </UserControl>

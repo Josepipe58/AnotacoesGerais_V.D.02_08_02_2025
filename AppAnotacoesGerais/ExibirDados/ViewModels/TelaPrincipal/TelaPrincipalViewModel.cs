@@ -2,6 +2,7 @@
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
+using AppAnotacoesGerais.ExibirDados.Views.TelaSenha;
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 
-namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipalVM;
+namespace AppAnotacoesGerais.ExibirDados.ViewModels.TelaPrincipal;
 
 public class MenuModel { public string NomeDoMenu { get; set; } }
 
@@ -87,7 +88,7 @@ public partial class TelaPrincipalViewModel : ViewModelBase
         {
             var opcao = parameter as string ?? string.Empty;
 
-            if(string.IsNullOrEmpty(opcao))
+            if (string.IsNullOrEmpty(opcao))
             {
                 Mensagens.MensagemDeErroDeSwitchCase();
                 return;
@@ -102,7 +103,7 @@ public partial class TelaPrincipalViewModel : ViewModelBase
                     SelecionarControleDeUsuario = new AnotacaoGeralView();
                     break;
                 case "Informações Pessoais":
-                    SelecionarControleDeUsuario = new TelaSenha();
+                    SelecionarControleDeUsuario = new TelaSenhaView();
                     break;
                 case "Submenu de Anotações Gerais":
                     SelecionarControleDeUsuario = new SubmenuAnotacoesGerais();

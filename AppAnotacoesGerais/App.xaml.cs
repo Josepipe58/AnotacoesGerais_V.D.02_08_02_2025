@@ -7,7 +7,7 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        MainWindow = new TelaPrincipal();
+        MainWindow = new TelaPrincipalView();
         MainWindow.Show();
 
         base.OnStartup(e);

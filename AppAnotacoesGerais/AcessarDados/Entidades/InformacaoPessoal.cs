@@ -4,7 +4,6 @@ namespace AppAnotacoesGerais.AcessarDados.Entidades;
 
 public class InformacaoPessoal
 {
-
     [Key]
     public int Id { get; set; }
 

@@ -1,31 +1,29 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--================================================| Diretório de Imagens |==============================================================-->
-
-    <ImageBrush x:Key="Voltar_Imagem" ImageSource="/ExibirDados/Recursos/Imagens/Voltar.png" Stretch="None"/>
+    <!--=============================================| Diretório de Imagens |=======================================================-->
+    
     <ImageBrush x:Key="PaginainicialImagem" ImageSource="/ExibirDados/Recursos/Imagens/AnotacoesGerais.png" Stretch="Fill"/>
     <ImageBrush x:Key="Logotipo_Imagem" ImageSource="/ExibirDados/Recursos/Imagens/MeuLogotipo.png" Stretch="Fill"/>
+    <ImageBrush x:Key="Voltar_Imagem" ImageSource="/ExibirDados/Recursos/Imagens/Voltar.png" Stretch="None"/>
 
-    <!--=================================================| MenuLateral |=================================================-->
+    <!--=============================================| MenuLateral |=================================================================-->
 
     <DataTemplate x:Key="MenuLateral">
 
         <Border CornerRadius="10" Grid.Column="0" Background="#FF021507" Margin="5 20 5 20">
-
-
             <StackPanel Margin="0,10,0,0">
-
+                
                 <!--| Logo |-->
                 <StackPanel Orientation="Horizontal" Height="50" Margin="15,25,0,20">
 
                     <TextBlock Text="GERENCIAR DADOS" Foreground="#FFFBF9F9"
-                           FontSize="20" FontFamily="Montserrat" FontWeight="Medium" Margin="40,0,0,0"
-                           VerticalAlignment="Center" HorizontalAlignment="Left" Width="NaN" />
+                               FontSize="20" FontFamily="Montserrat" FontWeight="Medium" Margin="40,0,0,0"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="NaN" />
 
                     <TextBlock Text="{Binding DataAtual}" Foreground="#FFFBF9F9"
-                           FontSize="20" FontFamily="Montserrat" FontWeight="Medium" Margin="10,0,0,0"
-                           VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" Width="NaN" />
+                               FontSize="20" FontFamily="Montserrat" FontWeight="Medium" Margin="10,0,0,0"
+                               VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" Width="NaN" />
                 </StackPanel>
                 <Grid Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
                     <ItemsControl ItemsSource="{Binding SourceCollection}">
@@ -35,18 +33,7 @@
                                     <Button Content="{Binding NomeDoMenu}" Width="280" Style="{StaticResource BtnRetangularVerdeEscuro}"
                                             CommandParameter="{Binding NomeDoMenu}" Command="{Binding DataContext.ComandoMenuLateral, 
                                             RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}, Mode=FindAncestor}}" Height="60"/>                                    
-                                </StackPanel>                                
-                                <!--<Grid Margin="10, 0, 10, 0">
-                                    <StackPanel Orientation="Horizontal"  >
-
-                                        <RadioButton Content="{Binding NomeDoMenu}" Tag="{Binding ImagemDoMenu}"                                                     
-                                                 CommandParameter="{Binding NomeDoMenu}"
-                                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-                                                 AncestorType={x:Type ItemsControl}}, Path=DataContext.ComandoMenuLateral}"
-                                                 Style="{StaticResource RbtnTransparente}"                                                                                                               
-                                                 GroupName="MenuGroup" Width="280"/>
-                                    </StackPanel>
-                                </Grid>-->                                
+                                </StackPanel>                       
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>                    
@@ -98,9 +85,28 @@
         </Setter>
     </Style>
 
-    <!--========================================================| TextBoxVerde |==============================================================-->
+    <!--==================================================| TxtBrancoEBordaAzul |=============================================================-->
 
-    <Style x:Key="TextBoxVerde" TargetType="{x:Type TextBox}">
+    <Style x:Key="TxtBrancoEBordaAzul" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#FF1729E0"/>
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="5,2,0,0"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="BorderBrush" Value="#FF1729E0"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+
+        <!--|________________________| Essa propriedade é do Ponto de Inserção |__________________________________|-->
+
+        <Setter Property="CaretBrush" Value="#FF0E1580" />
+    </Style>
+
+    <!--===================================================| TxtVerdeArredondado |============================================================-->
+
+    <Style x:Key="TxtVerdeArredondado" TargetType="{x:Type TextBox}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -130,311 +136,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--===============================================| TextBoxAzulMarinho |=================================================================-->
-
-    <Style x:Key="TextBoxAzulMarinho" TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="#FF0E1580"/>
-        <Setter Property="Padding" Value="10,5,0,0"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="BorderBrush" Value="White"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-
-        <!--|________________________| Essa propriedade é do Ponto de Inserção |__________________________________|-->
-
-        <Setter Property="CaretBrush" Value="White" />
-    </Style>
-
-    <!--==================================================| TxtBrancoEBordaAzul |=============================================================-->
-
-    <Style x:Key="TxtBrancoEBordaAzul" TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Foreground" Value="#FF1729E0"/>
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="Padding" Value="5,0,0,0"/>
-        <Setter Property="BorderThickness" Value="3"/>
-        <Setter Property="BorderBrush" Value="#FF1729E0"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-
-        <!--|________________________| Essa propriedade é do Ponto de Inserção |__________________________________|-->
-
-        <Setter Property="CaretBrush" Value="#FF0E1580" />
-    </Style>
-
-    <!--==================================================| TxtAzulClaroEBordaAzul |=============================================================-->
-
-    <Style x:Key="TxtAzulClaroEBordaAzul" TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Foreground" Value="#FF1729E0"/>
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Background" Value="#FF1AF3D6"/>
-        <Setter Property="Padding" Value="10,7,0,0"/>
-        <!--<Setter Property="BorderThickness" Value="3"/>
-        <Setter Property="BorderBrush" Value="#FF1729E0"/>-->
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-
-        <!--|________________________| Essa propriedade é do Ponto de Inserção |__________________________________|-->
-
-        <Setter Property="CaretBrush" Value="#FF0E1580" />
-    </Style>
-
-    <!--==================================================| TextBlockTranparente" |=============================================================-->
-
-    <Style x:Key="TextBlockTranparente" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="#FFFBF8F8"/>
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Background" Value="{x:Null}"/>
-        <Setter Property="Padding" Value="10 5 5 5"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>       
-    </Style>
-
-    <!--==============================================| SetaVoltarMenuAnterior |==============================================================-->
-
-    <Style x:Key="SetaVoltarMenuAnterior" TargetType="RadioButton">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Grid >
-                        <Border x:Name="border" CornerRadius="0" BorderThickness="5">
-                            <Border.Background>
-                                <ImageBrush ImageSource="/ExibirDados/Recursos/Imagens/Voltar.png"/>
-                            </Border.Background>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True"/>
-                        <Trigger Property="IsChecked" Value="True">
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     
-    <!--==================================================| LabelAzulMarino |=================================================================-->
+    <!--===============================| PesquisarTextBox - TextBox usado para pesquisar |====================================================-->
 
-    <Style x:Key="LabelAzulMarino" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="#FF02FDFD"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="#FF061134"/>
-        <Setter Property="Padding" Value="15 8 0 0"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-    </Style>
-
-    <!--==================================================| LabelTransparente |=================================================================-->
-
-    <Style x:Key="LabelTransparente" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="17"/>
-        <Setter Property="Foreground" Value="#FF02FDFD"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="{x:Null}"/>
-        <Setter Property="Padding" Value="10 0 0 0"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-    </Style>
-
-    <!--=================================================| LabelVerde |=======================================================================-->
-
-    <Style x:Key="LabelVerde" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="#FF06F0F0"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="#FF021507"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#FF06F0F0"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-    </Style>
-
-    <!--=================================================| LabelVerdeClaro |=======================================================================-->
-
-    <Style x:Key="LabelVerdeClaro" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="#FF1705EC"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="#FF1AF3D6"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#FF06F0F0"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Padding" Value="10 5 0 0"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-    </Style>
-
-    <!--================================================| LabelRosaEAmarelo |=================================================================-->
-
-    <Style TargetType="{x:Type Label}" x:Key="LabelRosaEAmarelo">
-        <Setter Property="Foreground" Value="#FF6B062B"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="BorderThickness" Value="5"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Label}">
-                    <Border x:Name="border" BorderBrush="#FFFFFF04" BorderThickness="5" 
-                            CornerRadius="20" Padding="{TemplateBinding Padding}">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFF94511" Offset="0.04"/>
-                                <GradientStop Color="#FFEA2A81" Offset="0.964"/>
-                                <GradientStop Color="#FFF1DEE0" Offset="0.4"/>
-                                <GradientStop Color="#FFEEE1E6" Offset="0.58"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Stretch" 
-                                          RecognizesAccessKey="False" 
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                          VerticalAlignment="Stretch" Margin="0,0,-4,-3" 
-                                          RenderTransformOrigin="0.5,0.5" Width="Auto" Height="Auto">
-                            <ContentPresenter.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </ContentPresenter.RenderTransform>
-                        </ContentPresenter>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--==============================================| LblGradienteVerdeAmareloLaranja |=====================================================-->
-
-    <Style x:Key="LblGradienteVerdeAmareloLaranja" TargetType="{x:Type Label}">
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="#FF161C99"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Label}">
-                    <Border x:Name="border" BorderBrush="#FFFFFF04" BorderThickness="5" CornerRadius="20" 
-                            Padding="{TemplateBinding Padding}">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFE47F1B" Offset="0.048"/>
-                                <GradientStop Color="#FFE47F1B" Offset="0.936"/>
-                                <GradientStop Color="#FF0CF093" Offset="0.384"/>
-                                <GradientStop Color="#FE09EAEA" Offset="0.628"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Stretch" 
-                                          RecognizesAccessKey="False" 
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                          VerticalAlignment="Stretch" Margin="0,0,-4,-3" 
-                                          RenderTransformOrigin="0.5,0.5" Width="Auto" Height="Auto">
-                            <ContentPresenter.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </ContentPresenter.RenderTransform>
-                        </ContentPresenter>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--====================================================| EstiloPath |====================================================================-->
-    <!--|Esse controle Path é parecido com uma elipse oval. Para fazer um teste, copie e cole esse código: <Path Margin="5,5,5,5" Style="{DynamicResource EstiloPath}"/> 
-    em uma janela dentro de uma Grid.|-->
-
-    <Style x:Key="EstiloPath" TargetType="{x:Type Path}">
-        <Setter Property="StrokeThickness" Value="10"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Stretch" Value="Fill"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Stroke">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFF10F42" Offset="0.032"/>
-                    <GradientStop Color="#FFE20ACE" Offset="1"/>
-                    <GradientStop Color="#FFD7EC07" Offset="0.793"/>
-                    <GradientStop Color="#FFD2EC09" Offset="0.343"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Data">
-            <Setter.Value>
-                <PathGeometry 
-                    Figures="M20,0 L140,0 A20,20,0,0,1,160,20 L160,60 A20,
-                    20,0,0,1,140,80 L70,80 L20,80 A20,20,0,0,1,20,0 z">
-                    <PathGeometry.Transform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </PathGeometry.Transform>
-                </PathGeometry>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Fill">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0.2,0" EndPoint="0.8,1" >
-                    <GradientStop Color="#FF149A84"  Offset="0.047"/>
-                    <GradientStop Color="#FF04EFEA"  Offset="0.357"/>
-                    <GradientStop Color="#FF0AE485" Offset="0.596"/>
-                    <GradientStop Color="#FF149A84" Offset="0.865"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--======================| PesquisarPorSubcategorias(PesquisarTextBlock e PesquisarTextBox) |============================================-->
-
-    <!--| TextBlock usado para pesquisar. |-->
-    <Style x:Key="PesquisarTextBlock" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Padding" Value="15,5,0,0"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="210"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
-        <Setter Property="Visibility" Value="Collapsed"/>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Text, ElementName=TxtPesquisar}" Value="">
-                <Setter Property="Visibility" Value="Visible"/>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--| TextBox usado para pesquisar. |-->
     <Style x:Key="PesquisarTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="White"/>
@@ -465,13 +169,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--====================================| PesquisarTextBlock  |==============================================================================-->
 
-    <!--======================| PesquisarPorAnotaçoesGerais(PesquisarTextBlock_AG e PesquisarTextBox_AG) |============================================-->
-
-    <!--| TextBlock usado para pesquisar Anotaçoes Gerais(AG). |-->
-    <Style x:Key="PesquisarTextBlock_AG" TargetType="{x:Type TextBlock}">
+    <Style x:Key="PesquisarTextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="Blue"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Padding" Value="15,5,0,0"/>
         <Setter Property="Height" Value="35"/>
@@ -487,33 +190,50 @@
         </Style.Triggers>
     </Style>
 
-    <!--| TextBox usado para pesquisar Anotaçoes Gerais(AG). |-->
-    <Style x:Key="PesquisarTextBox_AG" TargetType="{x:Type TextBox}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Foreground" Value="Blue"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Background" Value="#FF06F0D0"/>
-        <Setter Property="Padding" Value="10,5,0,0" />
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Width" Value="210"/>
-        <Setter Property="Margin" Value="0,10,0,10" />
+    <!--===========================================| TextBlockTranparente" |====================================================================-->
+
+    <Style x:Key="TextBlockTranparente" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Foreground" Value="#FF02FDFD"/>
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Padding" Value="10 5 5 5"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
 
-        <!--|________________________| Essa propriedade é do Ponto de Inserção |__________________________________|-->
+    <!--=======================================| LabelTransparente |=============================================================================-->
 
-        <Setter Property="CaretBrush" Value="Navy" />
+    <Style x:Key="LabelTransparente" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="Foreground" Value="#FF02FDFD"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="10 0 0 0"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
 
-        <!--|______________________________________| Corner Radius |_______________________________________________|-->
+    <!--=========================================| SetaVoltarMenuAnterior |=======================================================================-->
 
+    <Style x:Key="SetaVoltarMenuAnterior" TargetType="RadioButton">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border" CornerRadius="6" BorderThickness="{TemplateBinding BorderThickness}" 
-                        Background="{TemplateBinding Background}">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" 
-                                  VerticalScrollBarVisibility="Hidden"/>
-                    </Border>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid >
+                        <Border x:Name="border" CornerRadius="0" BorderThickness="5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/ExibirDados/Recursos/Imagens/Voltar.png"/>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True"/>
+                        <Trigger Property="IsChecked" Value="True">
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -51,7 +51,7 @@
 
         <!--| TeextBox |-->
         <TextBox Text="{Binding ConsumoGasModel.IdDataAnterior, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{DynamicResource TxtBrancoEBordaAzul}" Width="70" Margin="430,59,0,0">
+                 Style="{DynamicResource TxtVerdeArredondado}" Width="70" Margin="430,59,0,0">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="KeyDown">
                     <b:InvokeCommandAction Command="{Binding ComandoCalcularDiasConsumo}" PassEventArgsToCommand="True" />
@@ -60,16 +60,16 @@
         </TextBox>
 
         <TextBox Text="{Binding ConsumoGasModel.BotijaoReserva, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 Style="{DynamicResource TxtBrancoEBordaAzul}" Width="50" Margin="305,108,0,0"
+                 Style="{DynamicResource TxtVerdeArredondado}" Width="50" Margin="305,108,0,0"
                  Height="30" FontSize="16"/>
 
-        <TextBox x:Name ="TxtId" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="65" Margin="20,167,0,0"
+        <TextBox x:Name ="TxtId" Style="{DynamicResource TxtVerdeArredondado}" Width="65" Margin="20,167,0,0"
                  Text="{Binding ConsumoGasModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBox x:Name ="TxtConsumoEmDias" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="106" Margin="453,167,0,0"
+        <TextBox x:Name ="TxtConsumoEmDias" Style="{DynamicResource TxtVerdeArredondado}" Width="106" Margin="453,167,0,0"
                  Text="{Binding ConsumoGasModel.DiasConsumo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBox x:Name ="TxtPreco" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="105" Margin="777,167,0,0"
+        <TextBox x:Name ="TxtPreco" Style="{DynamicResource TxtVerdeArredondado}" Width="105" Margin="777,167,0,0"
                  Text="{Binding ConsumoGasModel.Preco, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="KeyDown">
@@ -78,7 +78,7 @@
             </b:Interaction.Triggers>
         </TextBox>
 
-        <TextBox x:Name ="TxtFornecedor" Style="{DynamicResource TxtBrancoEBordaAzul}" Width="120" Margin="887,167,0,0"
+        <TextBox x:Name ="TxtFornecedor" Style="{DynamicResource TxtVerdeArredondado}" Width="120" Margin="887,167,0,0"
                  Text="{Binding ConsumoGasModel.Fornecedor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!--| Calendários |-->

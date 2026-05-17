@@ -12,17 +12,13 @@
     </UserControl.DataContext>
 
     <!--| Grid Principal |-->
-    <Grid Background="#FF0A18E4" Margin="-10,0,-10,0">
+    <Grid Background="White">
 
         <!--| Grid Superior |-->
-        <Grid x:Name="GridSuperior" Background="#FFF4F5FB" Height="240" VerticalAlignment="Top">
+        <Grid x:Name="GridSuperior" Background="#FF041907" Height="240" VerticalAlignment="Top" Margin="0,5,5,5" Width="1475">
 
-            <!--| Imagem de Fundo |-->
-            <Image Margin="5,5,5,0" Source="/ExibirDados/Recursos/Imagens/Universo.jpg" Stretch="Fill" Height="235" VerticalAlignment="Top"/>
-
-            <!--| Título da Grid Superior |-->
-            <TextBlock Text="Gerenciar Anotações Gerais" FontSize="40" Foreground="#FF02FDFD" Width="520"
-                       Margin="530,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Grid.RowSpan="2"/>
+            <!--| TextBlock - Título da Grid Superior |-->
+            <TextBlock Text="Gerenciar Anotações Gerais" Style="{DynamicResource TextBlockTranparente}" Margin="530,0,0,0" />
 
             <!--| Rótulos(Label) |-->
             <Label Content="Categorias" Style="{DynamicResource LabelTransparente}" Margin="55,70,0,0" Height="34" Width="206"/>
@@ -33,57 +29,45 @@
 
             <Label Content="Consultar Registros" Style="{DynamicResource LabelTransparente}" Margin="739,175,0,0" Height="34" Width="165"/>
 
-            <Label Content="Quantidade de Registros" Style="{DynamicResource LabelTransparente}" Margin="1225,101,0,0" Height="34" Width="206"/>
+            <Label Content="Quantidade de Registros" Style="{DynamicResource LabelTransparente}" Margin="1000,176,0,0" Height="34" Width="206"/>
 
             <!--| TextBoxes |-->
             <TextBox x:Name="TxtId" Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Height="35" Margin="910,170,0,0" Padding="20 0 0 0"
                      Text="{Binding AnotacaoGeralModel.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBox x:Name="TxtQtdeRegistros" Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="1435,98,0,0"
+            <TextBox x:Name="TxtQtdeRegistros" Width="60" Style="{DynamicResource TxtBrancoEBordaAzul}" Margin="1210,173,0,0"
                      Text="{Binding AnotacaoGeralModel.ContadorRegistros, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      IsReadOnly="True" Height="34" Foreground="#FF0617C7" Padding="10 0 0 0"/>
 
-            <!--| Pesquisar Anotações Gerais|-->
-            <Grid Margin="990,140,0,0" Height="80" Width="441" HorizontalAlignment="Left" VerticalAlignment="Top">
-                
-                <TextBox x:Name="TxtPesquisar" Style="{StaticResource PesquisarTextBox_AG}" 
-                         Text="{Binding TextoPesquisa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="220"/>
-
-                <TextBlock x:Name="TxbPesquisar" Text="Pesquisar Anotação Geral" Style="{StaticResource PesquisarTextBlock_AG}" Width="220"/>
-
-                <Button Content="Limpar" FontSize="18" Height="50" Width="160" Margin="235,12,0,0" Style="{DynamicResource BtnAzulEscuroEAzulClaro}"
-                        Command="{Binding ComandoAtualizarAnotacaoGeral}"/>
-            </Grid>
-
             <!--| ComboBoxes |-->
-            <ComboBox Name="CbxCategoria" Height="40" Width="300" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="55,95,0,0"
+            <ComboBox Name="CbxCategoria" Height="40" Width="300" Style="{DynamicResource ComboBoxVerdeEscuro}" Margin="55,95,0,0"
                       Text="{Binding AnotacaoGeralModel.NomeCategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding CategoriaModel.ListaDeCategorias}" DisplayMemberPath="NomeCategoria" SelectedValuePath="Id"
                       SelectedItem="{Binding CategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <ComboBox Name="CbxSubcategoria" Height="40" Width="350" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="405,95,0,0" 
+            <ComboBox Name="CbxSubcategoria" Height="40" Width="350" Style="{DynamicResource ComboBoxVerdeEscuro}" Margin="405,95,0,0" 
                       Text="{Binding AnotacaoGeralModel.NomeSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding SubcategoriaModel.ListaDeSubcategorias}" DisplayMemberPath="NomeSubcategoria" SelectedValuePath="Id"                                              
                       SelectedItem="{Binding SubcategoriaSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedIndex="{Binding SubcategoriaModel.IndiceSelecionadoSubcategoria, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <ComboBox Height="40" Width="400" Style="{DynamicResource ComboBoxAzulMarinho}" Margin="805,95,0,0" 
+            <ComboBox Height="40" Width="400" Style="{DynamicResource ComboBoxVerdeEscuro}" Margin="805,95,0,0" 
                       Text="{Binding AnotacaoGeralModel.NomeDaDescricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding NomeDescricaoModel.ListaDoNomeDescricao}" DisplayMemberPath="NomeDaDescricao" SelectedValuePath="Id"                      
                       SelectedItem="{Binding NomeDescricaoSelecionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!--| Botões |-->
-            <Button Content="Adicionar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="48,165,0,0" Width="150" Height="50" 
-                    Command="{Binding Path=DataContext.ComandoAdicionarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
+            <Button Content="Adicionar" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="48,165,0,0" Width="150" Height="50" 
+                    Command="{Binding Path=DataContext.ComandoAbrirJanelaAdicionarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
                     AncestorType={x:Type Window}}}"/>
 
-            <Button Content="Editar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="218,165,0,0" Width="150" Height="50"
-                    Command="{Binding ComandoGerenciarAnotacaoGeral}"/>
+            <Button Content="Editar" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="218,165,0,0" Width="150" Height="50"
+                    Command="{Binding ComandoAbrirJanelaGerenciarAnotacaoGeral}"/>
 
-            <Button Content="Excluir" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="388,165,0,0" Width="150" Height="50" 
+            <Button Content="Excluir" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="388,165,0,0" Width="150" Height="50" 
                     Command="{Binding ComandoExcluirAnotacaoGeral, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Button Content="Atualizar" Style="{StaticResource BtnAzulEscuroEAzulClaro}" Margin="558,165,0,0" 
+            <Button Content="Atualizar" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="558,165,0,0" 
                     Width="150" Height="50" Command="{Binding ComandoAtualizarAnotacaoGeral}"/>
         </Grid>
         <Grid x:Name="GridInferior" Background="#FFFCFFFF" Margin="0,245,0,0">
@@ -99,9 +83,8 @@
                 </Border.Background>
 
                 <!--| Data Grid de Dados |-->
-                <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgEditorDeTextoInternoDaGridInferior}" Margin="5,5,5,5" IsReadOnly="True"
-                          ItemsSource="{Binding ListaDeAnotacoesGerais}" BorderBrush="#FF0C1889" BorderThickness="5"
-                          ColumnHeaderStyle="{DynamicResource CabecalhoEstilo}">
+                <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgEditorDeTextoInterno}" Margin="5,5,5,5" IsReadOnly="True"
+                          ItemsSource="{Binding ListaDeAnotacoesGerais}" BorderBrush="#FF0C1889" BorderThickness="5">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Código" Binding="{Binding Id, StringFormat=\{0:D4\}}" Width="100"/>
                         <DataGridTextColumn Header="Categoria" Binding="{Binding NomeCategoria}" Width="320"/>

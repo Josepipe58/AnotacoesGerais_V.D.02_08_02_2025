@@ -17,8 +17,7 @@ public class Contexto : DbContext
     public virtual DbSet<Subcategoria> TSubcategoria { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        //AnotacoesGerais
         optionsBuilder.UseSqlServer(" Data Source = JOSEPIPE-PC\\FINANCEIRO; Initial Catalog = BancoDeTestesAnotacoesGerais; " +
-                "Integrated Security = True; TrustServerCertificate=True");
+                                    "Integrated Security = True; TrustServerCertificate=True");
     }
 }

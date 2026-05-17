@@ -5,7 +5,7 @@ namespace AppAnotacoesGerais.GerenciarDados.Repositorios;
 
 public class InformacaoPessoalRepositorio : Repositorio<InformacaoPessoal>
 {
-    public static List<InformacaoPessoal> ObterInformacaoPessoal()
+    public static List<InformacaoPessoal> ObterInformacoesPessoais()
     {
         try
         {
@@ -18,11 +18,12 @@ public class InformacaoPessoalRepositorio : Repositorio<InformacaoPessoal>
         {
             Mensagens.NomeDoMetodo = "ObterInformacaoPessoal";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+
             return [];
         }
     }
 
-    public static List<InformacaoPessoal> ObterInformacaoPessoalPorId(int id)
+    public static List<InformacaoPessoal> ObterInformacoesPessoaisPorId(int id)
     {
         try
         {
@@ -40,36 +41,27 @@ public class InformacaoPessoalRepositorio : Repositorio<InformacaoPessoal>
         {
             Mensagens.NomeDoMetodo = "ObterInformacaoPessoalPorId";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+
             return [];
         }
     }
 
     //Verificar se esse método não vai dar erro.
-    public bool VerificarRegistros(int id)
+    public static bool VerificarRegistros(int id)
     {
         try
         {
+            if (id <= 0) return false;
             using Contexto contexto = new();
-            var verificarConsulta = contexto.TInformacaoPessoal.Select(x => x.Id == id); //SelecionarPK(id);
-            if (verificarConsulta is not null)
-            {
-                int retorno = Convert.ToInt32(verificarConsulta);
-                return retorno != 0 && retorno > 0;
-            }
-            else
-            {
-                return false;
-            }
+
+            return contexto.TInformacaoPessoal.Any(x => x.Id == id);
         }
         catch (Exception ex)
         {
-            if (id <= 0)
-            {
-                Mensagens.NomeDoMetodo = "VerificarRegistros";
-                Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-                return false;
-            }
-            return true;
+            Mensagens.NomeDoMetodo = "VerificarRegistros";
+            Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+
+            return false;
         }
     }
 }

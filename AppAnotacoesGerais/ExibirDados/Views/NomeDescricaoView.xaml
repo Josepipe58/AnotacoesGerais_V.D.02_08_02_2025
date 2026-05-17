@@ -129,8 +129,7 @@
         </Grid>
         <!--| DataGrid de DtgDados |-->
         <DataGrid x:Name="DtgDados" Style="{DynamicResource DtgDadosCorDaLinhaBisqueWhite}" Margin="5,0,5,5" 
-                  ItemsSource="{Binding ListaDoNomeDescricao}" 
-                  ColumnHeaderStyle="{DynamicResource DtgCabecalhoAmarelo}" IsReadOnly="True" Grid.Row="1">
+                  ItemsSource="{Binding ListaDoNomeDescricao}" IsReadOnly="True" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Código" Binding="{Binding CategoriaId, StringFormat=\{0:D4\}}" Width="100"/>
                 <DataGridTextColumn Header="Nome da Categoria" Binding="{Binding NomeCategoria}" Width="250"/>

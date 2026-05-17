@@ -10,10 +10,11 @@ public partial class AnotacaoGeralGerenciarView : UserControl
     {
         InitializeComponent();
     }
-    public AnotacaoGeralViewModel AnotacaoGeralViewModel { get; set; } = new();
+
     public AnotacaoGeralGerenciarView(AnotacaoGeralModel model, AnotacaoGeralViewModel origemViewModel)
     {
         InitializeComponent();
+
         // Use o ViewModel de origem se fornecido, caso contrário crie um novo para evitar NullReference
         var vm = origemViewModel ?? new AnotacaoGeralViewModel();
 
@@ -52,6 +53,10 @@ public partial class AnotacaoGeralGerenciarView : UserControl
             vm.NomeDescricaoSelecionada = vm.NomeDescricaoModel.ListaDoNomeDescricao
                 .FirstOrDefault(nd => nd.NomeDaDescricao == model.NomeDaDescricao);
         }
+
+        //Não deletar esse DataContext, ele é necessário para que os bindings funcionem corretamente.
+        //Ele deve ser o último comando do construtor para garantir que o ViewModel esteja totalmente
+        //configurado antes de ser atribuído à view.
         this.DataContext = vm;
     }
 }

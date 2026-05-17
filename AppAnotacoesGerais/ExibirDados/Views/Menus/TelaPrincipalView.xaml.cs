@@ -2,9 +2,9 @@
 
 namespace AppAnotacoesGerais.ExibirDados.Views.Menus;
 
-public partial class TelaPrincipal : Window
+public partial class TelaPrincipalView : Window
 {
-    public TelaPrincipal()
+    public TelaPrincipalView()
     {
         InitializeComponent();
     }
