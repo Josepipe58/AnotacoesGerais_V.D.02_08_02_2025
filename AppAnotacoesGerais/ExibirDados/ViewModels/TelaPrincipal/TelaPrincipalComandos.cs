@@ -1,7 +1,5 @@
 ﻿using AppAnotacoesGerais.ExibirDados.Comandos;
-using AppAnotacoesGerais.ExibirDados.Helpers;
 using AppAnotacoesGerais.ExibirDados.Views;
-using AppAnotacoesGerais.ExibirDados.Views.AnotacoesGeraisView;
 using AppAnotacoesGerais.ExibirDados.Views.InformacoesPessoaisView;
 using AppAnotacoesGerais.ExibirDados.Views.Menus;
 using AppAnotacoesGerais.ExibirDados.Views.TelaSenha;
@@ -42,51 +40,13 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
             return _comandoPaginaInicial;
         }
     }
-    #endregion
-
-    #region | Comandos de Anotaçoes Gerais |
-
-    private ICommand _comandoAbrirJanelaAdicionarAnotacaoGeral;
-    public ICommand ComandoAbrirJanelaAdicionarAnotacaoGeral
-    {
-        get
-        {
-            if (_comandoAbrirJanelaAdicionarAnotacaoGeral == null)
-            {
-                _comandoAbrirJanelaAdicionarAnotacaoGeral = new RelayCommand<object>(param => 
-                { 
-                    SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView(); 
-                });
-            }
-            return _comandoAbrirJanelaAdicionarAnotacaoGeral;
-        }
-    }
-    #endregion
-
-    #region | Comandos de Informações Pessoais |
-
-    private ICommand _comandoAbrirJanelaAdicionarInformacaoPessoal;
-    public ICommand ComandoAbrirJanelaAdicionarInformacaoPessoal
-    {
-        get
-        {
-            if (_comandoAbrirJanelaAdicionarInformacaoPessoal == null)
-            {
-                _comandoAbrirJanelaAdicionarInformacaoPessoal = new RelayCommand<object>(param =>
-                {
-                    SelecionarControleDeUsuario = new InformacaoPessoalGerenciarView();
-                });
-            }
-            return _comandoAbrirJanelaAdicionarInformacaoPessoal;
-        }
-    }
-    #endregion
+    #endregion   
 
     #region | Senha Para Acessar Informações Pessoais |
 
     private void VerificarSenha()
     {
-        if (Senha == "bj250281")
+        if (Senha == "bj250281" && !string.IsNullOrWhiteSpace(Senha))
         {
             SelecionarControleDeUsuario = new InformacaoPessoalView();
             Senha = null;
@@ -94,11 +54,13 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         else if (string.IsNullOrWhiteSpace(Senha))
         {
             MessageBox.Show($"Digite sua senha para logar.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+            SelecionarControleDeUsuario = new TelaSenhaView();
             return;
         }
         else if (Senha != "bj250281")
         {
             MessageBox.Show($"Senha incorreta, tente novamente.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+            Senha = null;
             SelecionarControleDeUsuario = new TelaSenhaView();
             return;
         }
@@ -123,24 +85,18 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         get
         {
             _comandoExecutarSenha ??= new RelayCommand<object>(param =>
-        {
-            if (InputHelpers.IsEnterKey(param))
             {
-                VerificarSenha();
-            }
-        });
+                if (param is KeyEventArgs e && e.Key == Key.Enter)
+                {
+                    VerificarSenha();
+                }
+            });
             return _comandoExecutarSenha;
         }
     }
-
     #endregion
 
     #region | Comandos de Categorias, Subcategorias, Nome da Descrição, ConsumoGas e Seta de Voltar|
-
-    public void CategoriaComando()
-    {
-        SelecionarControleDeUsuario = new CategoriaView();
-    }
 
     private ICommand _comandoCategoria;
     public ICommand ComandoCategoria
@@ -149,15 +105,13 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         {
             if (_comandoCategoria == null)
             {
-                _comandoCategoria = new RelayCommand<object>(param => CategoriaComando());
+                _comandoCategoria = new RelayCommand<object>(param =>
+                {
+                    SelecionarControleDeUsuario = new CategoriaView();
+                });
             }
             return _comandoCategoria;
         }
-    }
-
-    public void SubcategoriaComando()
-    {
-        SelecionarControleDeUsuario = new SubcategoriaView();
     }
 
     private ICommand _comandoSubcategoria;
@@ -167,15 +121,13 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         {
             if (_comandoSubcategoria == null)
             {
-                _comandoSubcategoria = new RelayCommand<object>(param => SubcategoriaComando());
+                _comandoSubcategoria = new RelayCommand<object>(param =>
+                {
+                    SelecionarControleDeUsuario = new SubcategoriaView();
+                });
             }
             return _comandoSubcategoria;
         }
-    }
-
-    public void NomeDescricaoComando()
-    {
-        SelecionarControleDeUsuario = new NomeDescricaoView();
     }
 
     private ICommand _comandoNomeDescricao;
@@ -185,15 +137,13 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         {
             if (_comandoNomeDescricao == null)
             {
-                _comandoNomeDescricao = new RelayCommand<object>(param => NomeDescricaoComando());
+                _comandoNomeDescricao = new RelayCommand<object>(param =>
+                {
+                    SelecionarControleDeUsuario = new NomeDescricaoView();
+                });
             }
             return _comandoNomeDescricao;
         }
-    }
-
-    public void ConsumoGasComando()
-    {
-        SelecionarControleDeUsuario = new ConsumoGasView();
     }
 
     private ICommand _comandoConsumoGas;
@@ -203,15 +153,13 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
         {
             if (_comandoConsumoGas == null)
             {
-                _comandoConsumoGas = new RelayCommand<object>(param => ConsumoGasComando());
+                _comandoConsumoGas = new RelayCommand<object>(param =>
+                {
+                    SelecionarControleDeUsuario = new ConsumoGasView();
+                });
             }
             return _comandoConsumoGas;
         }
-    }
-
-    private void VoltarSubmenuAnotacoesGerais()
-    {
-        SelecionarControleDeUsuario = new SubmenuAnotacoesGerais();
     }
 
     private ICommand _comandoVoltarSubmenuAnotacoesGerais;
@@ -222,48 +170,14 @@ public partial class TelaPrincipalViewModel// TelaPrincipalComandos
             if (_comandoVoltarSubmenuAnotacoesGerais == null)
             {
                 _comandoVoltarSubmenuAnotacoesGerais =
-                    new RelayCommand<object>(param => VoltarSubmenuAnotacoesGerais());
+                    new RelayCommand<object>(param =>
+                    {
+                        SelecionarControleDeUsuario = new SubmenuAnotacoesGerais();
+                    });
             }
             return _comandoVoltarSubmenuAnotacoesGerais;
         }
     }
     #endregion
-
-    #region | Banco de Dados e Sair do Aplicativo |
-    public static void BancoDadosComando()
-    {
-        Process.Start("C:\\Program Files (x86)\\Microsoft SQL Server Management Studio 20\\Common7\\IDE\\Ssms.exe");
-    }
-
-    private ICommand _comandoBancoDados;
-    public ICommand ComandoBancoDados
-    {
-        get
-        {
-            if (_comandoBancoDados == null)
-            {
-                _comandoBancoDados = new RelayCommand<object>(param => BancoDadosComando());
-            }
-            return _comandoBancoDados;
-        }
-    }
-
-    public static void SairAplicativoComando()
-    {
-        Application.Current.Shutdown();
-    }
-
-    private ICommand _comandoSairAplicativo;
-    public ICommand ComandoSairAplicativo
-    {
-        get
-        {
-            if (_comandoSairAplicativo == null)
-            {
-                _comandoSairAplicativo = new RelayCommand<object>(param => SairAplicativoComando());
-            }
-            return _comandoSairAplicativo;
-        }
-    }
-    #endregion
+    
 }

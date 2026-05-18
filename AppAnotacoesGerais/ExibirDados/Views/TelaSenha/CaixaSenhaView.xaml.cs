@@ -18,6 +18,8 @@ public partial class CaixaSenhaView : UserControl
     public CaixaSenhaView()
     {
         InitializeComponent();
+        CxaDeSenha.Focus();
+        
     }
 
     private void CaixaDeSenha_PasswordChanged(object sender, RoutedEventArgs e)

@@ -27,7 +27,6 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
         {
             Mensagens.NomeDoMetodo = "ObterAnotacoesGerais";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }
@@ -70,7 +69,6 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
         {
             Mensagens.NomeDoMetodo = "VerificarRegistros";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return false;
         }
     }
@@ -86,7 +84,6 @@ public class AnotacaoGeralRepositorio : Repositorio<AnotacaoGeral>
         {
             Mensagens.NomeDoMetodo = "ContadorRegistros";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return 0;
         }
     }

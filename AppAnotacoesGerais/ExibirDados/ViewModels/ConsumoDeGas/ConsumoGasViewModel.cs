@@ -13,8 +13,8 @@ public partial class ConsumoGasViewModel : ViewModelBase
 
     public ConsumoGasModel ConsumoGasModel { get; set; } = new();
 
-    private List<ConsumoGas> _listaDaDataAnterior;
-    public List<ConsumoGas> ListaDaDataAnterior
+    private ObservableCollection<ConsumoGas> _listaDaDataAnterior;
+    public ObservableCollection<ConsumoGas> ListaDaDataAnterior
     {
         get => _listaDaDataAnterior;
         set
@@ -39,6 +39,20 @@ public partial class ConsumoGasViewModel : ViewModelBase
                 OnPropertyChanged(nameof(ListaDeConsumoGas));
             }
         }
+    }
+
+     public ConsumoGasViewModel()
+    {
+        ConsumoGasModel.CalcularDiasConsumo = $"Quantidade de dias de consumo.";
+
+        //Não mudar essa lista senão o combobox ficará vazio ao limpar os dados.
+        _listaDaDataAnterior = [.. _consumoGasRepositorio.ObterListaDeTodos() ?? []];
+        ListaDaDataAnterior = new ObservableCollection<ConsumoGas>(_listaDaDataAnterior.OrderByDescending(x => x.DataTroca));
+
+        _listaDeConsumoGas = [.. _consumoGasRepositorio.ObterListaDeTodos() ?? []];
+        ListaDeConsumoGas = new ObservableCollection<ConsumoGas>(_listaDeConsumoGas.OrderByDescending(x => x.Id));
+
+        VerificarGasDeReserva();
     }
 
     private void VerificarGasDeReserva()
@@ -77,19 +91,5 @@ public partial class ConsumoGasViewModel : ViewModelBase
 
         //Carregar DataGrid de ConsumoGass.        
         ListaDeConsumoGas = new ObservableCollection<ConsumoGas>(listaDeConsumoGas);
-    }
-
-    public ConsumoGasViewModel()
-    {
-        ConsumoGasModel.CalcularDiasConsumo = $"Quantidade de dias de consumo.";
-
-        _listaDaDataAnterior = [.. _consumoGasRepositorio.ObterListaDeTodos().OrderByDescending(x => x.DataTroca)];
-        ListaDaDataAnterior = [.. _listaDaDataAnterior ?? []];
-
-        _listaDeConsumoGas = [.. _consumoGasRepositorio.ObterListaDeTodos() ?? []];
-
-        ListaDeConsumoGas = new ObservableCollection<ConsumoGas>(_listaDeConsumoGas.OrderByDescending(x => x.Id));
-
-        VerificarGasDeReserva();
     }
 }

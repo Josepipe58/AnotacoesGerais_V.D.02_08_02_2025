@@ -26,11 +26,10 @@
 
             <!--| Botões |-->
             <Button x:Name="BtnCadastrar" Content="CADASTRAR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="132" Canvas.Top="68"
-                     Command="{Binding Path=DataContext.ComandoAbrirJanelaAdicionarInformacaoPessoal, RelativeSource={RelativeSource FindAncestor, 
-                     AncestorType={x:Type Window}}}" Width="220"/>
+                     Command="{Binding ComandoAbrirJanelaAdicionarInformacaoPessoal}" Width="220"/>
 
             <Button x:Name="BtnEditar" Content="EDITAR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="382" Canvas.Top="68"
-                    Width="220" Command="{Binding ComandoAbrirJanelaGerenciarInformacaoPessoal}"/>
+                    Width="220" Command="{Binding ComandoAbrirJanelaEditarInformacaoPessoal}"/>
 
             <Button x:Name="BtnExcluir" Content="EXCLUIR" Style="{DynamicResource BtnRetangularVerdeEscuro}" Canvas.Left="632" Canvas.Top="68" 
                     Width="220" Command="{Binding ComandoExcluirInformacaoPessoal}"/>

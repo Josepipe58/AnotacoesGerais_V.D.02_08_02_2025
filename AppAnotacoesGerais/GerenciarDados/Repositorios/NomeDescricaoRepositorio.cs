@@ -33,7 +33,6 @@ public class NomeDescricaoRepositorio : Repositorio<NomeDescricao>
         {
             Mensagens.NomeDoMetodo = "ObterNomeDescricao";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }
@@ -66,7 +65,6 @@ public class NomeDescricaoRepositorio : Repositorio<NomeDescricao>
         {
             Mensagens.NomeDoMetodo = "ObterNomeDescricaoPorId";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }

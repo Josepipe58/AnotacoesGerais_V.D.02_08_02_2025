@@ -30,7 +30,6 @@ public class SubcategoriaRepositorio : Repositorio<Subcategoria>
         {
             Mensagens.NomeDoMetodo = "ObterSubcategorias";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }
@@ -58,7 +57,6 @@ public class SubcategoriaRepositorio : Repositorio<Subcategoria>
         {
             Mensagens.NomeDoMetodo = "ObterSubcategoriasPorId";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }

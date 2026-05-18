@@ -3,8 +3,6 @@ using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
 using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
-using System;
-using System.Reflection.Metadata;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +15,7 @@ public partial class NomeDescricaoViewModel//NomeDescricaoComandos
     {
         get
         {
-            _comandoAdicionarNomeDescricao ??= new RelayCommand<object>(param => 
+            _comandoAdicionarNomeDescricao ??= new RelayCommand<object>(param =>
             {
                 // Criar uma nova instância de NomeDescricaoModel para evitar
                 // modificar a instância vinculada à interface do usuário.
@@ -90,7 +88,7 @@ public partial class NomeDescricaoViewModel//NomeDescricaoComandos
                     }
                     catch (Exception ex)
                     {
-                        Mensagens.NomeDoMetodo = "Editar";
+                        Mensagens.NomeDoMetodo = "ComandoEditarNomeDescricao";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     }
                 }
@@ -142,7 +140,7 @@ public partial class NomeDescricaoViewModel//NomeDescricaoComandos
                     }
                     catch (Exception erro)
                     {
-                        Mensagens.NomeDoMetodo = "Excluir";
+                        Mensagens.NomeDoMetodo = "ComandoExcluirNomeDescricao";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(erro, Mensagens.NomeDoMetodo);
                         return;
                     }

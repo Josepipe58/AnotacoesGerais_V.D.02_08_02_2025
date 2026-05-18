@@ -38,7 +38,7 @@ public partial class SubcategoriaViewModel// SubcategoriaComandos
                     }
                     catch (Exception ex)
                     {
-                        Mensagens.NomeDoMetodo = "Adicionar";
+                        Mensagens.NomeDoMetodo = "ComandoAdicionarSubcategoria";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     }
                 }
@@ -86,7 +86,7 @@ public partial class SubcategoriaViewModel// SubcategoriaComandos
                     }
                     catch (Exception ex)
                     {
-                        Mensagens.NomeDoMetodo = "Editar";
+                        Mensagens.NomeDoMetodo = "ComandoEditarSubcategoria";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     }
                 }
@@ -138,7 +138,7 @@ public partial class SubcategoriaViewModel// SubcategoriaComandos
                     }
                     catch (Exception erro)
                     {
-                        Mensagens.NomeDoMetodo = "Excluir";
+                        Mensagens.NomeDoMetodo = "ComandoExcluirSubcategoria";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(erro, Mensagens.NomeDoMetodo);
                         return;
                     }

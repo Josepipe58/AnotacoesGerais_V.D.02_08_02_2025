@@ -43,7 +43,6 @@ public sealed class RelayCommand<T> : ICommand
         try
         {
             var converted = (T)Convert.ChangeType(parameter, typeof(T));
-
             return _canExecute(converted);
         }
         catch

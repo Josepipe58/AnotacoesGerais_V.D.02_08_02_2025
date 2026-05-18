@@ -13,12 +13,32 @@ namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
 public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
 {
-    private ICommand _comandoAbrirJanelaGerenciarAnotacaoGeral;
-    public ICommand ComandoAbrirJanelaGerenciarAnotacaoGeral
+    private ICommand _comandoAbrirJanelaAdicionarAnotacaoGeral;
+    public ICommand ComandoAbrirJanelaAdicionarAnotacaoGeral
     {
         get
         {
-            _comandoAbrirJanelaGerenciarAnotacaoGeral ??= new RelayCommand<object>(param =>
+            if (_comandoAbrirJanelaAdicionarAnotacaoGeral == null)
+            {
+                _comandoAbrirJanelaAdicionarAnotacaoGeral = new RelayCommand<object>(param =>
+                {
+                    var telaPrincipalViewModel = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
+                    if (telaPrincipalViewModel != null)
+                    {
+                        telaPrincipalViewModel.SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView();
+                    }
+                });
+            }
+            return _comandoAbrirJanelaAdicionarAnotacaoGeral;
+        }
+    }
+
+    private ICommand _comandoAbrirJanelaEditarAnotacaoGeral;
+    public ICommand ComandoAbrirJanelaEditarAnotacaoGeral
+    {
+        get
+        {
+            _comandoAbrirJanelaEditarAnotacaoGeral ??= new RelayCommand<object>(param =>
             {
                 try
                 {
@@ -57,14 +77,14 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                                     anotacaoGeralGerenciarView.DtpData.Text = AnotacaoGeralModel.Data.ToString();
 
                                     // Atribui a view de edição ao ViewModel principal para que o ContentControl principal exiba a UserControl
-                                    var mainVm = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
-                                    if (mainVm != null)
+                                    var telaPrincipalViewModel = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
+                                    if (telaPrincipalViewModel != null)
                                     {
-                                        mainVm.SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView(AnotacaoGeralModel, null);
-                                    }
+                                        telaPrincipalViewModel.SelecionarControleDeUsuario = new AnotacaoGeralGerenciarView(AnotacaoGeralModel, null);
+                                    }                                   
                                 }
                             }
-                        }
+                        }                        
                     }
                     else
                     {
@@ -74,12 +94,12 @@ public partial class AnotacaoGeralViewModel// AnotacaoGeralComandos
                 }
                 catch (Exception ex)
                 {
-                    Mensagens.NomeDoMetodo = "ComandoAbrirJanelaGerenciarAnotacaoGeral";
+                    Mensagens.NomeDoMetodo = "ComandoAbrirJanelaEditarAnotacaoGeral";
                     Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     return;
                 }
             });
-            return _comandoAbrirJanelaGerenciarAnotacaoGeral;
+            return _comandoAbrirJanelaEditarAnotacaoGeral;
         }
     }
 

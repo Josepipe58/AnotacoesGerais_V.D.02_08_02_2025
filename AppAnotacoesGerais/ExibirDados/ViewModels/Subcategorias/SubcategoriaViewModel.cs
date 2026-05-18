@@ -29,6 +29,11 @@ public partial class SubcategoriaViewModel : ViewModelBase
         }
     }
 
+    public SubcategoriaViewModel()
+    {
+        TextoPesquisa = string.Empty;
+    }
+
     private void PesquisarSubcategorias()
     {
         var listaDeSubcategorias = SubcategoriaRepositorio.ObterSubcategorias() ?? Enumerable.Empty<Subcategoria>();
@@ -53,10 +58,5 @@ public partial class SubcategoriaViewModel : ViewModelBase
 
         //Carregar DataGrid de Subcategorias.        
         SubcategoriaModel.ListaDeSubcategorias = new ObservableCollection<Subcategoria>(listaDeSubcategorias);
-    }
-
-    public SubcategoriaViewModel()
-    {
-        TextoPesquisa = string.Empty;
     }
 }

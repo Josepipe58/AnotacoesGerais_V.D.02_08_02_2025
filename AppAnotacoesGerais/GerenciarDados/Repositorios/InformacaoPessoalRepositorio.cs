@@ -18,7 +18,6 @@ public class InformacaoPessoalRepositorio : Repositorio<InformacaoPessoal>
         {
             Mensagens.NomeDoMetodo = "ObterInformacaoPessoal";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }
@@ -41,7 +40,6 @@ public class InformacaoPessoalRepositorio : Repositorio<InformacaoPessoal>
         {
             Mensagens.NomeDoMetodo = "ObterInformacaoPessoalPorId";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }
@@ -53,14 +51,12 @@ public class InformacaoPessoalRepositorio : Repositorio<InformacaoPessoal>
         {
             if (id <= 0) return false;
             using Contexto contexto = new();
-
             return contexto.TInformacaoPessoal.Any(x => x.Id == id);
         }
         catch (Exception ex)
         {
             Mensagens.NomeDoMetodo = "VerificarRegistros";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return false;
         }
     }

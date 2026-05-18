@@ -25,7 +25,6 @@ public abstract class Repositorio<T> : IDisposable where T : class
         {
             Mensagens.NomeDoMetodo = "ObterListaDeTodos";
             Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
-
             return [];
         }
     }

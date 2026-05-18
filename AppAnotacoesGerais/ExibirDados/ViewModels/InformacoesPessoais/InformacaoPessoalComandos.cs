@@ -13,12 +13,32 @@ namespace AppAnotacoesGerais.ExibirDados.ViewModels.InformacoesPessoais;
 
 public partial class InformacaoPessoalViewModel//InformacaoPessoalComandos
 {
-    private ICommand _comandoAbrirJanelaGerenciarInformacaoPessoal;
-    public ICommand ComandoAbrirJanelaGerenciarInformacaoPessoal
+    private ICommand _comandoAbrirJanelaAdicionarInformacaoPessoal;
+    public ICommand ComandoAbrirJanelaAdicionarInformacaoPessoal
     {
         get
         {
-            _comandoAbrirJanelaGerenciarInformacaoPessoal ??= new RelayCommand<object>(param =>
+            if (_comandoAbrirJanelaAdicionarInformacaoPessoal == null)
+            {
+                _comandoAbrirJanelaAdicionarInformacaoPessoal = new RelayCommand<object>(param =>
+                {
+                    var telaPrincipalViewModel = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
+                    if (telaPrincipalViewModel != null)
+                    {
+                        telaPrincipalViewModel.SelecionarControleDeUsuario = new InformacaoPessoalGerenciarView();
+                    }
+                });
+            }
+            return _comandoAbrirJanelaAdicionarInformacaoPessoal;
+        }
+    }
+
+    private ICommand _comandoAbrirJanelaEditarInformacaoPessoal;
+    public ICommand ComandoAbrirJanelaEditarInformacaoPessoal
+    {
+        get
+        {
+            _comandoAbrirJanelaEditarInformacaoPessoal ??= new RelayCommand<object>(param =>
             {
                 try
                 {
@@ -51,10 +71,10 @@ public partial class InformacaoPessoalViewModel//InformacaoPessoalComandos
                                     informacaoPessoalGerenciarView.TxtDescricao.Text = InformacaoPessoalModel.Descricao;
 
                                     // Atribui a view de edição ao ViewModel principal para que o ContentControl principal exiba a UserControl
-                                    var mainVm = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
-                                    if (mainVm != null)
+                                    var telaPrincipalViewModel = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
+                                    if (telaPrincipalViewModel != null)
                                     {
-                                        mainVm.SelecionarControleDeUsuario = new InformacaoPessoalGerenciarView(InformacaoPessoalModel, null);
+                                        telaPrincipalViewModel.SelecionarControleDeUsuario = new InformacaoPessoalGerenciarView(InformacaoPessoalModel, null);
                                     }
                                 }
                             }
@@ -68,12 +88,12 @@ public partial class InformacaoPessoalViewModel//InformacaoPessoalComandos
                 }
                 catch (Exception ex)
                 {
-                    Mensagens.NomeDoMetodo = "ComandoAbrirJanelaGerenciarInformacaoPessoal";
+                    Mensagens.NomeDoMetodo = "ComandoAbrirJanelaEditarInformacaoPessoal";
                     Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
                     return;
                 }
             });
-            return _comandoAbrirJanelaGerenciarInformacaoPessoal;
+            return _comandoAbrirJanelaEditarInformacaoPessoal;
         }
     }
 
@@ -86,10 +106,10 @@ public partial class InformacaoPessoalViewModel//InformacaoPessoalComandos
             {
                 _comandoVoltarInformacaoPessoal = new RelayCommand<object>(param =>
                 {
-                    var mainVm = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
-                    if (mainVm != null)
+                    var telaPrincipalViewModel = Application.Current?.MainWindow?.DataContext as TelaPrincipalViewModel;
+                    if (telaPrincipalViewModel != null)
                     {
-                        mainVm.SelecionarControleDeUsuario = new InformacaoPessoalView();
+                        telaPrincipalViewModel.SelecionarControleDeUsuario = new InformacaoPessoalView();
                     }
                 });
             }
@@ -231,7 +251,7 @@ public partial class InformacaoPessoalViewModel//InformacaoPessoalComandos
                     }
                     catch (Exception erro)
                     {
-                        Mensagens.NomeDoMetodo = "Excluir";
+                        Mensagens.NomeDoMetodo = "ComandoExcluirInformacaoPessoal";
                         Mensagens.ErroDeExcecaoENomeDoMetodo(erro, Mensagens.NomeDoMetodo);
                         return;
                     }

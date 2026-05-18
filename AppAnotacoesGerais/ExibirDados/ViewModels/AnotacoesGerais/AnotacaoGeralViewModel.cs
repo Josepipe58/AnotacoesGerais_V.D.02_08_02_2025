@@ -1,12 +1,14 @@
 ﻿using AppAnotacoesGerais.AcessarDados.Entidades;
 using AppAnotacoesGerais.ExibirDados.Comandos;
 using AppAnotacoesGerais.ExibirDados.Models;
+using AppAnotacoesGerais.GerenciarDados;
 using AppAnotacoesGerais.GerenciarDados.Repositorios;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.AnotacoesGerais;
 
+// Campos, Propriedades e Métodos relacionados à funcionalidade de Anotações Gerais.
 public partial class AnotacaoGeralViewModel : ViewModelBase
 {
     public CategoriaRepositorio _categoriaRepositorio = new();
@@ -119,6 +121,18 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
         }
     }
 
+    public AnotacaoGeralViewModel()
+    {
+        //Carregar ComboBox de Categorias de Despesa.
+        CategoriaModel.ListaDeCategorias = [.. _categoriaRepositorio.ObterListaDeTodos() ?? []];
+        ConsultasDeAnotacoesGerais();
+        ContadorDeRegistros();
+
+        //Carregar DataGrid de Anotações Gerais.
+        //Usando encapsulamento para obter a lista de Anotações Gerais do repositório e armazená-la em uma coleção observável.
+        ListaDeAnotacoesGerais = new ReadOnlyObservableCollection<AnotacaoGeral>(_listaDeAnotacoesGerais);
+    }
+
     // Método interno comum para atualizar a lista de Subcategorias.
     // chamarConsultas = true -> também chama ConsultasDeAnotacoesGerais() (usado no fluxo não editar)
     private void AtualizarListaDeSubcategorias(Categoria categoria, bool chamarConsultas)
@@ -154,15 +168,87 @@ public partial class AnotacaoGeralViewModel : ViewModelBase
         }
     }
 
-    public AnotacaoGeralViewModel()
+    public void ConsultasDeAnotacoesGerais()
     {
-        //Carregar ComboBox de Categorias de Despesa.
-        CategoriaModel.ListaDeCategorias = [.. _categoriaRepositorio.ObterListaDeTodos() ?? []];
-        ConsultasDeAnotacoesGerais();
-        ContadorDeRegistros();
+        try
+        {
+            var listaDeAnotacoesGerais = new ObservableCollection<AnotacaoGeral>();
+            if (string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeCategoria) && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeSubcategoria)
+                && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeDaDescricao))
+            {
+                listaDeAnotacoesGerais = [.. AnotacaoGeralRepositorio.ObterAnotacoesGerais() ?? []];
 
-        //Carregar DataGrid de Anotações Gerais.
-        //Usando encapsulamento para obter a lista de Anotações Gerais do repositório e armazená-la em uma coleção observável.
-        ListaDeAnotacoesGerais = new ReadOnlyObservableCollection<AnotacaoGeral>(_listaDeAnotacoesGerais);
+                _listaDeAnotacoesGerais.Clear();
+                foreach (var item in listaDeAnotacoesGerais)
+                    _listaDeAnotacoesGerais.Add(item);
+            }
+            else if (!string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeCategoria) && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeSubcategoria)
+                && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeDaDescricao))
+            {
+                listaDeAnotacoesGerais = [.. AnotacaoGeralRepositorio.ObterAnotacoesGerais().Where(x => x.NomeCategoria == AnotacaoGeralModel.NomeCategoria)
+                   ?? new ObservableCollection<AnotacaoGeral>()];
+
+                _listaDeAnotacoesGerais.Clear();
+                foreach (var item in listaDeAnotacoesGerais)
+                    _listaDeAnotacoesGerais.Add(item);
+            }
+            else if (!string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeCategoria) && !string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeSubcategoria)
+                && string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeDaDescricao))
+            {
+                listaDeAnotacoesGerais = [.. AnotacaoGeralRepositorio.ObterAnotacoesGerais().Where(dp => dp.NomeCategoria == AnotacaoGeralModel.NomeCategoria
+                && dp.NomeSubcategoria == AnotacaoGeralModel.NomeSubcategoria)];
+
+                _listaDeAnotacoesGerais.Clear();
+                foreach (var item in listaDeAnotacoesGerais)
+                    _listaDeAnotacoesGerais.Add(item);
+            }
+            else if (!string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeCategoria) && !string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeSubcategoria)
+                && !string.IsNullOrWhiteSpace(AnotacaoGeralModel.NomeDaDescricao))
+            {
+                listaDeAnotacoesGerais = [.. AnotacaoGeralRepositorio.ObterAnotacoesGerais().Where(dp => dp.NomeCategoria == AnotacaoGeralModel.NomeCategoria
+                && dp.NomeSubcategoria == AnotacaoGeralModel.NomeSubcategoria && dp.NomeDaDescricao == AnotacaoGeralModel.NomeDaDescricao)];
+
+                _listaDeAnotacoesGerais.Clear();
+                foreach (var item in listaDeAnotacoesGerais)
+                    _listaDeAnotacoesGerais.Add(item);
+            }
+            else
+            {
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            Mensagens.NomeDoMetodo = "ConsultasDeAnotacoesGerais";
+            Mensagens.ErroDeExcecaoENomeDoMetodo(ex, Mensagens.NomeDoMetodo);
+            return;
+        }
+    }
+
+    public void ContadorDeRegistros()
+    {
+        int contador = _anotacaoGeralRepositorio.ContadorRegistros();
+        if (contador <= 0)
+        {
+            MessageBox.Show($"Atenção! Não existe nenhum registro no Banco de Dados.",
+                        "Aviso!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        AnotacaoGeralModel.ContadorRegistros = contador;
+    }
+
+    public void AtualizarAnotacaoGeral()
+    {
+        AnotacaoGeralModel.Id = 0;
+        AnotacaoGeralModel.NomeCategoria = null;
+        AnotacaoGeralModel.NomeSubcategoria = null;
+        AnotacaoGeralModel.NomeDaDescricao = null;
+        ConsultasDeAnotacoesGerais();
+    }
+
+    public void LimparAdicionarEditar()
+    {
+        AnotacaoGeralModel.Id = 0;
+        AnotacaoGeralModel.Descricao = null;
+        AnotacaoGeralModel.Data = DateTime.Now;
     }
 }

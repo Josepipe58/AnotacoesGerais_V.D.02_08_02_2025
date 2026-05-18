@@ -7,8 +7,7 @@ using System.Collections.ObjectModel;
 namespace AppAnotacoesGerais.ExibirDados.ViewModels.NomeDescricaoVM;
 
 public partial class NomeDescricaoViewModel : ViewModelBase
-{
-    private string _textoPesquisa;
+{    
     public NomeDescricaoRepositorio _nomeDaDescricaoRepositorio = new();
     private ObservableCollection<NomeDescricao> _listaDoNomeDescricao;
 
@@ -16,6 +15,7 @@ public partial class NomeDescricaoViewModel : ViewModelBase
     public SubcategoriaModel SubcategoriaModel { get; set; } = new();
     public NomeDescricaoModel NomeDescricaoModel { get; set; } = new();
 
+    private string _textoPesquisa;
     public string TextoPesquisa
     {
         get => _textoPesquisa;
@@ -60,6 +60,13 @@ public partial class NomeDescricaoViewModel : ViewModelBase
         }
     }
 
+    public NomeDescricaoViewModel()
+    {
+        TextoPesquisa = string.Empty;
+        ListaDoNomeDescricao = [];
+        ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricao()];
+    }
+
     //Método do evento: "SelectionChanged" entre o ComboBox de Categorias e o ComboBox de Subcategorias.
     private void ObterListaDeSubcategorias()
     {
@@ -98,12 +105,5 @@ public partial class NomeDescricaoViewModel : ViewModelBase
 
         //Carregar DataGrid do Nome da Descrição.        
         ListaDoNomeDescricao = new ObservableCollection<NomeDescricao>(listaDeSubcategorias);
-    }
-
-    public NomeDescricaoViewModel()
-    {
-        TextoPesquisa = string.Empty;
-        ListaDoNomeDescricao = [];
-        ListaDoNomeDescricao = [.. NomeDescricaoRepositorio.ObterNomeDescricao()];
     }
 }

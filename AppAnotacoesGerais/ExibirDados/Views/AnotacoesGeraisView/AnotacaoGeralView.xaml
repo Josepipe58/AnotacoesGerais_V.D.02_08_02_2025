@@ -58,11 +58,10 @@
 
             <!--| Botões |-->
             <Button Content="Adicionar" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="48,165,0,0" Width="150" Height="50" 
-                    Command="{Binding Path=DataContext.ComandoAbrirJanelaAdicionarAnotacaoGeral, RelativeSource={RelativeSource FindAncestor, 
-                    AncestorType={x:Type Window}}}"/>
+                    Command="{Binding ComandoAbrirJanelaAdicionarAnotacaoGeral}"/>
 
             <Button Content="Editar" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="218,165,0,0" Width="150" Height="50"
-                    Command="{Binding ComandoAbrirJanelaGerenciarAnotacaoGeral}"/>
+                    Command="{Binding ComandoAbrirJanelaEditarAnotacaoGeral}"/>
 
             <Button Content="Excluir" Style="{StaticResource BtnRetangularVerdeEscuro}" Margin="388,165,0,0" Width="150" Height="50" 
                     Command="{Binding ComandoExcluirAnotacaoGeral, UpdateSourceTrigger=PropertyChanged}"/>
